@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 14:34:15 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/09 18:46:03 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/09 20:59:30 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,77 +14,91 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-void	ft_putchar_fd(char c, int fd);
-
-int	ft_valid (const char c)
+void	ft_putchar(char c, int *len)
 {
-	char	*charset;
-	int		i;
-
-	charset = "cspdiuxX";
-	i = -1;
-	while (charset[++i])
-	{
-		if (charset[i] == c)
-			return (i);
-	}
-	return (0);
+	write (1, &c, 1);
+	*len += 1;
 }
 
-int	ft_count (const char *s)
+void	ft_print_int(int n, int *len)
 {
-	int	ans;
+	char	tmp;
+
+	tmp = (n % 10) + 48;
+	ft_putchar(tmp, len);
+}
+
+
+void	ft_putstr(char *s, int *len)
+{
 	int	i;
 
-	ans = 0;
+	if (!(*s))
+		ft_putstr ("(null)", len);
 	i = -1;
 	while (s[++i])
+		ft_putchar (s[i], len);
+}
+
+void	ft_putnbr(int n, int *len)
+{
+	if (n == -2147483648)
+		ft_putstr("-2147483648", len);
+	else
 	{
-		if (s[i] == '%' && s[i + 1])
+		if (n < 0)
 		{
-			if (s[i + 1] == '%')
-				i += 1;
-			else if (ft_valid (s[i + 1]))
-				ans += 1;
+			ft_putchar('-', len);
+			n *= -1;
 		}
+		if (n > 9)
+		{
+			ft_putnbr(n / 10, len);
+			ft_putnbr(n % 10, len);
+		}
+		else
+			ft_print_int(n, len);
 	}
-	return (ans);
-} 
+}
+
+void	ft_printf_func(const char s, va_list lst, int *len)
+{
+	if (s == 'd')
+		ft_putnbr (va_arg (lst, int), len);
+}
 
 int	ft_printf (const char *s, ...)
 {
-	int		word_count;
+	int		len;
 	int		i;
 	va_list	lst;
 
 	if (!(*s))
 		return (0);
-	word_count = ft_count (s);
 	va_start (lst, s);
 	i = -1;
-	while (s[++i])
+	len = 0;
+	while (*s)
 	{
-		if (s[i] == '%')
+		if (*s == '%')
 		{
-			if (word_count)
-			{			
-				printf("%d", va_arg (lst, int));
-				word_count -= 1;
-				i += 1;
-			}
+			s ++;
+			ft_printf_func (*s, lst, &len);
 		}
 		else
-			ft_putchar_fd (s[i], 1);
+			ft_putchar (*s, &len);
+		s ++;
 	}
 	va_end (lst);
-	return (word_count);
+	return (len);
 }
  
 int main(int argc, char *argv[])
 {
     int a, b, c;
 
-	a = ft_printf (argv[1], 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+	a = ft_printf (argv[1], 10, -2147483648, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+	printf (" | return: %d", a);
  /*
     printf("\nEnter value of a in decimal format:");
     scanf("%i", &a);
