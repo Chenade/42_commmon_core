@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 14:34:15 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/09 20:59:30 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/10 12:37:23 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,48 @@ void	ft_putnbr(int n, int *len)
 			ft_putnbr(n % 10, len);
 		}
 		else
-			ft_print_int(n, len);
+			ft_putchar(n + 48, len);
 	}
 }
 
+void	func_u(unsigned int n, int *len)
+{
+	if (n > 9)
+	{
+		func_u (n / 10, len);
+		func_u (n % 10, len);
+	}
+	else
+		ft_putchar (n + 48, len);
+}
+
+void func_x (int n, int *len, int is_cap)
+{
+	char *base;
+
+	base = "0123456789abcdef";
+	if (is_cap)
+		base = "0123456789ABCDEF";
+	printf ("[%s]", base);
+	ft_putstr (base, len);
+} 
+
 void	ft_printf_func(const char s, va_list lst, int *len)
 {
-	if (s == 'd')
+	if (s == 'c')
+		ft_putchar (va_arg (lst,  int), len);
+	else if (s == 's')
+		ft_putstr (va_arg (lst, char *), len);
+	else if (s == 'd')
 		ft_putnbr (va_arg (lst, int), len);
+	else if (s == 'u')
+		func_u (va_arg (lst, unsigned int), len);
+	else if (s == 'x')
+		func_x (va_arg (lst, int), len, 0);
+	else if (s == 'X')
+		func_x (va_arg (lst, int), len , 1);
+	else if (s == '%')
+		ft_putchar (37, len);
 }
 
 int	ft_printf (const char *s, ...)
@@ -78,16 +112,16 @@ int	ft_printf (const char *s, ...)
 	va_start (lst, s);
 	i = -1;
 	len = 0;
-	while (*s)
+	while (s[++i])
 	{
-		if (*s == '%')
+		if (s[i] == '%')
 		{
-			s ++;
-			ft_printf_func (*s, lst, &len);
+			i += 1;
+			if (s[i])
+				ft_printf_func (s[i], lst, &len);
 		}
 		else
-			ft_putchar (*s, &len);
-		s ++;
+			ft_putchar (s[i], &len);
 	}
 	va_end (lst);
 	return (len);
@@ -97,19 +131,20 @@ int main(int argc, char *argv[])
 {
     int a, b, c;
 
-	a = ft_printf (argv[1], 10, -2147483648, 12, 13, 14, 15, 16, 17, 18, 19, 20);
-	printf (" | return: %d", a);
- /*
+//	a = ft_printf (argv[1], -5, 'c', "string", 13, 14, 15, 16, 17, 18, 19, 20);
+//	printf (" | return: %d", a);
+
     printf("\nEnter value of a in decimal format:");
     scanf("%i", &a);
     printf("%%d -> %d\n", a);
     printf("%%i -> %i\n", a);
+    printf("%%u -> %u\n", a);
     printf("%%x -> %x\n", a);
     printf("%%X -> %X\n", a);
     //printf("%%i -> %i\n", a);
     //printf("%%i -> %i\n", a);
 
-    printf("\nEnter value of b in octal format: ");
+/*    printf("\nEnter value of b in octal format: ");
     scanf("%i", &b);
     printf("%%d -> %d\n", b);
     printf("%%i -> %i\n", b);
