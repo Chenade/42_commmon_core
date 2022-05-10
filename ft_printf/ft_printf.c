@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 14:34:15 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/10 17:33:17 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/10 19:04:52 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 #include "ft_printf.h"
 
 void	ft_printf_func(const char s, va_list lst, int *len)
 {
 	if (s == 'c')
-		ft_putchar (va_arg (lst,  int), len);
+		ft_putchar (va_arg (lst, int), len);
 	else if (s == 's')
 		ft_putstr (va_arg (lst, char *), len);
 	else if (s == 'p')
-		func_p (va_arg (lst, unsigned long long), "0123456789abcdef", len);
+		func_p (va_arg (lst, unsigned long), "0123456789abcdef", len);
 	else if (s == 'd' || s == 'i')
 		ft_putnbr (va_arg (lst, int), len);
 	else if (s == 'u')
@@ -36,7 +32,7 @@ void	ft_printf_func(const char s, va_list lst, int *len)
 		ft_putchar (37, len);
 }
 
-int	ft_printf (const char *s, ...)
+int	ft_printf(const char *s, ...)
 {
 	int		len;
 	int		i;
@@ -61,4 +57,3 @@ int	ft_printf (const char *s, ...)
 	va_end (lst);
 	return (len);
 }
- 
