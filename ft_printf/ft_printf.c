@@ -16,66 +16,6 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-void	ft_putchar(char c, int *len)
-{
-	write (1, &c, 1);
-	*len += 1;
-}
-
-void	ft_putstr(char *s, int *len)
-{
-	int	i;
-
-	if (!(s))
-		ft_putstr ("(null)", len);
-	else
-	{
-		i = -1;
-		while (s[++i])
-			ft_putchar (s[i], len);
-	}
-}
-
-void	ft_putnbr(int nbr, int *len)
-{
-	long int	n;
-
-	n = (long) nbr;
-	if (n < 0)
-	{
-		ft_putchar('-', len);
-		n *= -1;
-	}
-	if (n > 9)
-		ft_putnbr(n / 10, len);
-	ft_putchar( (n % 10) + 48, len);
-}
-
-void	func_u(unsigned int n, int *len)
-{
-	if (n > 9)
-	{
-		func_u (n / 10, len);
-		func_u (n % 10, len);
-	}
-	else
-		ft_putchar (n + 48, len);
-}
-
-void	ft_puthex (unsigned int n, char *base, int *len)
-{
-	if (n >15)
-		ft_puthex(n / 16, base, len);
-	ft_putchar(base[n % 16], len);
-}
-
-void	ft_puthex_pointer (unsigned long long int n, char *base, int *len)
-{
-	if (n >15)
-		ft_puthex(n / 16, base, len);
-	ft_putchar(base[n % 16], len);
-}
-
 void	ft_printf_func(const char s, va_list lst, int *len)
 {
 	if (s == 'c')
@@ -83,10 +23,7 @@ void	ft_printf_func(const char s, va_list lst, int *len)
 	else if (s == 's')
 		ft_putstr (va_arg (lst, char *), len);
 	else if (s == 'p')
-	{
-		ft_putstr ("0x", len);
-		ft_puthex_pointer (va_arg (lst, unsigned long long), "0123456789abcdef", len);
-	}
+		func_p (va_arg (lst, unsigned long long), "0123456789abcdef", len);
 	else if (s == 'd' || s == 'i')
 		ft_putnbr (va_arg (lst, int), len);
 	else if (s == 'u')

@@ -6,7 +6,7 @@ CC 			= cc
 
 CC_FLAGS 	= -Wall -Wextra -Werror
 
-SRC			= ft_printf.c
+SRC			= ft_printf.c ft_put.c ft_puthex.c
 
 .c.o:		
 			${CC} ${CC_FLAGS} -c $< -o ${<:.c=.o}

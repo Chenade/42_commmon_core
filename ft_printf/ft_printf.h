@@ -20,10 +20,15 @@
 
 
 void	ft_puthex (unsigned int n, char *base, int *len);
+void	ft_puthex_pointer (unsigned long long n, char *base, int *len);
+void	func_p (unsigned long long n, char *base, int *len);
+
 void	func_u(unsigned int n, int *len);
+
 void	ft_putnbr(int nbr, int *len);
 void	ft_putstr(char *s, int *len);
 void	ft_putchar(char c, int *len);
+
 void	ft_printf_func(const char s, va_list lst, int *len);
 int     ft_printf (const char *s, ...);
 

@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     ft_printf("ft_printf: %%i -> %i\n\n", a);
 
 	char	*t;
-	t = "test";
+	t = 0;
     printf("##printf: %%p -> %p\n", t);
     ft_printf("##ft_printf: %%p -> %p\n\n", t);
 
