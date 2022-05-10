@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 00:13:35 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/10 19:26:58 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/10 22:50:59 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
+	char	*dest_t;
+	char	*src_t;
 
-	if (!dest && !src)
-		return (dest);
 	i = 0;
+	dest_t = (char *) dest;
+	src_t = (char *) src;
 	while (i < n)
 	{
-		*(unsigned char *)(dest + i) = *(unsigned const char *)(src + i);
+		dest_t[i] = src_t[i];
 		i += 1;
 	}
-	return (dest);
+	return (dest_t);
 }
