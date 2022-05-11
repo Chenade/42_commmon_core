@@ -6,31 +6,65 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:44:37 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/11 20:09:58 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/11 22:50:45 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+int	cut_line(char *line)
+{
+	int	i;
+	int	is_cut;
+
+	i = -1;
+	is_cut = 0;
+	while (line && line[++i])
+	{
+		if (line[i] == 10)
+			return (i);
+	}
+	return (0);
+}
+
+void	*clear_buffer(char *buffer, int pos)
+{
+	int	i;
+
+	i = 0;
+	pos += 1;
+	while (buffer[pos + i])
+	{
+		buffer[i] = buffer[pos +  i];
+		i += 1;
+	}
+	buffer[i] = '\0';
+	printf("in clear_buffer: [%s]", buffer);
+}
+
+char	*get_next_line(int fd)
 {
 	static char buffer[BUFFER_SIZE + 1];
 	char 		*line;
 	int			ret;
+	int			cut;
 
 	line = NULL;
-	line = ft_strjoin(line, buffer);
+	line = ft_strjoin_vi(line, buffer);
 	ret = 1;
-	while (ret > 0)
+	cut = 0;
+	while (ret > 0 && !cut)
 	{
 		ret = read(fd, buffer, BUFFER_SIZE);
 		if (ret < 0)
 			break ;
-		line = ft_strjoin (line, buffer);
+		buffer[ret] = '\0';
+		line = ft_strjoin_vi (line, buffer);
+		cut = cut_line(line);
 	}
+	clear_buffer (buffer, cut);
 	
-	printf("File opened successfully!\n");
-	printf ("%s,\n", line);
+	printf ("%s\n", line);
 	return (line);
 }
 
@@ -51,13 +85,16 @@ int	main(int argc, char *argv[])
 //			fd = 0;
 //		else
 			fd = open (argv[i++], O_RDONLY, 0);
-//		if (fd >= 0)
-//		{
+		if (fd >= 0)
+		{
+			printf("File opened successfully!\n");
+			l = get_next_line (fd);
+			l = get_next_line (fd);
 			l = get_next_line (fd);
 			close (fd);
-//		}
-//		else
-//			printf("File opened failed");
+		}
+		else
+			printf("File opened failed");
 //		if (--argc <= 1)
 //			break ;
 //	}
