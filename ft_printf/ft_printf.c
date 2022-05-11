@@ -36,6 +36,7 @@ int	ft_printf(const char *s, ...)
 {
 	int		len;
 	int		i;
+	int		is_break;
 	va_list	lst;
 
 	if (!(*s))
@@ -43,13 +44,14 @@ int	ft_printf(const char *s, ...)
 	va_start (lst, s);
 	i = -1;
 	len = 0;
-	while (s[++i])
+	is_break = 1;
+	while (s[++i] && is_break)
 	{
 		if (s[i] == '%')
 		{
-			i += 1;
-			if (s[i])
-				ft_printf_func (s[i], lst, &len);
+			if (!s[++i])
+				is_break = 0;
+			ft_printf_func (s[i], lst, &len);
 		}
 		else
 			ft_putchar (s[i], &len);
