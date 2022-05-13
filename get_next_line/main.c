@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:44:37 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/11 22:50:45 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/13 11:46:52 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,29 @@
 int	cut_line(char *line)
 {
 	int	i;
-	int	is_cut;
 
 	i = -1;
-	is_cut = 0;
 	while (line && line[++i])
 	{
 		if (line[i] == 10)
-			return (i);
+			return (i + 1);
 	}
 	return (0);
 }
 
-void	*clear_buffer(char *buffer, int pos)
+void	clear_buffer(char *buffer)
 {
 	int	i;
+	int	pos;
 
 	i = 0;
-	pos += 1;
-	while (buffer[pos + i])
+	pos = cut_line(buffer); 
+	while (buffer[pos + i] && pos)
 	{
 		buffer[i] = buffer[pos +  i];
 		i += 1;
 	}
 	buffer[i] = '\0';
-	printf("in clear_buffer: [%s]", buffer);
 }
 
 char	*get_next_line(int fd)
@@ -62,9 +60,7 @@ char	*get_next_line(int fd)
 		line = ft_strjoin_vi (line, buffer);
 		cut = cut_line(line);
 	}
-	clear_buffer (buffer, cut);
-	
-	printf ("%s\n", line);
+	clear_buffer (buffer);
 	return (line);
 }
 
@@ -89,8 +85,13 @@ int	main(int argc, char *argv[])
 		{
 			printf("File opened successfully!\n");
 			l = get_next_line (fd);
+			printf("%s", l);
 			l = get_next_line (fd);
+			printf("%s", l);
 			l = get_next_line (fd);
+			printf("%s", l);
+			l = get_next_line (fd);
+			printf("%s", l);
 			close (fd);
 		}
 		else
@@ -98,5 +99,6 @@ int	main(int argc, char *argv[])
 //		if (--argc <= 1)
 //			break ;
 //	}
+	(void) argc;
 	return (0);
 }
