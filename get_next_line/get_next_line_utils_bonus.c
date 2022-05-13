@@ -6,11 +6,11 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 19:33:45 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/13 14:13:46 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/13 20:25:12 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {

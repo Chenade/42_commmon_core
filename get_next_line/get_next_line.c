@@ -6,11 +6,11 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:44:37 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/13 14:44:44 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/13 20:25:42 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
