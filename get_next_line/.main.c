@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:44:37 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/13 11:51:49 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/05/13 13:58:52 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ int	main(int argc, char *argv[])
 			printf("File opened successfully!\n");
 			l = get_next_line (fd);
 			printf("%s", l);
+			free (l);
 			l = get_next_line (fd);
 			printf("%s", l);
+			free (l);
 			l = get_next_line (fd);
 			printf("%s", l);
+			free (l);
 			l = get_next_line (fd);
 			printf("%s", l);
+			free (l);
 			close (fd);
 		}
 		else
