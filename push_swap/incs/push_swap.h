@@ -9,6 +9,7 @@
 # include "../libft/libft.h"
 
 # define INT_SIZE sizeof(int) * 8 /* Size of int in bits */
+# define INT_MAX 2147483647
 
 typedef struct {
 	int	rows;  	//game rows
@@ -20,6 +21,11 @@ typedef struct {
 	char *board;	//board	
 }	t_game;
 
+int	ft_strcmp(char *s1, char *s2);
+void ft_print_err(char *msg);
+int convert_to_binary(int num, int *bin);
+void ft_push(char element, char stack[], int *top, int stackSize);
+void ft_pop(char stack[], int *top, int stackSize);
 
 
 #endif

@@ -12,108 +12,82 @@
 
 #include "push_swap.h"
 
-// // int check_args(int argc, char **argv) {
-// //     int valid = 1;
-// //     if (argc != 3) {
-// // 		ft_printf("\x1b[31mError: \x1b[0mBad number of arguments. Usage: ./push_swap <nb_rows> <nb_columns>\n");
-// // 		valid = 0;
-// // 	}else{
-// //         int i = ft_atoi(argv[1]);
-// //         int j = ft_atoi(argv[2]);
-// //         if (i < MIN_ROW) {
-// //             ft_printf("\x1b[31mError: \x1b[0mBad number of arguments. Usage: The mininum value for row is %d.\n", MIN_ROW);
-// //             valid = 0;
-// //         }
-// //         if (j < MIN_COL) {
-// //             ft_printf("\x1b[31mError: \x1b[0mBad number of arguments. Usage: The mininum value for column is %d.\n", MIN_COL);
-// //             valid = 0;
-// //         }
-// //     }
-// //     return (valid);
-// // }
+int check_valid(char **av, int index)
+{
+  int i;
 
-// void    convert_to_binary(int num, int *bin)
-// {
-//     int index;
-
-//     index = INT_SIZE - 1;
-//     while(index >= 0)
-//     {
-//         bin[index] = num & 1;
-//         index--;
-//         num >>= 1;
-//     }
-// }
-
-// int main(int argc, char **argv)
-// {
-//     int i;
-//     int count;
-//     int bin[INT_SIZE];
-
-//     count = 1;
-//     while (count < argc){
-//         ft_bzero(bin, INT_SIZE);
-//         convert_to_binary(ft_atoi(argv[count]), bin);
-
-//         printf("\nConverted binary: ");
-//         for(i=0; i<(int) INT_SIZE; i++)
-//             printf("%d", bin[i]);
-//         count += 1;
-//     }
-//     return 0;
-// }
-
-void push(char element, char stack[], int *top, int stackSize){
- if(*top == -1){
-  stack[stackSize - 1] = element;
-  *top = stackSize - 1;
- }
- else if(*top == 0){
-  printf("The stack is already full. \n");
- }
- else{
-  stack[(*top) - 1] = element;
-  (*top)--;
- }
+  i = -1;
+  while (av[index][++i])
+  {
+    if (!ft_isdigit(av[index][i]) && !(av[index][i] == '-' && i == 0))
+      return (0);
+  }
+  if (av[index][0] == '-' && ft_atoi(av[index]) > 0)
+    return (0);
+  if (av[index][0] != '-' && ft_atoi(av[index]) < 0)
+    return (0);
+  i = 0;
+  while (av[++i])
+  {
+    if (index != i && !ft_strcmp(av[index], av[i]))
+      return (0);
+  }
+  return (1);
 }
 
-void pop(char stack[], int *top, int stackSize){
- if(*top == -1){
-   printf("The stack is empty. \n");
- }
- else{
-  printf("===Element popped: %c \n", stack[(*top)]);
-  // If the element popped was the last element in the stack
-  // then set top to -1 to show that the stack is empty
-  if((*top) == stackSize - 1){
-    (*top) = -1;
+
+
+int main(int argc, char **argv)
+{
+  int count;
+  int valid;
+  int *order;
+
+  order = (int *) malloc((argc - 1) * sizeof(int));
+  if(!order)
+    return (ft_print_err("Error\n"), 1);
+
+  count = 0;
+  while (++count < argc)
+  {
+    valid = check_valid(argv, count);
+    if (!valid)
+      return (ft_print_err("Error\n"), 1);
   }
-  else{
-    (*top)++;
-  }
- }
-}
 
-int main() {
-  int stackSize = 4;
-  char stack[stackSize];
-  // A negative index shows that the stack is empty
-  int top = -1;
-  
-  push('a', stack, &top, stackSize);
-  printf("Element on top: %c\n", stack[top]);
 
-  push('b',stack, &top, stackSize);
-  printf("Element on top: %c\n", stack[top]);
 
-  pop(stack, &top, stackSize);
-  printf("Element on top: %c\n", stack[top]);
+    //   while (valid && count < argc){
+    //     ft_bzero(bin, INT_SIZE);
+    //     valid = convert_to_binary(ft_atoi(argv[count]), bin);
+    //     printf("\ninput: %s, valid: %d\n", argv[count], valid);
+    //     // push('a', stack, &top, stackSize);
 
-  pop(stack, &top, stackSize);
-  printf("Top: %d\n", top);
+    //     printf("\nConverted binary: ");
+    //     for(i=0; i<(int) INT_SIZE; i++)
+    //         printf("%d", bin[i]);
+    //     count += 1;
+    // }
 
-  pop(stack, &top, stackSize);
+    // int stackSize = 4;
+    // char stack[stackSize];
+    // // A negative index shows that the stack is empty
+    // int top = -1;
+    
+    // push('a', stack, &top, stackSize);
+    // printf("Element on top: %c\n", stack[top]);
+
+    // push('b',stack, &top, stackSize);
+    // printf("Element on top: %c\n", stack[top]);
+
+    // pop(stack, &top, stackSize);
+    // printf("Element on top: %c\n", stack[top]);
+
+    // pop(stack, &top, stackSize);
+    // printf("Top: %d\n", top);
+
+    // pop(stack, &top, stackSize);
+
   return 0;
 }
 
