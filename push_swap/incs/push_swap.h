@@ -23,7 +23,7 @@ typedef struct {
 
 int	ft_strcmp(char *s1, char *s2);
 void ft_print_err(char *msg);
-int convert_to_binary(int num, int *bin);
+char *convert_to_binary(int num);
 void ft_push(char element, char stack[], int *top, int stackSize);
 void ft_pop(char stack[], int *top, int stackSize);
 

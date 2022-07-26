@@ -35,7 +35,22 @@ int check_valid(char **av, int index)
   return (1);
 }
 
+int get_order(char **av, int index)
+{
+  int num;
+  int order;
+  int i;
 
+  num = ft_atoi(av[index]);
+  order = 0;
+  i = 0;
+  while (av[++i])
+  {
+    if (ft_atoi(av[i]) < num)
+      order += 1;
+  }
+  return (order);
+}
 
 int main(int argc, char **argv)
 {
@@ -46,15 +61,19 @@ int main(int argc, char **argv)
   order = (int *) malloc((argc - 1) * sizeof(int));
   if(!order)
     return (ft_print_err("Error\n"), 1);
+  ft_bzero(order, argc - 1);
 
   count = 0;
   while (++count < argc)
   {
     valid = check_valid(argv, count);
+    order[count - 1] = get_order(argv, count);
     if (!valid)
       return (ft_print_err("Error\n"), 1);
   }
 
+   for(int i = 0; i < argc - 1; i++)
+      printf("%d, ", order[i]);
 
 
     //   while (valid && count < argc){

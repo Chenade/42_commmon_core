@@ -4,6 +4,19 @@
   - [x] ft_isdigit
   - [x] int_max
   - [x] duplication
-- convert into order
+- [x] convert into order
 - convert order into binary
 - push in stack a
+- progam cmd
+  - [ ] sa
+  - [ ] sb
+  - [ ] ss : sa + sb
+  - [ ] pa
+  - [ ] pb
+  - [ ] ra
+  - [ ] rb
+  - [ ] rr : ra + rb
+  - [ ] rra
+  - [ ] rrb
+  - [ ] rrr : rra + rrb
+- redix sort
