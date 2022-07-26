@@ -6,7 +6,11 @@
   - [x] duplication
 - [x] convert into order
 - convert order into binary
-- push in stack a
+- [x] stack operation
+  - [x] push
+  - [x] pop
+  - [x] clear
+- [x] push in stack a
 - progam cmd
   - [ ] sa
   - [ ] sb

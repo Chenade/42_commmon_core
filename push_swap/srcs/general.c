@@ -27,9 +27,11 @@ int	ft_strcmp(char *s1, char *s2)
 }
 
 
-void ft_print_err(char *msg)
+void ft_print_err(char *msg, t_stack **stack_a, t_stack **stack_b)
 {
   ft_printf(msg);
+  ft_stack_clear(stack_a);
+  ft_stack_clear(stack_b);
 }
 
 

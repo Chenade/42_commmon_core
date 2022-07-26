@@ -1,32 +1,54 @@
 #include "push_swap.h"
 
-void ft_push(char element, char stack[], int *top, int stackSize){
- if(*top == -1){
-  stack[stackSize - 1] = element;
-  *top = stackSize - 1;
- }
- else if(*top == 0){
-  printf("The stack is already full. \n");
- }
- else{
-  stack[(*top) - 1] = element;
-  (*top)--;
- }
+t_stack	*ft_stack_new(int content)
+{
+	t_stack	*lst;
+
+	lst = (t_stack *)malloc(sizeof(t_stack));
+	if (!lst)
+		return (NULL);
+	lst->content = content;
+	lst->next = NULL;
+	return (lst);
 }
 
-void ft_pop(char stack[], int *top, int stackSize){
- if(*top == -1){
-   printf("The stack is empty. \n");
- }
- else{
-  printf("===Element popped: %c \n", stack[(*top)]);
-  // If the element popped was the last element in the stack
-  // then set top to -1 to show that the stack is empty
-  if((*top) == stackSize - 1){
-    (*top) = -1;
+int	ft_stack_pop(t_stack **stack_name)
+{
+  t_stack *tmp;
+  int     res;
+
+  res = 0;
+	if (*stack_name)
+	{
+    // ft_printf("%d\n", (*stack_name)->content);
+    res = (*stack_name)->content;
+		tmp = (*stack_name)->next;
+    free(*stack_name);
+		*stack_name = tmp;
+	}
+  return (res);
+}
+
+void	ft_stack_push(t_stack **stack_name, t_stack *new)
+{
+	if (*stack_name)
+  {
+    new->next = *stack_name;
+    *stack_name = new;    
   }
-  else{
-    (*top)++;
-  }
- }
+	else
+		*stack_name = new;
+}
+
+void  ft_stack_clear(t_stack **stack_name)
+{
+  t_stack	*tmp;
+
+	while (*stack_name)
+	{
+		tmp = (*stack_name)->next;
+    free(*stack_name);
+		*stack_name = tmp;
+	}
+  free(stack_name);
 }

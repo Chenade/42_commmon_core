@@ -31,8 +31,8 @@ RM 		= rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
-		ar rc $(NAME) $(OBJS)
+$(NAME):	$(OBJS) $(BONUS_OBJS)
+		ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
 
 bonus:		$(OBJS) $(BONUS_OBJS)
 		ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
