@@ -17,15 +17,30 @@ typedef struct s_stack
 	struct s_stack *next;
 } t_stack;
 
-int	ft_strcmp(char *s1, char *s2);
-void ft_print_err(char *msg, t_stack **stack_a, t_stack **stack_b);
-char *convert_to_binary(int num);
-void ft_push(char element, char stack[], int *top, int stackSize);
-void ft_pop(char stack[], int *top, int stackSize);
+int	    ft_strcmp(char *s1, char *s2);
+void    ft_print_err(char *msg, t_stack **stack_a, t_stack **stack_b);
+char    *convert_to_binary(int num);
+
 t_stack	*ft_stack_new(int content);
-void  ft_stack_clear(t_stack **stack_name);
-int	ft_stack_pop(t_stack **stack_name);
-void	ft_stack_push(t_stack **stack_name, t_stack *new);
+int	    ft_stack_pop(t_stack **stack_name);
+void	ft_stack_push(t_stack **stack_name, t_stack *node);
+void    ft_stack_clear(t_stack **stack_name);
+t_stack	*ft_stack_last(t_stack **stack_name);
+void	ft_stack_add_back(t_stack **stack_name, t_stack *node);
+void	ft_stack_del_back(t_stack **stack_name);
+void    ft_stack_print(t_stack **stack_name);
+
+void    sa(int print, t_stack **stack_a);
+void    sb(int print, t_stack **stack_b);
+void    ss(t_stack **stack_a, t_stack **stack_b);
+void    pa(t_stack **stack_a, t_stack **stack_b);
+void    pb(t_stack **stack_a, t_stack **stack_b);
+void    ra(int print, t_stack **stack_a);
+void    rb(int print, t_stack **stack_b);
+void    rr(t_stack **stack_a, t_stack **stack_b);
+void    rra(int print, t_stack **stack_a);
+void    rrb(int print, t_stack **stack_b);
+void    rrr(t_stack **stack_a, t_stack **stack_b);
 
 
 #endif

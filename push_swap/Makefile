@@ -12,7 +12,7 @@ LIBNAME		=	$(LIB_DIR)libft.a
 SRCS_DIR	=	srcs/
 OBJS_DIR	=	objs/
 INCS_DIR	= 	incs/
-SRCS 		= 	main.c general.c stack.c
+SRCS 		= 	main.c general.c stack.c cmd_sp.c cmd_r.c cmd_rr.c 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 DEPS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.d))
 INCS		=	-I $(INCS_DIR) -I $(LIB_DIR)

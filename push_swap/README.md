@@ -11,16 +11,16 @@
   - [x] pop
   - [x] clear
 - [x] push in stack a
-- progam cmd
-  - [ ] sa
-  - [ ] sb
-  - [ ] ss : sa + sb
-  - [ ] pa
-  - [ ] pb
-  - [ ] ra
-  - [ ] rb
-  - [ ] rr : ra + rb
-  - [ ] rra
-  - [ ] rrb
-  - [ ] rrr : rra + rrb
+- [x] progam cmd
+  - [x] sa
+  - [x] sb
+  - [x] ss : sa + sb
+  - [x] pa
+  - [x] pb
+  - [x] ra
+  - [x] rb
+  - [x] rr : ra + rb
+  - [x] rra
+  - [x] rrb
+  - [x] rrr : rra + rrb
 - redix sort
