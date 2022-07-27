@@ -19,16 +19,22 @@ typedef struct s_stack
 
 int	    ft_strcmp(char *s1, char *s2);
 void    ft_print_err(char *msg, t_stack **stack_a, t_stack **stack_b);
-char    *convert_to_binary(int num);
+void    print_both_stack(t_stack **stack_a, t_stack **stack_b);
+
+int     sort_redix(t_stack **stack_a, t_stack **stack_b);
+int     sort_3(t_stack **stack_a, t_stack **stack_b);
+int     push_swap(t_stack **stack_a, t_stack **stack_b);
 
 t_stack	*ft_stack_new(int content);
 int	    ft_stack_pop(t_stack **stack_name);
 void	ft_stack_push(t_stack **stack_name, t_stack *node);
-void    ft_stack_clear(t_stack **stack_name);
+void    ft_stack_clear(t_stack **stack_a, t_stack **stack_b);
 t_stack	*ft_stack_last(t_stack **stack_name);
 void	ft_stack_add_back(t_stack **stack_name, t_stack *node);
 void	ft_stack_del_back(t_stack **stack_name);
 void    ft_stack_print(t_stack **stack_name);
+int	    ft_stack_len(t_stack **stack_name);
+int	    ft_stack_isSort(t_stack **stack_name);
 
 void    sa(int print, t_stack **stack_a);
 void    sb(int print, t_stack **stack_b);

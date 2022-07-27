@@ -23,4 +23,6 @@
   - [x] rra
   - [x] rrb
   - [x] rrr : rra + rrb
-- redix sort
+- [ ] sorting
+  - [x] small sort (3)
+  - [ ] redix sort

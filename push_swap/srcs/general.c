@@ -26,43 +26,18 @@ int	ft_strcmp(char *s1, char *s2)
 	return (ans);
 }
 
-
 void ft_print_err(char *msg, t_stack **stack_a, t_stack **stack_b)
 {
-  ft_printf(msg);
-  ft_stack_clear(stack_a);
-  ft_stack_clear(stack_b);
+    ft_printf(msg);
+    ft_stack_clear(stack_a, stack_b);
 }
 
-
-void	ft_bzero_char(void *s, size_t n)
+void  print_both_stack(t_stack **stack_a, t_stack **stack_b)
 {
-	while (n--)
-		((char *)s)[n] = '0';
-}
-
-
-char *convert_to_binary(int num)
-{
-    ft_printf("===convert_to_binary(%d)===\n", num);
-    char *res;
-    int index;
-
-    index = INT_SIZE - 1;
-    res = (char *) malloc(INT_SIZE * sizeof(char));
-    if(!res)
-        return NULL;
-    ft_bzero_char(res, INT_SIZE);
-    // ft_printf("%s\n", res);
-    while(index >= 0)
-    {
-        ft_printf("%s", num & 1);
-        ft_printf("\n");
-        if (num & 1)
-            res[index] = num & 1;
-        index--;
-        num >>= 1;
-    }
-    res[INT_SIZE] = 0;
-    return (res);
+  ft_printf("========================\n");
+	ft_printf("stack a [len => %d]: ", ft_stack_len(stack_a));
+	ft_stack_print(stack_a);
+	ft_printf("stack b [len => %d]: ", ft_stack_len(stack_b));
+	ft_stack_print(stack_b);
+  ft_printf("========================\n");
 }
