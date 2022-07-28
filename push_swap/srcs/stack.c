@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 23:45:01 by ykuo              #+#    #+#             */
+/*   Updated: 2022/07/28 23:46:04 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack	*ft_stack_new(int content)
@@ -14,8 +26,8 @@ t_stack	*ft_stack_new(int content)
 
 int	ft_stack_pop(t_stack **stack_name)
 {
-	t_stack *tmp;
-	int     res;
+	t_stack	*tmp;
+	int		res;
 
 	res = 0;
 	if (*stack_name)
@@ -33,27 +45,27 @@ void	ft_stack_push(t_stack **stack_name, t_stack *node)
 	if (*stack_name)
 	{
 		node->next = *stack_name;
-		*stack_name = node;    
+		*stack_name = node;
 	}
 	else
 		*stack_name = node;
 }
 
-void  ft_stack_clear(t_stack **stack_a, t_stack **stack_b)
+void	ft_stack_clear(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tmp;
 
 	while (*stack_a)
 	{
 		tmp = (*stack_a)->next;
-    	free(*stack_a);
+		free(*stack_a);
 		*stack_a = tmp;
 	}
 	free(stack_a);
 	while (*stack_b)
 	{
 		tmp = (*stack_b)->next;
-    	free(*stack_b);
+		free(*stack_b);
 		*stack_b = tmp;
 	}
 	free(stack_b);
@@ -61,18 +73,18 @@ void  ft_stack_clear(t_stack **stack_a, t_stack **stack_b)
 
 int	ft_stack_len(t_stack **stack_name)
 {
-	int	res;
-	t_stack *org;
+	int		res;
+	t_stack	*org;
 
 	res = 0;
 	if (!(*stack_name))
 		return (res);
-    org = (*stack_name);
+	org = (*stack_name);
 	while ((*stack_name))
-    {
+	{
 		(*stack_name) = (*stack_name)->next;
 		res += 1;
-    }
-    (*stack_name) = org;
+	}
+	(*stack_name) = org;
 	return (res);
 }

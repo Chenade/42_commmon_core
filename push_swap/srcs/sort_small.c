@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_small.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 23:44:15 by ykuo              #+#    #+#             */
+/*   Updated: 2022/07/28 23:44:33 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	sort_3(t_stack **stack_a, t_stack **stack_b)
@@ -33,7 +45,7 @@ void	sort_4(t_stack **stack_a, t_stack **stack_b)
 {
 	int	distance;
 
-	if (ft_stack_isSort(stack_a))
+	if (ft_stack_issort(stack_a))
 		return ;
 	distance = get_distance(stack_a, get_min(stack_a, -1));
 	if (distance == 1)
@@ -45,7 +57,7 @@ void	sort_4(t_stack **stack_a, t_stack **stack_b)
 	}
 	else if (distance == 3)
 		rra(1, stack_a);
-	if (ft_stack_isSort(stack_a))
+	if (ft_stack_issort(stack_a))
 		return ;
 	pb(stack_a, stack_b);
 	sort_3(stack_a, stack_b);
@@ -71,7 +83,7 @@ void	sort_5(t_stack **stack_a, t_stack **stack_b)
 	}
 	else if (distance == 4)
 		rra(1, stack_a);
-	if (ft_stack_isSort(stack_a))
+	if (ft_stack_issort(stack_a))
 		return ;
 	pb(stack_a, stack_b);
 	sort_4(stack_a, stack_b);

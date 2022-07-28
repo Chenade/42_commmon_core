@@ -18,7 +18,7 @@ OBJS_CHECKER_DIR	=	objs/bonus/
 SRCS 		= 	main.c general.c push_swap.c
 SRCS 		+=  stack.c stack_tmp.c
 SRCS 		+= 	cmd_sp.c cmd_r.c cmd_rr.c
-SRCS 		+= 	sort_big.c sort_small.c
+SRCS 		+= 	sort_big.c sort_small.c sort_redix.c
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 DEPS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.d))
