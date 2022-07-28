@@ -59,20 +59,6 @@ void  ft_stack_clear(t_stack **stack_a, t_stack **stack_b)
 	free(stack_b);
 }
 
-void  ft_stack_print(t_stack **stack_name)
-{
-	t_stack	*tmp;
-
-	tmp = *stack_name;
-	while ((*stack_name))
-	{
-		ft_printf("%d, ", (*stack_name)->content);
-		(*stack_name) = (*stack_name)->next;
-	}
-	(*stack_name) = tmp;
-	ft_printf("\n");
-}
-
 int	ft_stack_len(t_stack **stack_name)
 {
 	int	res;
@@ -85,31 +71,6 @@ int	ft_stack_len(t_stack **stack_name)
 	while ((*stack_name))
     {
 		(*stack_name) = (*stack_name)->next;
-		res += 1;
-    }
-    (*stack_name) = org;
-	return (res);
-}
-
-int	ft_stack_isSort(t_stack **stack_name)
-{
-	int	res;
-	int	last;
-	t_stack *org;
-
-	res = 1;
-	if (!(*stack_name))
-		return (0);
-	last = (*stack_name)->content;
-	if (!(*stack_name))
-		return (res);
-    org = (*stack_name);
-	while ((*stack_name))
-    {
-		(*stack_name) = (*stack_name)->next;
-		if ((*stack_name) && last >= (*stack_name)->content)
-			return (0);
-		last = (*stack_name)->content;
 		res += 1;
     }
     (*stack_name) = org;

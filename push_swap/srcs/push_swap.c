@@ -1,62 +1,94 @@
 #include "push_swap.h"
 
-int	sort_redix(t_stack **stack_a, t_stack **stack_b)
+int check_valid(char **av, int index)
 {
-	int size = ft_stack_len(stack_a);
-	int max_num = size - 1;
-	int max_bits = 0;
-	while ((max_num >> max_bits) != 0) 
-	++max_bits;
-	// int i = 0;
-	// while (!ft_stack_isSort(stack_a))
-	  for (int i = 0 ; i < max_bits ; ++i)
+  int i;
+
+  i = -1;
+  while (av[index][++i])
+  {
+    if (!ft_isdigit(av[index][i]) && !(av[index][i] == '-' && i == 0 && av[index][i + 1]))
+      return (0);
+  }
+  if (av[index][0] == '-' && ft_atoi(av[index]) > 0)
+    return (0);
+  if (av[index][0] != '-' && ft_atoi(av[index]) < 0)
+    return (0);
+  i = 0;
+  while (av[++i])
+  {
+    if (index != i && !ft_strcmp(av[index], av[i]))
+      return (0);
+  }
+  return (1);
+}
+
+int get_order(char **av, int index)
+{
+  int num;
+  int order;
+  int i;
+
+  num = ft_atoi(av[index]);
+  order = 0;
+  i = 0;
+  while (av[++i])
+  {
+    if (ft_atoi(av[i]) < num)
+      order += 1;
+	else if (ft_atoi(av[i]) == num && i != index)
+		return (-1);
+  }
+  return (order);
+}
+
+int  init_stack(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
+{
+	int count;
+	int valid;
+	int	tmp;
+
+	count = argc;
+	while (--count > 0)
 	{
-		for(int j = 0 ; j < size ; ++j)
-		{
-		if(!(*stack_a))
-			break;
-		int num = (*stack_a)->content;
-		if (((num >> i)&1) == 1) 
-			ra(1, stack_a); 
+		valid = check_valid(argv, count);
+		if (!valid)
+			ft_print_err(stack_a, stack_b);
+		tmp = get_order(argv, count);
+		if (tmp > -1)
+			ft_stack_push(stack_a, ft_stack_new(get_order(argv, count)));
 		else
-			pb(stack_a, stack_b);
-		// print_both_stack(stack_a, stack_b);
-		}
-		while (ft_stack_len(stack_b)) pa(stack_a, stack_b);
-		// print_both_stack(stack_a, stack_b);
-		// i += 1;
+			ft_print_err(stack_a, stack_b);
 	}
-	// print_both_stack(stack_a, stack_b);
 	return (0);
 }
 
-int	sort_3(t_stack **stack_a, t_stack **stack_b)
+int	ft_stack_isSort(t_stack **stack_name)
 {
-	int	top;
-	int	middle;
-	int	bottom;
+	int	res;
+	int	last;
+	t_stack *org;
 
-	(void) stack_b;
-	top = (*stack_a)->content;
-	middle = (*stack_a)->next->content;
-	bottom = (*stack_a)->next->next->content;
-	if (top > middle && bottom > middle && top < bottom)
-		sa(1, stack_a);
-	else if (top > middle && middle > bottom && top > bottom)
-	{
-		sa(1, stack_a);
-		rra(1, stack_a);
-	}
-	else if (top > middle && bottom > middle && top > bottom)
-		ra(1, stack_a);
-	else if (top < middle && middle > bottom && top < bottom)
-	{
-		sa(1, stack_a);
-		ra(1, stack_a);
-	}
-	else if (top < middle && middle > bottom && top > bottom)
-		rra(1, stack_a);
-	return (0);
+	if (!(*stack_name))
+		return (0);
+	res = 1;
+    org = (*stack_name);
+	last = (*stack_name)->content;
+	if (!(*stack_name))
+		return (res);
+	while ((*stack_name))
+    {
+		(*stack_name) = (*stack_name)->next;
+		if ((*stack_name) && last >= (*stack_name)->content)
+		{
+			res = 0;
+			break ;
+		}
+		if ((*stack_name))
+			last = (*stack_name)->content;
+    }
+    (*stack_name) = org;
+	return (res);
 }
 
 int  push_swap(t_stack **stack_a, t_stack **stack_b)
@@ -66,8 +98,14 @@ int  push_swap(t_stack **stack_a, t_stack **stack_b)
 
 	size = ft_stack_len(stack_a);
 	res = 0;
-	if (size == 3)
-		res = sort_3(stack_a, stack_b);
+	if (ft_stack_isSort(stack_a))
+		return (res);
+	else if (size == 3)
+		sort_3(stack_a, stack_b);
+    else if (size == 4)
+		sort_4(stack_a, stack_b);
+    else if (size == 5)
+		sort_5(stack_a, stack_b);
 	else
 		res = sort_redix(stack_a, stack_b);
 	return (res);

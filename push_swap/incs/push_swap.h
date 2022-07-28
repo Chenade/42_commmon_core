@@ -17,12 +17,22 @@ typedef struct s_stack
 	struct s_stack *next;
 } t_stack;
 
+int	    ft_arrlen(char **av);
 int	    ft_strcmp(char *s1, char *s2);
-void    ft_print_err(char *msg, t_stack **stack_a, t_stack **stack_b);
+void    ft_print_err(t_stack **stack_a, t_stack **stack_b);
 void    print_both_stack(t_stack **stack_a, t_stack **stack_b);
+int	    get_min(t_stack **stack, int val);
+int	    get_distance(t_stack **stack, int index);
 
+void    sort_3(t_stack **stack_a, t_stack **stack_b);
+void	sort_4(t_stack **stack_a, t_stack **stack_b);
+void	sort_5(t_stack **stack_a, t_stack **stack_b);
 int     sort_redix(t_stack **stack_a, t_stack **stack_b);
-int     sort_3(t_stack **stack_a, t_stack **stack_b);
+int     sort_big(t_stack **stack_a, t_stack **stack_b);
+
+int     check_valid(char **av, int index);
+int     get_order(char **av, int index);
+int     init_stack(int argc, char **argv, t_stack **stack_a, t_stack **stack_b);
 int     push_swap(t_stack **stack_a, t_stack **stack_b);
 
 t_stack	*ft_stack_new(int content);

@@ -5,7 +5,6 @@
   - [x] int_max
   - [x] duplication
 - [x] convert into order
-- convert order into binary
 - [x] stack operation
   - [x] push
   - [x] pop
@@ -24,5 +23,10 @@
   - [x] rrb
   - [x] rrr : rra + rrb
 - [ ] sorting
-  - [x] small sort (3)
-  - [ ] redix sort
+  - [x] small sort (3)(4)(5)
+  - [X] redix sort
+    - 100: 1084 (3)
+    - 500: 6784 (4)
+  - [ ] quick sort
+    - 100: 
+    - 500: 
