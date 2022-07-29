@@ -4,7 +4,7 @@ NAME_CHECKER = bonus_checker
 CC =	cc
 RM = 	rm -rf
 
-CFLAGS =	-Wall -Wextra # -MMD #-Werror
+CFLAGS =	-Wall -Wextra -MMD -Werror
 CFLAGS +=	-g3
 
 LIB_DIR	 	= 	libft/
