@@ -19,8 +19,8 @@ int	check_valid(char **av, int index)
 	i = -1;
 	while (av[index][++i])
 	{
-		if (!ft_isdigit(av[index][i]) && !(av[index][i] == '-' &&
-			i == 0 && av[index][i + 1]))
+		if (!ft_isdigit(av[index][i]) &&
+			!(av[index][i] == '-' && i == 0 && av[index][i + 1]))
 			return (0);
 	}
 	if (av[index][0] == '-' && ft_atoi(av[index]) > 0)
@@ -111,15 +111,15 @@ int	push_swap(t_stack **stack_a, t_stack **stack_b)
 
 	size = ft_stack_len(stack_a);
 	res = 0;
-	if (ft_stack_issort(stack_a))
+	/*if (ft_stack_issort(stack_a))
 		return (res);
-	else if (size == 3)
+	else */if (size == 3)
 		sort_3(stack_a, stack_b);
 	else if (size == 4)
 		sort_4(stack_a, stack_b);
 	else if (size == 5)
 		sort_5(stack_a, stack_b);
 	else
-		res = sort_redix(stack_a, stack_b);
+		res = sort_big(stack_a, stack_b);
 	return (res);
 }

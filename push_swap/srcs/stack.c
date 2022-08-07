@@ -51,24 +51,23 @@ void	ft_stack_push(t_stack **stack_name, t_stack *node)
 		*stack_name = node;
 }
 
-void	ft_stack_clear(t_stack **stack_a, t_stack **stack_b)
+void	ft_stack_free(t_stack **stack_name)
 {
 	t_stack	*tmp;
 
-	while (*stack_a)
+	while (*stack_name)
 	{
-		tmp = (*stack_a)->next;
-		free(*stack_a);
-		*stack_a = tmp;
+		tmp = (*stack_name)->next;
+		free(*stack_name);
+		*stack_name = tmp;
 	}
-	free(stack_a);
-	while (*stack_b)
-	{
-		tmp = (*stack_b)->next;
-		free(*stack_b);
-		*stack_b = tmp;
-	}
-	free(stack_b);
+	free(stack_name);
+}
+
+void	ft_stack_clear(t_stack **stack_a, t_stack **stack_b)
+{
+	ft_stack_free(stack_a);
+	ft_stack_free(stack_b);
 }
 
 int	ft_stack_len(t_stack **stack_name)

@@ -30,3 +30,17 @@
   - [ ] quick sort
     - 100: 
     - 500: 
+  - [ ] others
+    - pb * 2
+    - Foreach stackA
+    - calculate the least step move to top
+    - get numB
+        - if the numA is less than all the num in B: find the the grestest num in B
+        - else: find the grestest num in B less than num
+    - calculate the least step move to top
+    - combine 
+        - ra + rb = rr
+        - rra + rrb = rrr
+    - take the least move
+    - do rb or rrb to make max to the top
+    - Foreach stackB : pa

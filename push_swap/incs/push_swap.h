@@ -57,6 +57,8 @@ void	ft_stack_del_back(t_stack **stack_name);
 void	ft_stack_print(t_stack **stack_name);
 int		ft_stack_len(t_stack **stack_name);
 int		ft_stack_issort(t_stack **stack_name);
+t_stack	**ft_stack_dup(t_stack **stack_a);
+void	ft_stack_free(t_stack **stack_name);
 
 void	sa(int print, t_stack **stack_a);
 void	sb(int print, t_stack **stack_b);
