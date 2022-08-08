@@ -15,7 +15,8 @@ INCS_DIR	= 	incs/
 SRCS 		= 	main.c general.c push_swap.c
 SRCS 		+=  stack.c stack_tmp.c
 SRCS 		+= 	cmd_sp.c cmd_r.c cmd_rr.c
-SRCS 		+= 	sort_big.c sort_small.c sort_redix.c
+SRCS 		+= 	sort_small.c sort_redix.c
+SRCS 		+= 	sort_big.c sort_big_lis.c
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 DEPS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.d))

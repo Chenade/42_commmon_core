@@ -41,6 +41,10 @@ void	sort_4(t_stack **stack_a, t_stack **stack_b);
 void	sort_5(t_stack **stack_a, t_stack **stack_b);
 int		sort_redix(t_stack **stack_a, t_stack **stack_b);
 int		sort_big(t_stack **stack_a, t_stack **stack_b);
+int		search_replace(int *lis, int left, int right, int key);
+int		*ft_lis_ans(int lis_length, int	*index, int *A, int n);
+int		*ft_lis(int *A, int n);
+int		*find_lis(t_stack **stack_a);
 
 int		check_valid(char **av, int index);
 int		get_order(char **av, int index);
