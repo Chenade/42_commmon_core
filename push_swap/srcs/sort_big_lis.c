@@ -51,6 +51,7 @@ int	*ft_lis_ans(int lis_length, int	*index, int *A, int n)
 	answer = (int *) malloc((lis_length + 1) * sizeof(int));
 	if (!answer)
 		return (NULL);
+	answer[lis_length] = '\0';
 	i = n;
 	tmp = lis_length;
 	while (--i >= 0)
@@ -121,4 +122,33 @@ int	*find_lis(t_stack **stack_a)
 	(*stack_ans) = head;
 	ft_stack_free (stack_ans);
 	return (lis);
+}
+
+void	split_lis(t_stack **stack_a, t_stack **stack_b, int *lis)
+{
+	int		count;
+	int		i;
+	int		is_brk;
+	int		size;
+	t_stack	*head;
+
+	count = ft_stack_len(stack_a);
+	head = (*stack_a);
+	size = ft_stack_len(stack_a);
+	while (!ft_stack_issort(stack_a))
+	{
+		i = 0;
+		is_brk = 0;
+		while (lis[++i] && !is_brk)
+			if (lis[i] == (*stack_a)->content)
+				is_brk = 1;
+		if (is_brk || (*stack_a)->content == 0)
+			ra(1, stack_a);
+		else
+		{
+			pb(stack_a, stack_b);
+			if ((*stack_b)->content > (size / 2) && ft_stack_len(stack_b) > 1)
+				rb(1, stack_b);
+		}
+	}
 }

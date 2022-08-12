@@ -47,7 +47,7 @@ void	sort_4(t_stack **stack_a, t_stack **stack_b)
 
 	if (ft_stack_issort(stack_a))
 		return ;
-	distance = get_distance(stack_a, get_min(stack_a, -1));
+	distance = get_distance(stack_a, get_min(stack_a, -1), 0);
 	if (distance == 1)
 		ra(1, stack_a);
 	else if (distance == 2)
@@ -68,7 +68,7 @@ void	sort_5(t_stack **stack_a, t_stack **stack_b)
 {
 	int	distance;
 
-	distance = get_distance(stack_a, get_min(stack_a, -1));
+	distance = get_distance(stack_a, get_min(stack_a, -1), 0);
 	if (distance == 1)
 		ra(1, stack_a);
 	else if (distance == 2)

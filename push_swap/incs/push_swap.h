@@ -23,6 +23,19 @@
 # define INT_SIZE 32
 # define INT_MAX 2147483647
 
+typedef struct s_move
+{
+	int	num_a;
+	int	num_b;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+	int	count;
+}	t_move;
+
 typedef struct s_stack
 {
 	int				content;
@@ -34,7 +47,7 @@ int		ft_strcmp(char *s1, char *s2);
 void	ft_print_err(t_stack **stack_a, t_stack **stack_b);
 void	print_both_stack(t_stack **stack_a, t_stack **stack_b);
 int		get_min(t_stack **stack, int val);
-int		get_distance(t_stack **stack, int index);
+int		get_distance(t_stack **stack, int index, int type);
 
 void	sort_3(t_stack **stack_a, t_stack **stack_b);
 void	sort_4(t_stack **stack_a, t_stack **stack_b);
@@ -45,6 +58,7 @@ int		search_replace(int *lis, int left, int right, int key);
 int		*ft_lis_ans(int lis_length, int	*index, int *A, int n);
 int		*ft_lis(int *A, int n);
 int		*find_lis(t_stack **stack_a);
+void	split_lis(t_stack **stack_a, t_stack **stack_b, int *lis);
 
 int		check_valid(char **av, int index);
 int		get_order(char **av, int index);

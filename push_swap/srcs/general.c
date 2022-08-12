@@ -61,11 +61,13 @@ int	get_min(t_stack **stack, int val)
 	return (min);
 }
 
-int	get_distance(t_stack **stack, int index)
+int	get_distance(t_stack **stack, int index, int type)
 {
 	t_stack	*head;
 	int		distance;
 
+	if (index == 1000)
+		return (0);
 	distance = 0;
 	head = *stack;
 	while (head)
@@ -74,6 +76,11 @@ int	get_distance(t_stack **stack, int index)
 			break ;
 		distance++;
 		head = head->next;
+	}
+	if (type)
+	{
+		if ((ft_stack_len(stack) - distance) < distance)
+			distance = ft_stack_len(stack) - distance;
 	}
 	return (distance);
 }
