@@ -69,21 +69,3 @@ void	ft_stack_clear(t_stack **stack_a, t_stack **stack_b)
 	ft_stack_free(stack_a);
 	ft_stack_free(stack_b);
 }
-
-int	ft_stack_len(t_stack **stack_name)
-{
-	int		res;
-	t_stack	*org;
-
-	res = 0;
-	if (!(*stack_name))
-		return (res);
-	org = (*stack_name);
-	while ((*stack_name))
-	{
-		(*stack_name) = (*stack_name)->next;
-		res += 1;
-	}
-	(*stack_name) = org;
-	return (res);
-}

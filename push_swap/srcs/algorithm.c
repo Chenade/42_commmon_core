@@ -1,16 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_small.c                                       :+:      :+:    :+:   */
+/*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/28 23:44:15 by ykuo              #+#    #+#             */
-/*   Updated: 2022/07/28 23:44:33 by ykuo             ###   ########.fr       */
+/*   Created: 2022/08/12 06:38:21 by ykuo              #+#    #+#             */
+/*   Updated: 2022/08/12 06:38:34 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	sort_redix(t_stack **stack_a, t_stack **stack_b)
+{
+	int	size;
+	int	i;
+	int	j;
+	int	num;
+
+	size = ft_stack_len(stack_a);
+	i = 0;
+	while (!ft_stack_issort(stack_a))
+	{
+		j = 0;
+		while (++j <= size)
+		{
+			if (!(*stack_a))
+				break ;
+			num = (*stack_a)->content;
+			if (((num >> i) & 1) == 1)
+				ra(1, stack_a);
+			else
+				pb(stack_a, stack_b);
+		}
+		while (ft_stack_len(stack_b))
+			pa(stack_a, stack_b);
+		i += 1;
+	}
+	return (0);
+}
+
+int	sort_big(t_stack **stack_a, t_stack **stack_b)
+{
+	int		*lis;
+	t_move	*min_move;
+
+	lis = find_lis(stack_a);
+	split_lis(stack_a, stack_b, lis);
+	while (ft_stack_len(stack_b))
+	{
+		min_move = ft_minmove(stack_a, stack_b);
+		ft_move(stack_a, stack_b, min_move);
+		free (min_move);
+	}
+	while ((*stack_a)->content != 0)
+		ra(1, stack_a);
+	free (lis);
+	return (1);
+}
 
 void	sort_3(t_stack **stack_a, t_stack **stack_b)
 {

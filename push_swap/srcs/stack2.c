@@ -36,6 +36,19 @@ void	print_both_stack(t_stack **stack_a, t_stack **stack_b)
 	ft_printf("========================\n");
 }
 
+void	ft_stack_reverse(t_stack **stack_ans, t_stack **stack_tmp2)
+{
+	t_stack	*head;
+
+	head = *stack_tmp2;
+	while ((*stack_tmp2))
+	{
+		ft_stack_push(stack_ans, ft_stack_new((*stack_tmp2)->content));
+		(*stack_tmp2) = (*stack_tmp2)->next;
+	}
+	(*stack_tmp2) = head;
+}
+
 t_stack	**ft_stack_dup(t_stack **stack_a)
 {
 	t_stack	**stack_ans;
@@ -55,13 +68,25 @@ t_stack	**ft_stack_dup(t_stack **stack_a)
 		(*stack_a) = (*stack_a)->next;
 	}
 	(*stack_a) = head;
-	head = *stack_tmp2;
-	while ((*stack_tmp2))
-	{
-		ft_stack_push(stack_ans, ft_stack_new((*stack_tmp2)->content));
-		(*stack_tmp2) = (*stack_tmp2)->next;
-	}
-	(*stack_tmp2) = head;
+	ft_stack_reverse (stack_ans, stack_tmp2);
 	ft_stack_free (stack_tmp2);
 	return (stack_ans);
+}
+
+int	ft_stack_len(t_stack **stack_name)
+{
+	int		res;
+	t_stack	*org;
+
+	res = 0;
+	if (!(*stack_name))
+		return (res);
+	org = (*stack_name);
+	while ((*stack_name))
+	{
+		(*stack_name) = (*stack_name)->next;
+		res += 1;
+	}
+	(*stack_name) = org;
+	return (res);
 }

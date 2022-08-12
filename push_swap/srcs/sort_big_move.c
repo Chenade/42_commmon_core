@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 23:43:43 by ykuo              #+#    #+#             */
-/*   Updated: 2022/07/28 23:50:54 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/08/12 06:21:55 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_move	*ft_minmove(t_stack **stack_a, t_stack **stack_b)
 
 void	ft_move(t_stack **stack_a, t_stack **stack_b, t_move *move)
 {
-	t_move *head;
+	t_move	*head;
 
 	head = move;
 	while ((move->ra)--)
@@ -128,24 +128,4 @@ void	ft_move(t_stack **stack_a, t_stack **stack_b, t_move *move)
 		rrb(1, stack_b);
 	pa (stack_a, stack_b);
 	move = head;
-}
-
-int	sort_big(t_stack **stack_a, t_stack **stack_b)
-{
-	int		*lis;
-	t_move	*min_move;
-
-	lis = find_lis(stack_a);
-	split_lis(stack_a, stack_b, lis);
-
-	while (ft_stack_len(stack_b))
-	{
-		min_move = ft_minmove(stack_a, stack_b);
-		ft_move(stack_a, stack_b, min_move);
-		free (min_move);
-	}
-	while ((*stack_a)->content != 0)
-		ra(1, stack_a);
-	free (lis);
-	return (1);
 }
