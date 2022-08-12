@@ -1,57 +1,82 @@
-NAME =	push_swap
 
-CC =	cc
-RM = 	rm -rf
+NAME		=	push_swap
 
-CFLAGS =	-Wall -Wextra -MMD #-Werror
-CFLAGS +=	-g3
+NAME_CHECKER=	checker
 
-LIB_DIR	 	= 	libft/
-LIBNAME		=	$(LIB_DIR)libft.a
-SRCS_DIR	=	srcs/
-OBJS_DIR	=	objs/
-INCS_DIR	= 	incs/
+RM			=	rm -rf
 
-SRCS 		= 	main.c general.c push_swap.c
-SRCS 		+=  stack.c stack2.c
-SRCS 		+= 	cmd_sp.c cmd_r.c cmd_rr.c
-SRCS 		+= 	algorithm.c
-SRCS 		+= 	sort_big_move.c sort_big_lis.c
+CC			=	cc
 
-OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
-DEPS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.d))
-INCS		=	-I $(INCS_DIR) -I $(LIB_DIR)
+CFLAGS		=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(LIBFT_DIR)/$(INC_DIR)
+CFLAGS		+=	-g3 -MMD
 
-all:		$(NAME)
+CLIBS		=	-L . -lft
 
-$(NAME):	$(LIBNAME) $(OBJS) 
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INCS) $(LIBNAME)
-	@echo "\033[92mPush Swap Compile Successfully\033[0m"
+LIBFT		=	libft.a
 
+SRCS_DIR	=	srcs
 
-$(LIBNAME):
-	@make -C $(LIB_DIR)
-	@echo "\033[92mLibft Compile Successfully\n\033[0m"
+INC_DIR		=	incs
 
-$(OBJS_DIR)%.o:$(SRCS_DIR)%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
+OBJS_DIR	=	objs
+
+LIBFT_DIR	=	libft
+
+SRCS		=	program/main.c						\
+				program/general.c					\
+				program/push_swap.c					\
+				program/stack.c						\
+				program/stack2.c					\
+				program/cmd_sp.c					\
+				program/cmd_r.c						\
+				program/cmd_rr.c					\
+				program/algorithm.c					\
+				program/sort_big_move.c				\
+				program/sort_big_lis.c
+
+SRCS_CHECKER=	checker/main.c						\
+				program/parsing.c					\
+				program/stack.c						\
+				checker/operations/rotate.c			\
+				checker/operations/reverse_rotate.c	\
+				checker/operations/push.c			\
+				checker/operations/swap.c
+
+OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+
+OBJS_CHECKER=	$(addprefix $(OBJS_DIR)/, $(SRCS_CHECKER:.c=.o))
+
+$(NAME):		$(LIBFT) $(OBJS)
+				$(CC) $(OBJS) $(CFLAGS) $(CLIBS) -o $(NAME)
+				@echo "\033[92mPush Swap Compile Successfully\033[0m"
+
+$(LIBFT):
+				$(MAKE) -C $(LIBFT_DIR) all
+				mv $(LIBFT_DIR)/$(LIBFT) .
+				$(MAKE) -C $(LIBFT_DIR) fclean
+				@echo "\033[92mLibft Compile Successfully\n\033[0m"
+
+$(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
+				@mkdir -p $(dir $@)
+				$(CC) $(CFLAGS) -c $< -o $@
+
+all:			$(NAME)
 
 clean:
-	$(RM) $(OBJS_DIR)
-	make clean -C $(LIB_DIR) 
+				$(RM) $(OBJS_DIR)
 
-fclean: 
-	@make fclean -C $(LIB_DIR)  
-	@echo "\033[92mLibft Clean Successfully\033[0m"
-	$(RM) $(OBJS_DIR)
-	$(RM) $(NAME)
-	@echo "\033[92mPush Swap Clean Successfully\n\n\033[0m"
+fclean:			clean
+				$(RM) $(LIBFT)
+				@echo "\033[92mLibft Clean Successfully\033[0m"
+				$(RM) $(NAME)
+				$(RM) $(NAME_CHECKER)
+				@echo "\033[92mPush Swap Clean Successfully\n\n\033[0m"
 
-re: fclean all
+re:				fclean all
 
--include $(DEPS)
+$(NAME_CHECKER):$(LIBFT) $(OBJS_CHECKER)
+				$(CC) $(OBJS_CHECKER) $(CFLAGS) $(CLIBS) -o $(NAME_CHECKER)
 
-.PHONY: all clean fclean re
+bonus:			checker
 
-# .SILENT:
+.PHONY:			all clean fclean re bonus
