@@ -67,7 +67,7 @@ int	get_distance(t_stack **stack, int index, int type)
 	int		distance;
 
 	if (index == 1000)
-		return (0);
+		index = 0;
 	distance = 0;
 	head = *stack;
 	while (head)
