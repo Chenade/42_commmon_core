@@ -7,7 +7,8 @@ RM			=	rm -rf
 
 CC			=	cc
 
-CFLAGS		=	-Wall -Werror -Wextra -I $(INC_DIR) -I $(LIBFT_DIR)/$(INC_DIR)
+CFLAGS		=	-Wall #-Werror -Wextra
+CFLAGS		+=	-I $(INC_DIR) -I $(LIBFT_DIR)/$(INC_DIR)
 CFLAGS		+=	-g3 -MMD
 
 CLIBS		=	-L . -lft
@@ -34,13 +35,13 @@ SRCS		=	program/main.c						\
 				program/sort_big_move.c				\
 				program/sort_big_lis.c
 
-SRCS_CHECKER=	checker/main.c						\
-				program/parsing.c					\
-				program/stack.c						\
-				checker/operations/rotate.c			\
-				checker/operations/reverse_rotate.c	\
-				checker/operations/push.c			\
-				checker/operations/swap.c
+SRCS_CHECKER=	checker/main.c						
+				# program/parsing.c					\
+				# program/stack.c						\
+				# checker/operations/rotate.c			\
+				# checker/operations/reverse_rotate.c	\
+				# checker/operations/push.c			\
+				# checker/operations/swap.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
