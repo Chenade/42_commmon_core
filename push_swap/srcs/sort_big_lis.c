@@ -48,10 +48,10 @@ int	*ft_lis_ans(int lis_length, int	*index, int *A, int n)
 	int	tmp;
 	int	*answer;
 
-	answer = (int *) malloc((lis_length + 1) * sizeof(int));
+	answer = (int *) malloc((lis_length + 2) * sizeof(int));
 	if (!answer)
 		return (NULL);
-	answer[lis_length] = '\0';
+	answer[lis_length + 1] = '\0';
 	i = n;
 	tmp = lis_length;
 	while (--i >= 0)

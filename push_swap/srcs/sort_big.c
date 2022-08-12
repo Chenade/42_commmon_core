@@ -142,10 +142,10 @@ int	sort_big(t_stack **stack_a, t_stack **stack_b)
 	{
 		min_move = ft_minmove(stack_a, stack_b);
 		ft_move(stack_a, stack_b, min_move);
+		free (min_move);
 	}
 	while ((*stack_a)->content != 0)
 		ra(1, stack_a);
-	free (min_move);
 	free (lis);
 	return (1);
 }
