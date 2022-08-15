@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:44:37 by ykuo              #+#    #+#             */
-/*   Updated: 2022/05/13 20:25:42 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/08/15 09:06:32 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	cut_line(char *line)
 	return (0);
 }
 
-static size_t	gnl_ft_strlen(const char *s)
+static size_t	gnl_strlen(const char *s)
 {
 	size_t	ans;
 
@@ -48,9 +48,9 @@ static char	*gnl_ft_strjoin(char *s1, char *s2)
 	if (!s2[0])
 		return (s1);
 	if (cut_line(s2) > 0)
-		ret = malloc(sizeof(char) * (gnl_ft_strlen(s1) + cut_line(s2) + 1));
+		ret = malloc(sizeof(char) * (gnl_strlen(s1) + cut_line(s2) + 1));
 	else
-		ret = malloc(sizeof(char) * (gnl_ft_strlen(s1) + gnl_ft_strlen(s2) + 1));
+		ret = malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
 	if (!ret)
 		return (0);
 	while (s1 && s1[i])

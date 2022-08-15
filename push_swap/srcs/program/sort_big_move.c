@@ -118,14 +118,26 @@ void	ft_move(t_stack **stack_a, t_stack **stack_b, t_move *move)
 	t_move	*head;
 
 	head = move;
+	while ((move->ra) && (move->rb))
+	{
+		rr(1, stack_a, stack_b);
+		(move->ra) -= 1;
+		(move->rb) -= 1;
+	}
 	while ((move->ra)--)
 		ra(1, stack_a);
 	while ((move->rb)--)
 		rb(1, stack_b);
+	while ((move->rra) && (move->rrb))
+	{
+		rrr(1, stack_a, stack_b);
+		(move->rra) -= 1;
+		(move->rrb) -= 1;
+	}
 	while ((move->rra)--)
 		rra(1, stack_a);
 	while ((move->rrb)--)
 		rrb(1, stack_b);
-	pa (stack_a, stack_b);
+	pa(1, stack_a, stack_b);
 	move = head;
 }

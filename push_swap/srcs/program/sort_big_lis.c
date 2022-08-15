@@ -146,7 +146,7 @@ void	split_lis(t_stack **stack_a, t_stack **stack_b, int *lis)
 			ra(1, stack_a);
 		else
 		{
-			pb(stack_a, stack_b);
+			pb(1, stack_a, stack_b);
 			if ((*stack_b)->content > (size / 2) && ft_stack_len(stack_b) > 1)
 				rb(1, stack_b);
 		}

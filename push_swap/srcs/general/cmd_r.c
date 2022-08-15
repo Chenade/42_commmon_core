@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "general.h"
 
 t_stack	*ft_stack_last(t_stack **stack_name)
 {
@@ -69,9 +69,10 @@ void	rb(int print, t_stack **stack_b)
 		ft_printf("rb\n");
 }
 
-void	rr(t_stack **stack_a, t_stack **stack_b)
+void	rr(int print, t_stack **stack_a, t_stack **stack_b)
 {
 	ra(0, stack_a);
 	rb(0, stack_b);
-	ft_printf("rr\n");
+	if (print)
+		ft_printf("rr\n");
 }

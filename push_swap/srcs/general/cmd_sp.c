@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "general.h"
 
 void	sa(int print, t_stack **stack_a)
 {
@@ -44,14 +44,15 @@ void	sb(int print, t_stack **stack_b)
 		ft_printf("sb\n");
 }
 
-void	ss(t_stack **stack_a, t_stack **stack_b)
+void	ss(int print, t_stack **stack_a, t_stack **stack_b)
 {
 	sa(0, stack_a);
 	sb(0, stack_b);
-	ft_printf("ss\n");
+	if (print)
+		ft_printf("ss\n");
 }
 
-void	pa(t_stack **stack_a, t_stack **stack_b)
+void	pa(int print, t_stack **stack_a, t_stack **stack_b)
 {
 	int	tmp;
 
@@ -60,10 +61,11 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 		tmp = ft_stack_pop(stack_b);
 		ft_stack_push(stack_a, ft_stack_new(tmp));
 	}
-	ft_printf("pa\n");
+	if (print)
+		ft_printf("pa\n");
 }
 
-void	pb(t_stack **stack_a, t_stack **stack_b)
+void	pb(int print, t_stack **stack_a, t_stack **stack_b)
 {
 	int	tmp;
 
@@ -72,5 +74,6 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 		tmp = ft_stack_pop(stack_a);
 		ft_stack_push(stack_b, ft_stack_new(tmp));
 	}
-	ft_printf("pb\n");
+	if (print)
+		ft_printf("pb\n");
 }

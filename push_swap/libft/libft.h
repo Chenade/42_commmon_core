@@ -6,7 +6,7 @@
 /*   By: cmenasse <cmenasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 17:57:29 by cmenasse          #+#    #+#             */
-/*   Updated: 2021/02/24 19:17:21 by cmenasse         ###   ########.fr       */
+/*   Updated: 2022/08/15 09:06:53 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-#ifndef BUFFER_SIZE
 # define BUFFER_SIZE 10
-#endif
 
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);

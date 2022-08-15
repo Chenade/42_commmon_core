@@ -32,10 +32,10 @@ int	sort_redix(t_stack **stack_a, t_stack **stack_b)
 			if (((num >> i) & 1) == 1)
 				ra(1, stack_a);
 			else
-				pb(stack_a, stack_b);
+				pb(1, stack_a, stack_b);
 		}
 		while (ft_stack_len(stack_b))
-			pa(stack_a, stack_b);
+			pa(1, stack_a, stack_b);
 		i += 1;
 	}
 	return (0);
@@ -107,9 +107,9 @@ void	sort_4(t_stack **stack_a, t_stack **stack_b)
 		rra(1, stack_a);
 	if (ft_stack_issort(stack_a))
 		return ;
-	pb(stack_a, stack_b);
+	pb(1, stack_a, stack_b);
 	sort_3(stack_a, stack_b);
-	pa(stack_a, stack_b);
+	pa(1, stack_a, stack_b);
 }
 
 void	sort_5(t_stack **stack_a, t_stack **stack_b)
@@ -133,7 +133,7 @@ void	sort_5(t_stack **stack_a, t_stack **stack_b)
 		rra(1, stack_a);
 	if (ft_stack_issort(stack_a))
 		return ;
-	pb(stack_a, stack_b);
+	pb(1, stack_a, stack_b);
 	sort_4(stack_a, stack_b);
-	pa(stack_a, stack_b);
+	pa(1, stack_a, stack_b);
 }

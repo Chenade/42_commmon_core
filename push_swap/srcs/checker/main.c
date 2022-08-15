@@ -3,87 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/26 13:42:11 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/22 13:10:38 by plouvel          ###   ########.fr       */
+/*   Created: 2022/08/15 09:03:48 by ykuo              #+#    #+#             */
+/*   Updated: 2022/08/15 09:03:53 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
-// #include "get_next_line.h"
-#include <stdlib.h>
-
-// static int	throw_error_checker(t_data *data, const char *err_str)
-// {
-// 	if (ft_strcmp(err_str, STR_ERROR) == 0)
-// 		ft_putstr_fd(err_str, STDERR);
-// 	else
-// 		ft_putstr(err_str);
-// 	free_stacks(data);
-// 	get_next_line(GNL_FLUSH);
-// 	return (1);
-// }
-
-// static t_inst	str_to_inst(char *str)
-// {
-// 	if (ft_strcmp(str, STR_SA) == 0)
-// 		return (sa);
-// 	else if (ft_strcmp(str, STR_SB) == 0)
-// 		return (sb);
-// 	else if (ft_strcmp(str, STR_SS) == 0)
-// 		return (ss);
-// 	else if (ft_strcmp(str, STR_PA) == 0)
-// 		return (pa);
-// 	else if (ft_strcmp(str, STR_PB) == 0)
-// 		return (pb);
-// 	else if (ft_strcmp(str, STR_RA) == 0)
-// 		return (ra);
-// 	else if (ft_strcmp(str, STR_RB) == 0)
-// 		return (rb);
-// 	else if (ft_strcmp(str, STR_RR) == 0)
-// 		return (rr);
-// 	else if (ft_strcmp(str, STR_RRA) == 0)
-// 		return (rra);
-// 	else if (ft_strcmp(str, STR_RRB) == 0)
-// 		return (rrb);
-// 	else if (ft_strcmp(str, STR_RRR) == 0)
-// 		return (rrr);
-// 	else
-// 		return (NULL);
-// }
-
-static char	*get_line(char **line)
-{
-	*line = get_next_line(0);
-	return (*line);
-}
 
 int	main(int argc, char **argv)
 {
-	// t_data	data;ls
-	// t_inst	inst;
-	char	*line;
+	int		status;
+	t_stack	**stack_a;
+	t_stack	**stack_b;
 
 	if (argc > 1)
 	{
-		// if (!alloc_stack(&data.a, argc - 1) || !alloc_stack(&data.b, argc - 1))
-		// 	return (throw_error_checker(&data, STR_ERROR));
-		// if (fill_stack_from_args(&data.a, argc, argv) == -1)
-		// 	return (throw_error_checker(&data, STR_ERROR));
-		while (get_line(&line))
+		stack_a = (t_stack **) malloc((argc - 1) * sizeof(t_stack *));
+		stack_b = (t_stack **) malloc((argc - 1) * sizeof(t_stack *));
+		if (!stack_a || !stack_b)
+			return (0);
+		ft_bzero(stack_a, (argc - 1) * sizeof(t_stack *));
+		ft_bzero(stack_b, (argc - 1) * sizeof(t_stack *));
+		status = init_stack(argc, argv, stack_a, stack_b);
+		if (!status)
+			status = run_command(stack_a, stack_b);
+		if (!status)
 		{
-			ft_printf("%s", line);
-			// inst = str_to_inst(line);
-			free(line);
-			// if (!inst)
-			// 	return (throw_error_checker(&data, STR_ERROR));
-			// inst(&data);
+			if (ft_stack_issort(stack_a))
+				ft_printf (STR_OK);
+			else
+				ft_printf (STR_KO);
+			ft_stack_clear (stack_a, stack_b);
 		}
-		// if (!is_stack_sorted(data.a))
-		// 	return (throw_error_checker(&data, STR_KO));
-		// free_stacks(&data);
-		// ft_putstr(STR_OK);
 	}
 	return (0);
 }

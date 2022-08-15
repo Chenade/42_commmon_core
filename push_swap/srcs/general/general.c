@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "general.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -83,4 +83,32 @@ int	get_distance(t_stack **stack, int index, int type)
 			distance = ft_stack_len(stack) - distance;
 	}
 	return (distance);
+}
+
+int	ft_stack_issort(t_stack **stack_name)
+{
+	int		res;
+	int		last;
+	t_stack	*org;
+
+	if (!(*stack_name))
+		return (0);
+	res = 1;
+	org = (*stack_name);
+	last = (*stack_name)->content;
+	if (!(*stack_name))
+		return (res);
+	while ((*stack_name))
+	{
+		(*stack_name) = (*stack_name)->next;
+		if ((*stack_name) && last >= (*stack_name)->content)
+		{
+			res = 0;
+			break ;
+		}
+		if ((*stack_name))
+			last = (*stack_name)->content;
+	}
+	(*stack_name) = org;
+	return (res);
 }

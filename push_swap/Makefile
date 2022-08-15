@@ -23,25 +23,23 @@ OBJS_DIR	=	objs
 
 LIBFT_DIR	=	libft
 
-SRCS		=	program/main.c						\
-				program/general.c					\
+SRC_GENERAL	=	general/general.c					\
+				general/parsing.c					\
+				general/stack.c						\
+				general/stack2.c					\
+				general/cmd_sp.c					\
+				general/cmd_r.c						\
+				general/cmd_rr.c
+
+SRCS		=	$(SRC_GENERAL)
+SRCS		+=	program/main.c						\
 				program/push_swap.c					\
-				program/stack.c						\
-				program/stack2.c					\
-				program/cmd_sp.c					\
-				program/cmd_r.c						\
-				program/cmd_rr.c					\
 				program/algorithm.c					\
 				program/sort_big_move.c				\
 				program/sort_big_lis.c
 
-SRCS_CHECKER=	checker/main.c						
-				# program/parsing.c					\
-				# program/stack.c						\
-				# checker/operations/rotate.c			\
-				# checker/operations/reverse_rotate.c	\
-				# checker/operations/push.c			\
-				# checker/operations/swap.c
+SRCS_CHECKER=	$(SRC_GENERAL)
+SRCS_CHECKER+=	checker/main.c						
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
@@ -49,7 +47,7 @@ OBJS_CHECKER=	$(addprefix $(OBJS_DIR)/, $(SRCS_CHECKER:.c=.o))
 
 $(NAME):		$(LIBFT) $(OBJS)
 				$(CC) $(OBJS) $(CFLAGS) $(CLIBS) -o $(NAME)
-				@echo "\033[92mPush Swap Compile Successfully\033[0m"
+				@echo "\033[92mPush Swap Compile Successfully\n\033[0m"
 
 $(LIBFT):
 				$(MAKE) -C $(LIBFT_DIR) all
@@ -77,6 +75,7 @@ re:				fclean all
 
 $(NAME_CHECKER):$(LIBFT) $(OBJS_CHECKER)
 				$(CC) $(OBJS_CHECKER) $(CFLAGS) $(CLIBS) -o $(NAME_CHECKER)
+				@echo "\033[92mPush Swap Checker Compile Successfully\n\033[0m"
 
 bonus:			checker
 
