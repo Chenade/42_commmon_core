@@ -24,9 +24,21 @@
   - [x] rrr : rra + rrb
 - [ ] sorting
   - [x] small sort (3)(4)(5)
-  - [X] redix sort
-    - 100: 1084 (3)
-    - 500: 6784 (4)
+  - [X] redix sort - Score 7
+    - 100: 1084
+    - 500: 6784
+  - [X] LIS optmize - Score 10
+    - find lis in stack A
+    - push all other num not in lis to stack B
+    - do a rb if num is larger than median
+    - calculate all the move for selection sort
+    - find the cheapest one
+      - 100: Avg 538.7 (539, 568, 652, 633, 493, 550, 609, 628, 583, 627)
+      - 500: Avg 4747  (4760, 4565, 4952, 4464, 4833, 5023, 4676, 4603, 4833, 4761)
+    - Optimze option
+      - [ ] combine move when send to stack B
+      - [ ] combine move when calcultate
+      - [X] combine move when printing
   - [ ] quick sort
     - 100: 
     - 500: 
