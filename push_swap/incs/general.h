@@ -24,6 +24,7 @@
 
 # define INT_SIZE 32
 # define INT_MAX 2147483647
+# define malloc(...) NULL
 
 typedef struct s_stack
 {
