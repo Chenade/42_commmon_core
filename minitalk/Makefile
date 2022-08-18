@@ -29,17 +29,23 @@ OBJS_SERVER	=	$(addprefix $(OBJS_DIR)/, $(SRC_SERVER:.c=.o))
 SRC_CLIENT	=	client.c
 OBJS_CLIENT	=	$(addprefix $(OBJS_DIR)/, $(SRC_CLIENT:.c=.o))
 
-$(NAME):		$(LIBFT) $(OBJS_SERVER) $(OBJS_CLIENT)
-				$(CC) $(OBJS_SERVER) $(CFLAGS) $(CLIBS) -o $(SERVER)
-				@echo "\033[92mClient Compile Successfully\n\033[0m"
-				$(CC) $(OBJS_CLIENT) $(CFLAGS) $(CLIBS) -o $(CLIENT)
-				@echo "\033[92mServer Compile Successfully\n\033[0m"
+$(NAME):		$(CLIENT) $(SERVER)
+				@echo "\033[92mMiniTalk Compile Successfully\n\033[0m"
 
 $(LIBFT):
 				$(MAKE) -C $(LIBFT_DIR) all
 				mv $(LIBFT_DIR)/$(LIBFT) .
 				$(MAKE) -C $(LIBFT_DIR) fclean
 				@echo "\033[92mLibft Compile Successfully\n\033[0m"
+
+$(CLIENT):		$(LIBFT) $(OBJS_CLIENT)
+				$(CC) $(OBJS_CLIENT) $(CFLAGS) $(CLIBS) -o $(CLIENT)
+				@echo "\033[92mClient Compile Successfully\n\033[0m"
+
+$(SERVER):		$(LIBFT) $(OBJS_SERVER)
+				$(CC) $(OBJS_SERVER) $(CFLAGS) $(CLIBS) -o $(SERVER)
+				@echo "\033[92mServer Compile Successfully\n\033[0m"
+
 
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 				@mkdir -p $(dir $@)
@@ -61,14 +67,4 @@ fclean:			clean
 
 re:				fclean all
 
-$(CLIENT):		$(LIBFT) $(OBJS_CLIENT)
-				$(CC) $(OBJS_CLIENT) $(CFLAGS) $(CLIBS) -o $(CLIENT)
-				@echo "\033[92mClient Compile Successfully\n\033[0m"
-
-$(SERVER):		$(LIBFT) $(OBJS_SERVER)
-				$(CC) $(OBJS_SERVER) $(CFLAGS) $(CLIBS) -o $(CLIENT)
-				@echo "\033[92mServer Compile Successfully\n\033[0m"
-
-bonus:			checker
-
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re
