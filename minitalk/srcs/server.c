@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/18 18:16:11 by ykuo              #+#    #+#             */
+/*   Updated: 2022/08/18 18:16:14 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 static volatile sig_atomic_t	g_response[2] = {};
@@ -29,7 +41,7 @@ static void	handler(int signum, siginfo_t *sig, void *context)
 	(void)context;
 	if ((SIGUSR1 ^ signum) == 0)
 		letter |= (1 << i);
-	i++;
+	i += 1;
 	if ((8 ^ i) == 0)
 	{
 		string_assembly(letter);
