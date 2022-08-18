@@ -7,7 +7,7 @@ RM			=	rm -rf
 
 CC			=	cc
 
-CFLAGS		=	-Wall #-Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra
 CFLAGS		+=	-I $(INC_DIR) -I $(LIBFT_DIR)/$(INC_DIR)
 CFLAGS		+=	-g3 -MMD
 
@@ -39,15 +39,14 @@ SRCS		+=	program/main.c						\
 				program/sort_big_lis.c
 
 SRCS_CHECKER=	$(SRC_GENERAL)
-SRCS_CHECKER+=	checker/main.c						
+SRCS_CHECKER+=	checker/main.c						\
+				checker/checker.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 OBJS_CHECKER=	$(addprefix $(OBJS_DIR)/, $(SRCS_CHECKER:.c=.o))
 
-$(NAME):		$(LIBFT) $(OBJS)
-				$(CC) $(OBJS) $(CFLAGS) $(CLIBS) -o $(NAME)
-				@echo "\033[92mPush Swap Compile Successfully\n\033[0m"
+all:			$(NAME) $(NAME_CHECKER)
 
 $(LIBFT):
 				$(MAKE) -C $(LIBFT_DIR) all
@@ -55,27 +54,31 @@ $(LIBFT):
 				$(MAKE) -C $(LIBFT_DIR) fclean
 				@echo "\033[92mLibft Compile Successfully\n\033[0m"
 
+$(NAME):		$(LIBFT) $(OBJS)
+				$(CC) $(OBJS) $(CFLAGS) $(CLIBS) -o $(NAME)
+				@echo "\033[92mPush Swap Compile Successfully\n\033[0m"
+
+$(NAME_CHECKER):$(LIBFT) $(OBJS_CHECKER)
+				$(CC) $(OBJS_CHECKER) $(CFLAGS) $(CLIBS) -o $(NAME_CHECKER)
+				@echo "\033[92mPush Swap Checker Compile Successfully\n\033[0m"
+
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 				@mkdir -p $(dir $@)
 				$(CC) $(CFLAGS) -c $< -o $@
 
-all:			$(NAME)
-
 clean:
 				$(RM) $(OBJS_DIR)
+				@echo ""
 
 fclean:			clean
 				$(RM) $(LIBFT)
 				@echo "\033[92mLibft Clean Successfully\033[0m"
 				$(RM) $(NAME)
+				@echo "\033[92mPush Swap Clean Successfully\033[0m"
 				$(RM) $(NAME_CHECKER)
-				@echo "\033[92mPush Swap Clean Successfully\n\n\033[0m"
+				@echo "\033[92mPush Swap Checker Clean Successfully\n\n\033[0m"
 
 re:				fclean all
-
-$(NAME_CHECKER):$(LIBFT) $(OBJS_CHECKER)
-				$(CC) $(OBJS_CHECKER) $(CFLAGS) $(CLIBS) -o $(NAME_CHECKER)
-				@echo "\033[92mPush Swap Checker Compile Successfully\n\033[0m"
 
 bonus:			checker
 

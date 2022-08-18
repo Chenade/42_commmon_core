@@ -6,7 +6,7 @@
 /*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 09:05:14 by ykuo              #+#    #+#             */
-/*   Updated: 2022/08/15 09:05:17 by ykuo             ###   ########.fr       */
+/*   Updated: 2022/08/15 09:25:13 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@
 # define STR_SA "sa\n"
 # define STR_SB "sb\n"
 # define STR_SS "ss\n"
+
+int	str_to_cmd(char *str, t_stack **stack_a, t_stack **stack_b);
+int	run_command(t_stack **stack_a, t_stack **stack_b);
 
 #endif

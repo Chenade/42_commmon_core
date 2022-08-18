@@ -27,6 +27,8 @@ int	check_valid(char **av, int index)
 		return (0);
 	if (av[index][0] != '-' && ft_atoi(av[index]) < 0)
 		return (0);
+	if (ft_strlen(av[index]) > 12)
+		return (0);
 	i = 0;
 	while (av[++i])
 	{
