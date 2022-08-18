@@ -49,6 +49,7 @@ all:			$(NAME)
 
 clean:
 				$(RM) $(OBJS_DIR)
+				@echo ""
 
 fclean:			clean
 				$(RM) $(LIBFT)
