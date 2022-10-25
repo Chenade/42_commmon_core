@@ -13,7 +13,7 @@ MINILIBXPATH		= minilibx-linux/
 CFLAGS			= -I includes -I ${MINILIBXPATH} -Wall -Wextra -Werror -O3
 LFLAGS			= -L ${MINILIBXPATH} -lmlx_Linux -lX11 -lXext -lm
 
-NAME 			= retromfa
+NAME 			= fdf
 
 RM 			= rm -f
 
