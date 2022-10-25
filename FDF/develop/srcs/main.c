@@ -1,4 +1,5 @@
 #include "retromfa.h"
+#include "libft.h"
 
 long int findSize(char file_name[])
 {
@@ -326,7 +327,7 @@ int main(int argc, char **argv)
 
     if (argc != 2 || !check_mfa(argv[1]))
     {
-        printf("Error: Usage: ./retromfa {filename}.mfa\n");
+        ft_printf("Error: Usage: ./retromfa {filename}.mfa\n");
         return 1;
     }
 
