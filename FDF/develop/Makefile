@@ -5,7 +5,7 @@ RM			=	rm -rf
 CC			=	cc
 
 CFLAGS		=	-Wall -Werror -Wextra
-CFLAGS		+=	-I $(INC_DIR) -I $(LIBFT_DIR) -I ${MLX_DIR}
+CFLAGS		+=	-I $(INCS_DIR) -I $(LIBFT_DIR) -I ${MLX_DIR}
 CFLAGS		+=	-g3 -MMD
 
 LFLAGS		= 	-L . -lmlx_Linux -lX11 -lXext -lm
@@ -18,15 +18,17 @@ LIBMLX		=	libmlx.a
 
 LIBMLX_2	=	libmlx_Linux.a
 
+LIBS_DIR	=	libs
+
+LIBFT_DIR	=	$(LIBS_DIR)/libft
+
+MLX_DIR		=	$(LIBS_DIR)/minilibx-linux
+
 SRCS_DIR	=	srcs
 
-INC_DIR		=	incs
+INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
-
-LIBFT_DIR	=	libft
-
-MLX_DIR		=	minilibx-linux/
 
 SRCS		=	main.c
 
