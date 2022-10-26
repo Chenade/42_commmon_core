@@ -313,58 +313,53 @@ int getNextImg(t_data *d)
     img->p += 17;
     return (1);
 }
-int check_mfa(const char *name)
+int check_filename(const char *name)
 {
 
     int x = strlen(name) - 3;
-    if (strcmp(name + x, "mfa"))
+    if (strcmp(name + x, "fdf"))
         return (0);
     return (1);
 }
 
-int main(int argc, char **argv)
+int init_mlx(t_data *d, char *name)
 {
+    // print_title(fd);
+    d->size = print_info(name);
+    d->buf = (char *)malloc(d->size);
+    bzero(d->buf, d->size);
 
-    if (argc != 2 || !check_mfa(argv[1]))
+    d->w = WIDTH;
+    d->h = HEIGHT;
+
     {
-        ft_printf("Error: Usage: ./retromfa {filename}.mfa\n");
-        return 1;
+        d->mlx_ptr = mlx_init();
+        d->win_ptr = mlx_new_window(d->mlx_ptr, d->w, d->h, "retromfa");
+        if (!d->win_ptr)
+            print_err("Failed to launch window.", d);
+        d->img.mlx_img = mlx_new_image(d->mlx_ptr, d->w, d->h);
+        if (!d->img.mlx_img)
+            print_err("mlx new image error", d);
+        d->img.addr = mlx_get_data_addr(d->img.mlx_img, &d->img.bpp,
+                                       &d->img.line_len, &d->img.endian);
     }
+    d->curr_img.p = d->buf;
+    return (0);
+}
 
-    int fd = open(argv[1], O_RDONLY);
+int read_file(t_data *d, char *name)
+{
+    int fd = open(name, O_RDONLY);
     if (fd < 0 || read(fd, 0, 0))
     {
         printf("Error: Cannot open file.");
         return 1;
     }
 
-    t_data d;
-    bzero(&d, sizeof(d));
-
-    // print_title(fd);
-    d.size = print_info(argv[1]);
-    d.buf = (char *)malloc(d.size);
-    bzero(d.buf, d.size);
-
-    d.w = WIDTH;
-    d.h = HEIGHT;
-
-    {
-        d.mlx_ptr = mlx_init();
-        d.win_ptr = mlx_new_window(d.mlx_ptr, d.w, d.h, "retromfa");
-        if (!d.win_ptr)
-            print_err("Failed to launch window.", &d);
-        d.img.mlx_img = mlx_new_image(d.mlx_ptr, d.w, d.h);
-        if (!d.img.mlx_img)
-            print_err("mlx new image error", &d);
-        d.img.addr = mlx_get_data_addr(d.img.mlx_img, &d.img.bpp,
-                                       &d.img.line_len, &d.img.endian);
-    }
-    d.curr_img.p = d.buf;
     size_t total = 0;
     while (1)
     {
-        ssize_t c = read(fd, d.buf + total, d.size - total);
+        ssize_t c = read(fd, d->buf + total, d->size - total);
         if (c == -1)
         {
             printf("failed to read the file.");
@@ -375,69 +370,44 @@ int main(int argc, char **argv)
             break;
         total += c;
     }
-    // getNextImg(&d);
+    close(fd);
+    return (0);
+}
 
-    // d.byte_off = d.p - d.buf;
-    d.num_img = getImgNum(&d);
-    bzero(&d.curr_img, sizeof(t_img2));
-    d.curr_img.p = d.buf;
-    printf("nb img %d\n", d.num_img);
-    d.images = (t_img2 *)malloc(d.num_img * sizeof(t_img2));
-    fillImage(&d);
-    draw_all_img(&d);
-    print_img_data(&d.img);
+int fdf(char *filename)
+{
+    t_data d;
 
+    bzero(&d, sizeof(d));
+    init_mlx(&d, filename);
+    read_file(&d, filename);
+    {
+        d.num_img = getImgNum(&d);
+        bzero(&d.curr_img, sizeof(t_img2));
+        d.curr_img.p = d.buf;
+        d.images = (t_img2 *)malloc(d.num_img * sizeof(t_img2));
+        fillImage(&d);
+        draw_all_img(&d);
+        print_img_data(&d.img);
+    }
     mlx_loop_hook(d.mlx_ptr, render_frame, &d);
     mlx_hook(d.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &d);
     mlx_hook(d.win_ptr, ClientMessage,
              StructureNotifyMask, &handle_exit, &d);
     mlx_loop(d.mlx_ptr);
     free_data(&d);
-    close(fd);
     return (0);
 }
 
-// size_t something;
-// read(fd, &something, 4);
-// printf("here something %u\n", something);
-// read(fd, &something, 4);
-// printf("here something %u\n", something);
+int main(int argc, char **argv)
+{
+    int status;
 
-// while(read(fd, &something, 4) > 0)
-// {
-
-//     printf("here something %u\n", something);
-//     char *title = malloc(something + 1);
-//     bzero(title, something + 1);
-//     read(fd, title, something);
-//     title[something] = 0;
-//     printf("title %s\n", title);
-//     free(title);
-// }
-
-// int fd2 = open("MFA/brown.mfa", O_RDONLY);
-// test(fd2);
-
-// int something = 0;
-// int something2 = 0;
-// read(fd, &something, 4);
-// read(fd2, &something2, 4);
-// printf("something %d\n", something);
-
-// // print ^
-// int same = 0;
-// while (same < 14)
-// {
-//     read(fd, &something, 4);
-//     read(fd2, &something2, 4);
-//     //printf("fd something %d\n", something);
-//     same++;
-//     //printf("fd something2 %d\n", something2);
-//     // char *title = malloc(something + 1);
-//     // title[something] = 0;
-//     // read(fd, title, something);
-//     // printf("title %s\n", title);
-// }
-// printf("same %d\n", same);
-// read(fd, &something, 4);
-// printf("something %u\n", something);
+    if (argc != 2 || !check_filename(argv[1]))
+    {
+        ft_printf("Error: Usage: ./fdf {filename}.fdf\n");
+        return (1);
+    }
+    status = fdf(argv[1]);
+    return (status);
+}
