@@ -43,7 +43,10 @@ INCS_DIR	=	incs
 OBJS_DIR	=	objs
 
 # SRCS		=	retromfa.c
-SRCS		=	main.c
+SRCS		=	main.c			\
+				mlx_setup.c		\
+				helper.c		\
+				general.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
@@ -77,8 +80,6 @@ $(NAME):		$(LIBFT) $(LIBMLX) $(OBJS)
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 				@mkdir -p $(dir $@)
 				$(CC) $(CFLAGS) ${LFLAGS} -c $< -o $@
-				@echo "\033[92m!!!! Compile Successfully\033[0m"
-
 
 clean:
 				$(RM) $(OBJS_DIR)
