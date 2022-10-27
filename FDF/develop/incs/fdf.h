@@ -18,8 +18,11 @@
 #define NB_PATTERN 2
 #define PATTERN_SIZE 4
 
-#define HEIGHT 800
-#define WIDTH 800
+#define HEIGHT 1600
+#define WIDTH 1200
+
+#define COLOR_RED 0x00FF0000
+#define COLOR_WHITE 0x00FFFFFF
 
 typedef struct  s_pattern
 {
@@ -69,7 +72,7 @@ typedef struct s_data
     t_img2 *images;
     int num_img;
     int h_off;
-    
+
     int map_h;
     int map_w;
     char **map;

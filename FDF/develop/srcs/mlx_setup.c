@@ -6,12 +6,12 @@ int init_mlx(t_data *d, char *name)
     d->buf = (char *)malloc(d->size);
     bzero(d->buf, d->size);
 
-    d->w = WIDTH;
-    d->h = HEIGHT;
+    d->w = HEIGHT;
+    d->h = WIDTH;
 
     {
         d->mlx_ptr = mlx_init();
-        d->win_ptr = mlx_new_window(d->mlx_ptr, d->w, d->h, "retromfa");
+        d->win_ptr = mlx_new_window(d->mlx_ptr, d->w, d->h, "fdf");
         if (!d->win_ptr)
             print_err("Failed to launch window.", d);
         d->img.mlx_img = mlx_new_image(d->mlx_ptr, d->w, d->h);
