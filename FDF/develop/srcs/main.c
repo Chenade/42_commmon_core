@@ -26,6 +26,8 @@ int draw_x(t_data *d)
     int i;
     int x;
     int y;
+    int rat_x = 1;
+    int rat_y = 1;
 
     i = -1;
     x = 200;
@@ -40,7 +42,7 @@ int draw_x(t_data *d)
         else
         {
             for (int j = 0; j <= 20; j ++)
-                img_pix_put(d, (x + j), y, COLOR_WHITE);
+                img_pix_put(d, (x + j), ((x + j) * rat_x / rat_y), COLOR_WHITE);
             x += 25;
         }
     }
