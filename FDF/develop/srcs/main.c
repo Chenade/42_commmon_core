@@ -1,5 +1,4 @@
 #include "fdf.h"
-const t_pattern patterns[NB_PATTERN] = {(t_pattern){{0, 6, 16, 0}, 2}, (t_pattern){{0, 4, 16, 0}, 3}};
 
 void img_pix_put(t_data *d, int x, int y, int color)
 {
@@ -21,89 +20,59 @@ int encode_rgb(t_color c)
     return (c.r << 16 | c.g << 8 | c.b);
 }
 
+int xy_to_x(t_data *d, int x, int y)
+{
+    return (y * d->map_w + x);
+}
+
+int find_end_x(t_data *d, t_cord pos)
+{
+    (void) d;
+    (void) pos;
+    return (1);
+}
+
+int draw_line_x(t_data *d, t_cord pos)
+{
+    (void) d;
+    (void) pos;
+    // for (int j = 0; j <= 20; j ++)
+        // img_pix_put(d, (delta_x + j), (((j) * 0) + delta_y), COLOR_WHITE);
+    return (1);
+}
+
 int draw_x(t_data *d)
 {
-    int i;
     int delta_x;
     int delta_y;
 
-    i = -1;
     delta_x = 500;
     delta_y = 500;
-    while(d->map[++i])
+
+    for (int y = 0; y < d->map_h; y++)
     {
-        if (i % d->map_w == 0)
+        delta_x = 500 - (22 * y);
+        delta_y = 200 + 22 * y;
+        for (int x = 0; x < d->map_w; x++)
         {
-            delta_x = 500 - (20 * (i / d->map_h));
-            delta_y += 25;
-        }
-        else
-        {
-            for (int j = 0; j <= 20; j ++)
-                img_pix_put(d, (delta_x + j), (((j) * 0) + delta_y), COLOR_WHITE);
+            if (x + 1 != d->map_w)
+                for (int j = 0; j <= 20; j ++)
+                    img_pix_put(d, (delta_x + j), (((j) * tan(45)) + delta_y), COLOR_RED);
+            if (y + 1 != d->map_h)
+                for (int j = 0; j <= 20; j ++)
+                    img_pix_put(d, (delta_x - j), (((j) * tan(45)) + delta_y), COLOR_WHITE);
             delta_x += 25;
+            delta_y += 25;
         }
     }
     return (0);
 }
-
-
-int draw_y(t_data *d)
-{
-    int i;
-    int delta_x;
-    int delta_y;
-
-    i = -1;
-    delta_x = 500;
-    delta_y = 500;
-    while(d->map[++i])
-    {
-        if (i % d->map_w == 0)
-        {
-            delta_x = 500 - (20 * (i / d->map_h));
-            delta_y += 25;
-        }
-        if (i / d->map_w != d->map_h - 1)
-        {
-            for (int j = 0; j <= 20; j ++)
-                img_pix_put(d, (delta_x - j), (((j) * 1) + delta_y), COLOR_WHITE);
-            delta_x += 25;
-        }
-    }
-    return (0);
-}
-
-// int draw_y(t_data *d)
-// {
-//     int i;
-//     int x;
-//     int y;
-
-//     i = -1;
-//     x = 500;
-//     y = 500;
-//     while(d->map[++i])
-//     {
-//         if (i % d->map_w == 0)
-//         {
-//             x = 500;
-//             y += 25;
-//         }
-//         if (i / d->map_w != d->map_h - 1)
-//         {
-//             for (int j = 0; j <= 20; j ++)
-//                 img_pix_put(d, x, (y + j), COLOR_WHITE);
-//             x += 25;
-//         }
-//     }
-//     return (0);
-// }
 
 void draw_all_img(t_data *d)
 {
+    ft_bzero(&d->curr_start, sizeof(t_cord));
+    ft_bzero(&d->curr_end, sizeof(t_cord));
     draw_x(d);
-    draw_y(d);
 }
 
 int render_frame(t_data *d)

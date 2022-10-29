@@ -57,6 +57,13 @@ typedef struct s_img2
     int h;
 } t_img2;
 
+typedef struct s_cord
+{
+    int x;
+    int y;
+    int z;
+} t_cord;
+
 typedef struct s_data
 {
     void *win_ptr;
@@ -76,6 +83,9 @@ typedef struct s_data
     int map_h;
     int map_w;
     char **map;
+    char **map_draw;
+    t_cord  curr_start;
+    t_cord  curr_end;
     // int w_off;
     // int h_off;
 } t_data;

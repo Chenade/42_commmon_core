@@ -13,8 +13,12 @@ void free_data(t_data *d)
     free(d->buf);
     i = -1;
     while(d->map[++i])
+    {
         free(d->map[i]);
+        free(d->map_draw[i]);
+    }
     free(d->map);
+    free(d->map_draw);
     free(d->images);
 }
 
@@ -73,6 +77,7 @@ int read_file(t_data *d, char *name)
         d->map_h += 1;
     }
     d->map = ft_split(d->buf, 32);
+    d->map_draw = ft_split(d->buf, 32);
     close(fd);
     return (0);
 }

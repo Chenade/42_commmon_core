@@ -21,12 +21,12 @@ long int findSize(char file_name[])
     return res;
 }
 
-void print_img_data(t_img *i)
-{
-    printf("bit per pixel %d\n", i->bpp);
-    printf("endian %d\n", i->endian);
-    printf("line_len %d\n", i->line_len);
-}
+// void print_img_data(t_img *i)
+// {
+//     printf("bit per pixel %d\n", i->bpp);
+//     printf("endian %d\n", i->endian);
+//     printf("line_len %d\n", i->line_len);
+// }
 
 int print_info(char *name)
 {
