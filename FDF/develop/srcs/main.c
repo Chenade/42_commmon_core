@@ -24,56 +24,81 @@ int encode_rgb(t_color c)
 int draw_x(t_data *d)
 {
     int i;
-    int x;
-    int y;
-    int rat_x = 1;
-    int rat_y = 1;
+    int delta_x;
+    int delta_y;
 
     i = -1;
-    x = 200;
-    y = 200;
+    delta_x = 500;
+    delta_y = 500;
     while(d->map[++i])
     {
         if (i % d->map_w == 0)
         {
-            x = 200;
-            y += 25;
+            delta_x = 500 - (20 * (i / d->map_h));
+            delta_y += 25;
         }
         else
         {
             for (int j = 0; j <= 20; j ++)
-                img_pix_put(d, (x + j), ((x + j) * rat_x / rat_y), COLOR_WHITE);
-            x += 25;
+                img_pix_put(d, (delta_x + j), (((j) * 0) + delta_y), COLOR_WHITE);
+            delta_x += 25;
         }
     }
     return (0);
 }
+
 
 int draw_y(t_data *d)
 {
     int i;
-    int x;
-    int y;
+    int delta_x;
+    int delta_y;
 
     i = -1;
-    x = 200;
-    y = 200;
+    delta_x = 500;
+    delta_y = 500;
     while(d->map[++i])
     {
         if (i % d->map_w == 0)
         {
-            x = 200;
-            y += 25;
+            delta_x = 500 - (20 * (i / d->map_h));
+            delta_y += 25;
         }
         if (i / d->map_w != d->map_h - 1)
         {
             for (int j = 0; j <= 20; j ++)
-                img_pix_put(d, x, (y + j), COLOR_WHITE);
-            x += 25;
+                img_pix_put(d, (delta_x - j), (((j) * 1) + delta_y), COLOR_WHITE);
+            delta_x += 25;
         }
     }
     return (0);
 }
+
+// int draw_y(t_data *d)
+// {
+//     int i;
+//     int x;
+//     int y;
+
+//     i = -1;
+//     x = 500;
+//     y = 500;
+//     while(d->map[++i])
+//     {
+//         if (i % d->map_w == 0)
+//         {
+//             x = 500;
+//             y += 25;
+//         }
+//         if (i / d->map_w != d->map_h - 1)
+//         {
+//             for (int j = 0; j <= 20; j ++)
+//                 img_pix_put(d, x, (y + j), COLOR_WHITE);
+//             x += 25;
+//         }
+//     }
+//     return (0);
+// }
 
 void draw_all_img(t_data *d)
 {
