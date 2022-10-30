@@ -42,13 +42,15 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-# SRCS		=	retromfa.c
-SRCS		=	main.c			\
-				draw.c		\
-				tools.c		\
-				mlx_setup.c		\
+SRCS_GEN	=	general.c		\
+				tools.c			\
 				helper.c		\
-				general.c
+
+SRCS		=	$(SRCS_GEN)
+SRCS		+=	main.c			\
+				parse.c			\
+				mlx_setup.c		\
+				draw.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
@@ -79,6 +81,11 @@ $(NAME):		$(LIBFT) $(LIBMLX) $(OBJS)
 				@echo "\033[92mFDF Compile Successfully\033[0m"
 				@echo "\033[94mCommand: ./fdf {filename}.fdf\033[0m\n"
 
+project:		clean $(OBJS)
+				${CC} ${OBJS} ${CFLAGS} ${LFLAGS} $(LIBFT) -o $(NAME)
+				@echo "\033[92mFDF Compile Successfully\033[0m"
+				@echo "\033[94mCommand: ./fdf {filename}.fdf\033[0m\n"
+
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 				@mkdir -p $(dir $@)
 				$(CC) $(CFLAGS) ${LFLAGS} -c $< -o $@
@@ -94,4 +101,4 @@ fclean:			clean
 
 re:				fclean all
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re project

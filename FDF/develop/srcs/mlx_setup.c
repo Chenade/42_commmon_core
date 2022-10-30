@@ -20,7 +20,6 @@ int init_mlx(t_data *d, char *name)
         d->img.addr = mlx_get_data_addr(d->img.mlx_img, &d->img.bpp,
                                        &d->img.line_len, &d->img.endian);
     }
-    d->curr_img.p = d->buf;
     return (0);
 }
 
@@ -46,14 +45,14 @@ int handle_keypress(int keysym, t_data *data)
     else if (keysym == XK_Up)
     {
         // data->h++;
-        data->h_off += 10;
+        // data->h_off += 10;
         bzero(data->img.addr, data->img.line_len * HEIGHT);
         draw_maps(data);
     }
     else if (keysym == XK_Down)
     {
         // data->h--;
-        data->h_off -= 10;
+        // data->h_off -= 10;
         bzero(data->img.addr, data->img.line_len * HEIGHT);
         draw_maps(data);
     }

@@ -24,18 +24,14 @@ int main(int argc, char **argv)
     int fd;
     int status;
 
-    if (argc != 2 || !check_filename(argv[1]))
-    {
-        ft_printf("Error: Usage: ./fdf {filename}.fdf\n");
-        return (1);
-    }
     fd = open(argv[1], O_RDONLY);
-    if (fd < 0 || read(fd, 0, 0))
-    {
+    status = 1;
+    if (argc != 2 || !check_filename(argv[1], "fdf"))
+        ft_printf("Error: Usage: ./fdf {filename}.fdf\n");
+    else if (fd < 0 || read(fd, 0, 0))
         ft_printf("Error: Cannot open file.\n");
-        return (1);
-    }
+    else
+        status = fdf(argv[1]);
     close (fd);
-    status = fdf(argv[1]);
     return (status);
 }

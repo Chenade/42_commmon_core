@@ -43,7 +43,7 @@ int print_map(t_data *d)
     {
         for (int x = 0; x < d->map_w; x++)
         {
-            ft_printf("(%d, %d)  ", d->map_draw[xy_to_x(d, x, y)]->x, d->map_draw[xy_to_x(d, x, y)]->y);
+            ft_printf("(%d, %d, %d)  ", d->map_draw[xy_to_x(d, x, y)]->x, d->map_draw[xy_to_x(d, x, y)]->y, d->map_draw[xy_to_x(d, x, y)]->z);
         }
         ft_printf("\n");
     }

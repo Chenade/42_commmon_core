@@ -75,15 +75,12 @@ typedef struct s_data
     int h;
     int byte_off;
 
-    t_img2 curr_img;
-    t_img2 *images;
-    int num_img;
-    int h_off;
-
     int map_h;
     int map_w;
     char **map;
     t_cord **map_draw;
+
+    int line_length;
 } t_data;
 
 // main.c
@@ -104,9 +101,12 @@ int print_map(t_data *d);
 // general.c
 void free_data(t_data *d);
 void print_err(const char *err_msg, t_data *d);
-int check_filename(const char *name);
+int check_filename(const char *name, const char *ext);
+
+// parse.c
 int map_width(t_data *d, char **line);
 int read_file(t_data *d, char *name);
+int init_var(t_data *d);
 
 // draw.c
 int draw_y(t_data *d, int x, int y);
