@@ -44,6 +44,8 @@ OBJS_DIR	=	objs
 
 # SRCS		=	retromfa.c
 SRCS		=	main.c			\
+				draw.c		\
+				tools.c		\
 				mlx_setup.c		\
 				helper.c		\
 				general.c

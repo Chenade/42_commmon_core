@@ -38,7 +38,7 @@ int check_filename(const char *name)
     return (1);
 }
 
-int    *map_width(t_data *d, char **line)
+int map_width(t_data *d, char **line)
 {
     int     i;
     char    **res;
@@ -77,9 +77,14 @@ int read_file(t_data *d, char *name)
         d->map_h += 1;
     }
     d->map = ft_split(d->buf, 32);
-    d->map_draw = ft_split(d->buf, 32);
+    d->map_draw = (t_cord **) malloc((d->map_w * d->map_h) * sizeof(t_cord *));
+    ft_bzero(d->map_draw, sizeof(t_cord *));
+    int k = -1;
+    while (++k < (d->map_h * d->map_w))
+    {
+        d->map_draw[k] = (t_cord *) malloc(sizeof(t_cord));
+        ft_bzero(d->map_draw[k], sizeof(t_cord *));
+    }
     close(fd);
     return (0);
 }
-
-   

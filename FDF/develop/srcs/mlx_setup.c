@@ -24,6 +24,14 @@ int init_mlx(t_data *d, char *name)
     return (0);
 }
 
+int render_frame(t_data *d)
+{
+    if (d->win_ptr == NULL)
+        return (1);
+    mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.mlx_img, 0, 0);
+    return (0);
+}
+
 int handle_keypress(int keysym, t_data *data)
 {
     if (keysym == XK_Escape)
@@ -40,14 +48,14 @@ int handle_keypress(int keysym, t_data *data)
         // data->h++;
         data->h_off += 10;
         bzero(data->img.addr, data->img.line_len * HEIGHT);
-        draw_all_img(data);
+        draw_maps(data);
     }
     else if (keysym == XK_Down)
     {
         // data->h--;
         data->h_off -= 10;
         bzero(data->img.addr, data->img.line_len * HEIGHT);
-        draw_all_img(data);
+        draw_maps(data);
     }
     // else if (keysym == XK_a)
     // {

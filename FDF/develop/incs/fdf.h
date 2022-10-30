@@ -83,29 +83,15 @@ typedef struct s_data
     int map_h;
     int map_w;
     char **map;
-    char **map_draw;
-    t_cord  curr_start;
-    t_cord  curr_end;
-    // int w_off;
-    // int h_off;
+    t_cord **map_draw;
 } t_data;
 
 // main.c
-void img_pix_put(t_data *d, int x, int y, int color);
-int getpixelcolor(t_img *img, int x, int y);
-int encode_rgb(t_color c);
-int getImgNum(t_data *d);
-int fillImage(t_data *d);
-void draw_all_img(t_data *d);
-void draw_img(t_data *d, int w_off, int h_off, t_img2 *img);
-int render_frame(t_data *d);
-char *searchPatterns(t_data *d, char *buf);
-char *searchPattern(t_data *d, char *buf, const unsigned char *pattern, int n);
-int getNextImg(t_data *d);
-int fdf(char *filename);;
+int fdf(char *filename);
 
 //mlx_setup.c
 int init_mlx(t_data *d, char *name);
+int render_frame(t_data *d);
 int handle_keypress(int keysym, t_data *data);
 int handle_exit(t_data *data);
 
@@ -113,11 +99,25 @@ int handle_exit(t_data *data);
 long int findSize(char file_name[]);
 void print_img_data(t_img *i);
 int print_info(char *name);
+int print_map(t_data *d);
 
 // general.c
 void free_data(t_data *d);
 void print_err(const char *err_msg, t_data *d);
 int check_filename(const char *name);
+int map_width(t_data *d, char **line);
 int read_file(t_data *d, char *name);
+
+// draw.c
+int draw_y(t_data *d, int x, int y);
+int find_end_x(t_data *d, t_cord pos);
+int draw_x(t_data *d, int x, int y);
+void draw_maps(t_data *d);
+
+// tools.c
+void img_pix_put(t_data *d, int x, int y, int color);
+int getpixelcolor(t_img *img, int x, int y);
+int encode_rgb(t_color c);
+int xy_to_x(t_data *d, int x, int y);
 
 #endif

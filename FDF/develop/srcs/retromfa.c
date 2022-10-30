@@ -96,7 +96,7 @@ int fillImage(t_data *d)
     return (i);
 }
 
-void draw_all_img(t_data *d)
+void draw_maps(t_data *d)
 {
     static int h_max;
     int w_off = 0;
@@ -157,7 +157,7 @@ void draw_img(t_data *d, int w_off, int h_off, t_img2 *img)
 int render_frame(t_data *d)
 {
     // bzero(d->img.addr, d->img.line_len * HEIGHT);
-    //  draw_all_img(d/);
+    //  draw_maps(d/);
     // draw_img(d, 0, 0);
 
     if (d->win_ptr == NULL)
@@ -183,14 +183,14 @@ int handle_keypress(int keysym, t_data *data)
         // data->h++;
         data->h_off += 10;
         bzero(data->img.addr, data->img.line_len * HEIGHT);
-        draw_all_img(data);
+        draw_maps(data);
     }
     else if (keysym == XK_Down)
     {
         // data->h--;
         data->h_off -= 10;
         bzero(data->img.addr, data->img.line_len * HEIGHT);
-        draw_all_img(data);
+        draw_maps(data);
     }
     // else if (keysym == XK_a)
     // {
@@ -384,7 +384,7 @@ int main(int argc, char **argv)
     printf("nb img %d\n", d.num_img);
     d.images = (t_img2 *)malloc(d.num_img * sizeof(t_img2));
     fillImage(&d);
-    draw_all_img(&d);
+    draw_maps(&d);
     print_img_data(&d.img);
 
     mlx_loop_hook(d.mlx_ptr, render_frame, &d);

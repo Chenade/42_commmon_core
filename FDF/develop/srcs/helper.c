@@ -36,3 +36,17 @@ int print_info(char *name)
 
     return size;
 }
+
+int print_map(t_data *d)
+{
+    for (int y = 0; y < d->map_h; y++)
+    {
+        for (int x = 0; x < d->map_w; x++)
+        {
+            ft_printf("(%d, %d)  ", d->map_draw[xy_to_x(d, x, y)]->x, d->map_draw[xy_to_x(d, x, y)]->y);
+        }
+        ft_printf("\n");
+    }
+        ft_printf("\n");
+    return (0);
+}
