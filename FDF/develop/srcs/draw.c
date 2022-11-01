@@ -74,7 +74,7 @@ int ft_matrix_rotate(t_data *d)
             d->map_3d[xy_to_x(d, x, y)]->z = tmp.z;
         }
     }
-    ft_printf("rotate -> (%d, %d, %d)\n", d->rotation->x, d->rotation->y, d->rotation->z);
+    // ft_printf("rotate -> (%d, %d, %d)\n", d->rotation->x, d->rotation->y, d->rotation->z);
     return (0);
 }
 
@@ -109,7 +109,7 @@ int ft_matrix_move(t_data *d, t_cord min, t_cord max)
             d->map_2d[xy_to_x(d, x, y)]->y += ft_abs(min.y) + HEIGHT / 2 - size - d->center->y;
         }
     }
-    ft_printf("move -> (%d, %d)\n", d->center->x, d->center->y);
+    // ft_printf("move -> (%d, %d)\n", d->center->x, d->center->y);
     return (0);
 }
 

@@ -16,10 +16,10 @@
 # define ARROW_LEFT			123
 # define ARROW_RIGHT		124
 
-# define NUM_PAD_0			82
-# define NUM_PAD_1			83
-# define NUM_PAD_2			84
-# define NUM_PAD_3			85
+# define NUM_PAD_0			65438
+# define NUM_PAD_1			65436
+# define NUM_PAD_2			65433
+# define NUM_PAD_3			65435
 # define NUM_PAD_4			65430
 # define NUM_PAD_5			65437
 # define NUM_PAD_6			65432

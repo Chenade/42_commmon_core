@@ -21,7 +21,7 @@ int init_map(t_data *d)
         {
             d->map_3d[xy_to_x(d, x, y)]->x = x * d->line_length;
             d->map_3d[xy_to_x(d, x, y)]->y = y * d->line_length;
-            d->map_3d[xy_to_x(d, x, y)]->z = atoi(d->map[xy_to_x(d, x, y)]) * 5;
+            d->map_3d[xy_to_x(d, x, y)]->z = atoi(d->map[xy_to_x(d, x, y)]) * d->height;
             d->map_2d[xy_to_x(d, x, y)]->x = 0;
             d->map_2d[xy_to_x(d, x, y)]->y = 0;
             d->map_2d[xy_to_x(d, x, y)]->z = 0;
@@ -60,6 +60,7 @@ int init_var(t_data *d)
     // int max;
 
     d->line_length = 40;
+    d->height = 5;
     init_map(d);
     init_setup(d);
     // max = sqrt((d->map_w * d->map_w) + (d->map_h * d->map_h));

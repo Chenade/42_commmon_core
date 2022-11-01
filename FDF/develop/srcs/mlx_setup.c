@@ -62,6 +62,14 @@ int handle_keypress(int keysym, t_data *data)
             data->center->y += 10;
         else if (keysym == XK_Down)
             data->center->y -= 10;
+        else if (keysym == NUM_PAD_1)
+            data->line_length --;
+        else if (keysym == NUM_PAD_3)
+            data->line_length ++;
+        else if (keysym == NUM_PAD_2)
+            data->height ++;
+        else if (keysym == NUM_PAD_0)
+            data->height --;
         draw_maps(data);
     }
     // else if (keysym == XK_Right)

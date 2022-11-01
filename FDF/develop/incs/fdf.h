@@ -69,6 +69,7 @@ typedef struct s_data
     t_cord **map_3d;
     t_cord **map_2d;
     int line_length;
+    int height;
     t_cord  *center;
     t_cord  *rotation;
 } t_data;
