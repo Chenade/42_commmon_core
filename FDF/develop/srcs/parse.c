@@ -47,6 +47,11 @@ int init_setup(t_data *d)
     d->rotation->x = 13;
     d->rotation->y = 16;
     d->rotation->z = 3;
+    d->center = (t_cord *) malloc(sizeof(t_cord));
+    ft_bzero(d->center, sizeof(t_cord *));
+    d->center->x = 0;
+    d->center->y = 0;
+    d->center->z = 0;
     return (0);
 }
 

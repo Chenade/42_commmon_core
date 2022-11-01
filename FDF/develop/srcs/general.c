@@ -32,6 +32,7 @@ void free_data(t_data *d)
     free(d->u);
     free(d->v);
     free(d->rotation);
+    free(d->center);
     free(d->map);
 }
 

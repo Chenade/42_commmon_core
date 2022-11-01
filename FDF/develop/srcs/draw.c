@@ -88,21 +88,65 @@ int ft_matrix_to_vector(t_data *d)
         {
             _2d = d->map_2d[xy_to_x(d, x, y)];
             _3d = d->map_3d[xy_to_x(d, x, y)];
-            _2d->x = (_3d->x * d->u->x + _3d->y * d->u->y +_3d->z * d->u->z) + 500;
-            _2d->y = (_3d->x * d->v->x + _3d->y * d->v->y +_3d->z * d->v->z) + 500;
+            _2d->x = (_3d->x * d->u->x + _3d->y * d->u->y +_3d->z * d->u->z);
+            _2d->y = (_3d->x * d->v->x + _3d->y * d->v->y +_3d->z * d->v->z);
         }
     }
+    return (0);
+}
+
+int ft_matrix_move(t_data *d, t_cord min, t_cord max)
+{
+    int size;
+
+    for (int y = 0; y < d->map_h; y++)
+    {
+        for (int x = 0; x < d->map_w; x++)
+        {
+            size = (max.x - min.x) / 2;
+            d->map_2d[xy_to_x(d, x, y)]->x += ft_abs(min.x) + WIDTH / 2 - size + d->center->x;
+            size = (max.y - min.y) / 2;
+            d->map_2d[xy_to_x(d, x, y)]->y += ft_abs(min.y) + HEIGHT / 2 - size - d->center->y;
+        }
+    }
+    ft_printf("move -> (%d, %d)\n", d->center->x, d->center->y);
+    return (0);
+}
+
+int ft_matrix_center(t_data *d)
+{
+    t_cord  min;
+    t_cord  max;
+
+    min.x = d->map_2d[0]->x;
+    min.y = d->map_2d[0]->y;
+    max.x = d->map_2d[0]->x;
+    max.y = d->map_2d[0]->y;
+    for (int y = 0; y < d->map_h; y++)
+    {
+        for (int x = 0; x < d->map_w; x++)
+        {
+            if (min.x > d->map_2d[xy_to_x(d, x, y)]->x)
+                min.x = d->map_2d[xy_to_x(d, x, y)]->x;
+            if (min.y > d->map_2d[xy_to_x(d, x, y)]->y)
+                min.y = d->map_2d[xy_to_x(d, x, y)]->y;
+            if (max.x < d->map_2d[xy_to_x(d, x, y)]->x)
+                max.x = d->map_2d[xy_to_x(d, x, y)]->x;
+            if (max.y < d->map_2d[xy_to_x(d, x, y)]->y)
+                max.y = d->map_2d[xy_to_x(d, x, y)]->y;
+        }
+    }
+    ft_matrix_move(d, min, max);
     return (0);
 }
 
 void draw_maps(t_data *d)
 {
     ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
-    ft_matrix_rotate(d);
     // ft_matrix_zoom(d);
-    // ft_matrix_move(d);
-    // ft_matrix_center(d);
+    ft_matrix_rotate(d);
     ft_matrix_to_vector(d);
+    ft_matrix_center(d);
     for (int y = 0; y < d->map_h; y++)
     {
         for (int x = 0; x < d->map_w; x++)
