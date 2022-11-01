@@ -21,14 +21,9 @@
 #define HEIGHT 1600
 #define WIDTH 1200
 
+#define COLOR_BLACK 0x0000000
 #define COLOR_RED 0x00FF0000
 #define COLOR_WHITE 0x00FFFFFF
-
-typedef struct  s_pattern
-{
-    unsigned char magic[PATTERN_SIZE];
-    int byte_color;
-}           t_pattern;
 
 typedef struct s_color
 {
@@ -37,6 +32,20 @@ typedef struct s_color
     int b;
     int rgb;
 } t_color;
+
+typedef struct s_cord
+{
+    int x;
+    int y;
+    int z;
+} t_cord;
+
+typedef struct s_fxy
+{
+    float x;
+    float y;
+    float z;
+} t_fxy;
 
 typedef struct s_img
 {
@@ -49,21 +58,6 @@ typedef struct s_img
     int h;
 } t_img;
 
-typedef struct s_img2
-{
-    char *p;
-    t_pattern pattern;
-    int w;
-    int h;
-} t_img2;
-
-typedef struct s_cord
-{
-    int x;
-    int y;
-    int z;
-} t_cord;
-
 typedef struct s_data
 {
     void *win_ptr;
@@ -71,16 +65,19 @@ typedef struct s_data
     t_img img;
     char *buf;
     int size;
+    t_cord  *u;
+    t_cord  *v;
     int w;
     int h;
-    int byte_off;
 
     int map_h;
     int map_w;
     char **map;
-    t_cord **map_draw;
-
+    t_cord **map_3d;
+    t_cord **map_2d;
     int line_length;
+    t_cord  *center;
+    t_cord  *rotation;
 } t_data;
 
 // main.c
@@ -96,9 +93,10 @@ int handle_exit(t_data *data);
 long int findSize(char file_name[]);
 void print_img_data(t_img *i);
 int print_info(char *name);
-int print_map(t_data *d);
+int print_map(t_data *d, t_cord **map);
 
 // general.c
+void free_cord_map(t_data *d);
 void free_data(t_data *d);
 void print_err(const char *err_msg, t_data *d);
 int check_filename(const char *name, const char *ext);
@@ -106,13 +104,12 @@ int check_filename(const char *name, const char *ext);
 // parse.c
 int map_width(t_data *d, char **line);
 int read_file(t_data *d, char *name);
+int init_map(t_data *d);
 int init_var(t_data *d);
 
 // draw.c
-int draw_y(t_data *d, int x, int y);
-int find_end_x(t_data *d, t_cord pos);
-int draw_x(t_data *d, int x, int y);
 void draw_maps(t_data *d);
+int ft_matrix_rotate(t_data *d, int x, int y, int z);
 
 // tools.c
 void img_pix_put(t_data *d, int x, int y, int color);

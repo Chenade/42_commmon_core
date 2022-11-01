@@ -1,22 +1,65 @@
 #include "fdf.h"
 
-int init_var(t_data *d)
+int init_map(t_data *d)
 {
     int k;
-    int max;
 
     k = -1;
-    d->map_draw = (t_cord **) malloc((d->map_w * d->map_h) * sizeof(t_cord *));
-    ft_bzero(d->map_draw, sizeof(t_cord *));
+    d->map_3d = (t_cord **) malloc((d->map_w * d->map_h) * sizeof(t_cord *));
+    d->map_2d = (t_cord **) malloc((d->map_w * d->map_h) * sizeof(t_cord *));
+    ft_bzero(d->map_3d, sizeof(t_cord *));
     while (++k < (d->map_h * d->map_w))
     {
-        d->map_draw[k] = (t_cord *) malloc(sizeof(t_cord));
-        ft_bzero(d->map_draw[k], sizeof(t_cord *));
+        d->map_3d[k] = (t_cord *) malloc(sizeof(t_cord));
+        d->map_2d[k] = (t_cord *) malloc(sizeof(t_cord));
+        ft_bzero(d->map_3d[k], sizeof(t_cord *));
+        ft_bzero(d->map_2d[k], sizeof(t_cord *));
     }
-    max = sqrt((d->map_w * d->map_w) + (d->map_h * d->map_h));
-    ft_printf("max: %d. \n", max / d->w);
+    for (int y = 0; y < d->map_h; y++)
+    {
+        for (int x = 0; x < d->map_w; x++)
+        {
+            d->map_3d[xy_to_x(d, x, y)]->x = x * d->line_length;
+            d->map_3d[xy_to_x(d, x, y)]->y = y * d->line_length;
+            d->map_3d[xy_to_x(d, x, y)]->z = atoi(d->map[xy_to_x(d, x, y)]) * 5;
+            d->map_2d[xy_to_x(d, x, y)]->x = 0;
+            d->map_2d[xy_to_x(d, x, y)]->y = 0;
+            d->map_2d[xy_to_x(d, x, y)]->z = 0;
+        }
+    }
+    return (0);
+}
+
+int init_setup(t_data *d)
+{
+    d->u = (t_cord *) malloc(sizeof(t_cord));
+    ft_bzero(d->u, sizeof(t_cord *));
+    d->u->x = 1;
+    d->u->y = 0;
+    d->u->z = 0;
+    d->v = (t_cord *) malloc(sizeof(t_cord));
+    ft_bzero(d->v, sizeof(t_cord *));
+    d->v->x = 0;
+    d->v->y = 0;
+    d->v->z = 1;
+    d->rotation = (t_cord *) malloc(sizeof(t_cord));
+    ft_bzero(d->rotation, sizeof(t_cord *));
+    d->rotation->x = 2;
+    d->rotation->y = 0;
+    d->rotation->z = 0;
+    return (0);
+}
+
+int init_var(t_data *d)
+{
+    // int max;
+
+    d->line_length = 40;
+    init_map(d);
+    init_setup(d);
+    // max = sqrt((d->map_w * d->map_w) + (d->map_h * d->map_h));
+    // ft_printf("max: %d. \n", max / d->w);
     // d->line_length = 5;
-    d->line_length = 10;
     return (0);
 }
 

@@ -1,4 +1,5 @@
 #include "fdf.h"
+#include "keyboard.h"
 
 int init_mlx(t_data *d, char *name)
 {
@@ -38,37 +39,30 @@ int handle_keypress(int keysym, t_data *data)
         mlx_destroy_window(data->mlx_ptr, data->win_ptr);
         data->win_ptr = NULL;
     }
+    else
+    {
+        // ft_printf("|%d|\n", keysym);
+        if (keysym == NUM_PAD_7)
+        {
+            data->rotation->x ++;
+            ft_matrix_rotate(data, 45, 0, 0);
+        }
+        else if (keysym == NUM_PAD_4)
+        {
+            data->rotation->x --;
+            ft_matrix_rotate(data, 45, 0, 0);
+        }
+        else if (keysym == NUM_PAD_8)
+            ft_matrix_rotate(data, -1, 0, 0);
+        else if (keysym == NUM_PAD_5)
+            ft_matrix_rotate(data, -1, 0, 0);
+        else if (keysym == NUM_PAD_9)
+            ft_matrix_rotate(data, -1, 0, 0);
+        else if (keysym == NUM_PAD_6)
+            ft_matrix_rotate(data, -1, 0, 0);
+        draw_maps(data);
+    }
     // else if (keysym == XK_Right)
-    //     data->w++;
-    // else if (keysym == XK_Left)
-    //     data->w--;
-    else if (keysym == XK_Up)
-    {
-        // data->h++;
-        // data->h_off += 10;
-        bzero(data->img.addr, data->img.line_len * HEIGHT);
-        draw_maps(data);
-    }
-    else if (keysym == XK_Down)
-    {
-        // data->h--;
-        // data->h_off -= 10;
-        bzero(data->img.addr, data->img.line_len * HEIGHT);
-        draw_maps(data);
-    }
-    // else if (keysym == XK_a)
-    // {
-    //     data->byte_off--;
-    // }
-    // else if (keysym == XK_d)
-    // {
-    //     data->byte_off++;
-    // }
-    // else if (keysym == XK_p)
-    // {
-    //     if (!getNextImg(data))
-    //         return (mlx_loop_end(data->mlx_ptr));
-    // }
     return (0);
 }
 

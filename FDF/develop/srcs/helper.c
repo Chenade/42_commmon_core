@@ -21,12 +21,12 @@ long int findSize(char file_name[])
     return res;
 }
 
-// void print_img_data(t_img *i)
-// {
-//     printf("bit per pixel %d\n", i->bpp);
-//     printf("endian %d\n", i->endian);
-//     printf("line_len %d\n", i->line_len);
-// }
+void print_img_data(t_img *i)
+{
+    printf("bit per pixel %d\n", i->bpp);
+    printf("endian %d\n", i->endian);
+    printf("line_len %d\n", i->line_len);
+}
 
 int print_info(char *name)
 {
@@ -37,13 +37,13 @@ int print_info(char *name)
     return size;
 }
 
-int print_map(t_data *d)
+int print_map(t_data *d, t_cord **map)
 {
     for (int y = 0; y < d->map_h; y++)
     {
         for (int x = 0; x < d->map_w; x++)
         {
-            ft_printf("(%d, %d, %d)  ", d->map_draw[xy_to_x(d, x, y)]->x, d->map_draw[xy_to_x(d, x, y)]->y, d->map_draw[xy_to_x(d, x, y)]->z);
+            ft_printf("(%d, %d, %d)  ", map[xy_to_x(d, x, y)]->x, map[xy_to_x(d, x, y)]->y, map[xy_to_x(d, x, y)]->z);
         }
         ft_printf("\n");
     }
