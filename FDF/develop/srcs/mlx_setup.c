@@ -7,8 +7,8 @@ int init_mlx(t_data *d, char *name)
     d->buf = (char *)malloc(d->size);
     bzero(d->buf, d->size);
 
-    d->w = HEIGHT;
-    d->h = WIDTH;
+    d->w = WIDTH;
+    d->h = HEIGHT;
 
     {
         d->mlx_ptr = mlx_init();
@@ -43,23 +43,17 @@ int handle_keypress(int keysym, t_data *data)
     {
         // ft_printf("|%d|\n", keysym);
         if (keysym == NUM_PAD_7)
-        {
             data->rotation->x ++;
-            ft_matrix_rotate(data, 45, 0, 0);
-        }
         else if (keysym == NUM_PAD_4)
-        {
             data->rotation->x --;
-            ft_matrix_rotate(data, 45, 0, 0);
-        }
         else if (keysym == NUM_PAD_8)
-            ft_matrix_rotate(data, -1, 0, 0);
+            data->rotation->y ++;
         else if (keysym == NUM_PAD_5)
-            ft_matrix_rotate(data, -1, 0, 0);
+            data->rotation->y --;
         else if (keysym == NUM_PAD_9)
-            ft_matrix_rotate(data, -1, 0, 0);
+            data->rotation->z ++;
         else if (keysym == NUM_PAD_6)
-            ft_matrix_rotate(data, -1, 0, 0);
+            data->rotation->z --;
         draw_maps(data);
     }
     // else if (keysym == XK_Right)

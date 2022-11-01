@@ -1,12 +1,5 @@
 #include "fdf.h"
 
-int FT_ABS(int num)
-{
-    if (num < 0)
-        return (num * -1);
-    return (num);
-}
-
 static void	ft_lines_draw(t_data *d, t_cord f, t_cord s)//, t_color c)
 {
 	t_cord	delta;
@@ -14,8 +7,8 @@ static void	ft_lines_draw(t_data *d, t_cord f, t_cord s)//, t_color c)
 	t_cord	cur;
 	int		error[2];
 
-	delta.x = FT_ABS(s.x - f.x);
-	delta.y = FT_ABS(s.y - f.y);
+	delta.x = ft_abs(s.x - f.x);
+	delta.y = ft_abs(s.y - f.y);
 	sign.x = f.x < s.x ? 1 : -1;
 	sign.y = f.y < s.y ? 1 : -1;
 	error[0] = delta.x - delta.y;
@@ -36,11 +29,8 @@ static void	ft_lines_draw(t_data *d, t_cord f, t_cord s)//, t_color c)
 	}
 }
 
-int ft_matrix_rotate(t_data *d, int dx, int dy, int dz)
+int ft_matrix_rotate(t_data *d)
 {
-    (void) dx;
-    (void) dy;
-    (void) dz;
     free_cord_map(d);
     init_map(d);
     // rotate x
@@ -48,31 +38,43 @@ int ft_matrix_rotate(t_data *d, int dx, int dy, int dz)
     {
         for (int x = 0; x < d->map_w; x++)
         {
+            t_cord tmp;
+            tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
+            tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
             d->map_3d[xy_to_x(d, x, y)]->x = d->map_3d[xy_to_x(d, x, y)]->x;
-            d->map_3d[xy_to_x(d, x, y)]->y = d->map_3d[xy_to_x(d, x, y)]->y * cos(d->rotation->x) + d->map_3d[xy_to_x(d, x, y)]->z * sin(d->rotation->x);
-            d->map_3d[xy_to_x(d, x, y)]->z = d->map_3d[xy_to_x(d, x, y)]->y * sin(d->rotation->x) * -1 + d->map_3d[xy_to_x(d, x, y)]->z * cos(d->rotation->x);
+            d->map_3d[xy_to_x(d, x, y)]->y = tmp.y * cos(d->rotation->x) + tmp.z * sin(d->rotation->x);
+            d->map_3d[xy_to_x(d, x, y)]->z = tmp.y * sin(d->rotation->x) * -1 + tmp.z * cos(d->rotation->x);
         }
     }
     // // rotate y
-    // for (int y = 0; y < d->map_h; y++)
-    // {
-    //     for (int x = 0; x < d->map_w; x++)
-    //     {
-    //         d->map_3d[xy_to_x(d, x, y)]->x = d->map_3d[xy_to_x(d, x, y)]->x * cos(dy) + d->map_3d[xy_to_x(d, x, y)]->z * sin(dy);
-    //         d->map_3d[xy_to_x(d, x, y)]->y = d->map_3d[xy_to_x(d, x, y)]->y;
-    //         d->map_3d[xy_to_x(d, x, y)]->z = d->map_3d[xy_to_x(d, x, y)]->x * sin(dy) * -1 + d->map_3d[xy_to_x(d, x, y)]->z * cos(dy);
-    //     }
-    // }
-    // // rotate z
-    // for (int y = 0; y < d->map_h; y++)
-    // {
-    //     for (int x = 0; x < d->map_w; x++)
-    //     {
-    //         d->map_3d[xy_to_x(d, x, y)]->x = d->map_3d[xy_to_x(d, x, y)]->x * cos(dz) - d->map_3d[xy_to_x(d, x, y)]->y * sin(dz);
-    //         d->map_3d[xy_to_x(d, x, y)]->y = d->map_3d[xy_to_x(d, x, y)]->x * cos(dz) + d->map_3d[xy_to_x(d, x, y)]->y * sin(dz);
-    //         d->map_3d[xy_to_x(d, x, y)]->z = d->map_3d[xy_to_x(d, x, y)]->z;
-    //     }
-    // }
+    for (int y = 0; y < d->map_h; y++)
+    {
+        for (int x = 0; x < d->map_w; x++)
+        {
+            t_cord tmp;
+            tmp.x = d->map_3d[xy_to_x(d, x, y)]->x;
+            tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
+            tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
+            d->map_3d[xy_to_x(d, x, y)]->x = tmp.x * cos(d->rotation->y) + tmp.z * sin(d->rotation->y);
+            d->map_3d[xy_to_x(d, x, y)]->y = tmp.y;
+            d->map_3d[xy_to_x(d, x, y)]->z = tmp.x * sin(d->rotation->y) * -1 + tmp.z * cos(d->rotation->y);
+        }
+    }
+    // rotate z
+    for (int y = 0; y < d->map_h; y++)
+    {
+        for (int x = 0; x < d->map_w; x++)
+        {
+            t_cord tmp;
+            tmp.x = d->map_3d[xy_to_x(d, x, y)]->x;
+            tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
+            tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
+            d->map_3d[xy_to_x(d, x, y)]->x = tmp.x * cos(d->rotation->z) - tmp.y * sin(d->rotation->z);
+            d->map_3d[xy_to_x(d, x, y)]->y = tmp.x * cos(d->rotation->z) + tmp.y * sin(d->rotation->z);
+            d->map_3d[xy_to_x(d, x, y)]->z = tmp.z;
+        }
+    }
+    ft_printf("rotate -> (%d, %d, %d)\n", d->rotation->x, d->rotation->y, d->rotation->z);
     return (0);
 }
 
@@ -95,9 +97,12 @@ int ft_matrix_to_vector(t_data *d)
 
 void draw_maps(t_data *d)
 {
-    ft_bzero(d->img.addr, d->img.line_len * 0.6 * HEIGHT);
+    ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
+    ft_matrix_rotate(d);
+    // ft_matrix_zoom(d);
+    // ft_matrix_move(d);
+    // ft_matrix_center(d);
     ft_matrix_to_vector(d);
-    // ft_matrix_rotate(d, 45, 0, 0);
     for (int y = 0; y < d->map_h; y++)
     {
         for (int x = 0; x < d->map_w; x++)
@@ -109,5 +114,4 @@ void draw_maps(t_data *d)
                 ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x, y + 1)]));
         }
     }
-    // ft_printf("rotate: %d\n", d->rotation->x);
 }

@@ -44,9 +44,9 @@ int init_setup(t_data *d)
     d->v->z = 1;
     d->rotation = (t_cord *) malloc(sizeof(t_cord));
     ft_bzero(d->rotation, sizeof(t_cord *));
-    d->rotation->x = 2;
-    d->rotation->y = 0;
-    d->rotation->z = 0;
+    d->rotation->x = 13;
+    d->rotation->y = 16;
+    d->rotation->z = 3;
     return (0);
 }
 

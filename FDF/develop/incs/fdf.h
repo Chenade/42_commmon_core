@@ -18,8 +18,8 @@
 #define NB_PATTERN 2
 #define PATTERN_SIZE 4
 
-#define HEIGHT 1600
-#define WIDTH 1200
+#define WIDTH 1600
+#define HEIGHT 1200
 
 #define COLOR_BLACK 0x0000000
 #define COLOR_RED 0x00FF0000
@@ -39,13 +39,6 @@ typedef struct s_cord
     int y;
     int z;
 } t_cord;
-
-typedef struct s_fxy
-{
-    float x;
-    float y;
-    float z;
-} t_fxy;
 
 typedef struct s_img
 {
@@ -109,7 +102,7 @@ int init_var(t_data *d);
 
 // draw.c
 void draw_maps(t_data *d);
-int ft_matrix_rotate(t_data *d, int x, int y, int z);
+int ft_matrix_rotate(t_data *d);
 
 // tools.c
 void img_pix_put(t_data *d, int x, int y, int color);

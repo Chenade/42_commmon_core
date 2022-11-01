@@ -25,6 +25,7 @@ typedef struct s_list
 
 # define BUFFER_SIZE 10
 
+int					ft_abs(int c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);

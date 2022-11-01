@@ -21,11 +21,11 @@
 # define NUM_PAD_2			84
 # define NUM_PAD_3			85
 # define NUM_PAD_4			65430
-# define NUM_PAD_5			87
-# define NUM_PAD_6			88
+# define NUM_PAD_5			65437
+# define NUM_PAD_6			65432
 # define NUM_PAD_7			65429
-# define NUM_PAD_8			91
-# define NUM_PAD_9			92
+# define NUM_PAD_8			65431
+# define NUM_PAD_9			65434
 # define NUM_PAD_PLUS		69
 # define NUM_PAD_MINUS		78
 
