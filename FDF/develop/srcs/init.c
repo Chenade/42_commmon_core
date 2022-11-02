@@ -1,32 +1,63 @@
 #include "fdf.h"
 
-int init_map(t_data *d)
+int init_vector(t_vector *v)
 {
-    int k;
+    v->x = 0;
+    v->y = 0;
+    v->z = 0;
+    return (0);
+}
 
-    k = -1;
+
+int init_map3d(t_data *d)
+{
+    int x;
+    int y;
+
+    y = -1;
     d->map_3d = (t_vector **) malloc((d->map_w * d->map_h) * sizeof(t_vector *));
-    d->map_2d = (t_vector **) malloc((d->map_w * d->map_h) * sizeof(t_vector *));
     ft_bzero(d->map_3d, sizeof(t_vector *));
-    while (++k < (d->map_h * d->map_w))
+    while (++y < (d->map_h * d->map_w))
     {
-        d->map_3d[k] = (t_vector *) malloc(sizeof(t_vector));
-        d->map_2d[k] = (t_vector *) malloc(sizeof(t_vector));
-        ft_bzero(d->map_3d[k], sizeof(t_vector *));
-        ft_bzero(d->map_2d[k], sizeof(t_vector *));
+        d->map_3d[y] = (t_vector *) malloc(sizeof(t_vector));
+        ft_bzero(d->map_3d[y], sizeof(t_vector *));
     }
-    for (int y = 0; y < d->map_h; y++)
+    y = -1;
+    while (++y < d->map_h)
     {
-        for (int x = 0; x < d->map_w; x++)
+        x = -1;
+        while (++x < d->map_w)
         {
             d->map_3d[xy_to_x(d, x, y)]->x = x * d->line_length;
             d->map_3d[xy_to_x(d, x, y)]->y = y * d->line_length;
             d->map_3d[xy_to_x(d, x, y)]->z = atoi(d->map[xy_to_x(d, x, y)]) * d->height;
-            d->map_2d[xy_to_x(d, x, y)]->x = 0;
-            d->map_2d[xy_to_x(d, x, y)]->y = 0;
-            d->map_2d[xy_to_x(d, x, y)]->z = 0;
         }
     }
+    return (0);
+}
+
+
+int init_map(t_data *d)
+{
+    int x;
+    int y;
+
+    y = -1;
+    d->map_2d = (t_vector **) malloc((d->map_w * d->map_h) * sizeof(t_vector *));
+    ft_bzero(d->map_2d, sizeof(t_vector *));
+    while (++y < (d->map_h * d->map_w))
+    {
+        d->map_2d[y] = (t_vector *) malloc(sizeof(t_vector));
+        ft_bzero(d->map_2d[y], sizeof(t_vector *));
+    }
+    y = -1;
+    while (++y < d->map_h)
+    {
+        x = -1;
+        while (++x < d->map_w)
+            init_vector(d->map_2d[xy_to_x(d, x, y)]);
+    }
+    init_map3d(d);
     return (0);
 }
 

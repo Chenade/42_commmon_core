@@ -28,6 +28,8 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
 int		ft_abs(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

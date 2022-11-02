@@ -39,14 +39,19 @@ int print_info(char *name)
 
 int print_map(t_data *d, t_vector **map)
 {
-    for (int y = 0; y < d->map_h; y++)
+    int x;
+    int y;
+
+    y = -1;
+    while (++y < d->map_h)
     {
-        for (int x = 0; x < d->map_w; x++)
+        x = -1;
+        while (++x < d->map_w)
         {
             ft_printf("(%d, %d, %d)  ", map[xy_to_x(d, x, y)]->x, map[xy_to_x(d, x, y)]->y, map[xy_to_x(d, x, y)]->z);
         }
         ft_printf("\n");
     }
-        ft_printf("\n");
+    ft_printf("\n");
     return (0);
 }

@@ -78,27 +78,16 @@ typedef struct s_data
 int		fdf(char *filename);
 
 // init.c
-int		init_map(t_data *d);
-int		init_setup(t_data *d);
-int		init_var(t_data *d);
+int			init_vector(t_vector *v);
+int			init_map(t_data *d);
+int			init_setup(t_data *d);
+int			init_var(t_data *d);
 
 //mlx_setup.c
-int		 init_mlx(t_data *d, char *name);
-int		 render_frame(t_data *d);
-int		 handle_keypress(int keysym, t_data *data);
-int		 handle_exit(t_data *data);
-
-//helper.c
-long int	findSize(char file_name[]);
-void		print_img_data(t_img *i);
-int			print_info(char *name);
-int			print_map(t_data *d, t_vector **map);
-
-// general.c
-void		free_cord_map(t_data *d);
-void		free_data(t_data *d);
-void		print_err(const char *err_msg, t_data *d);
-int			check_filename(const char *name, const char *ext);
+int			init_mlx(t_data *d, char *name);
+int			render_frame(t_data *d);
+int			handle_keypress(int keysym, t_data *data);
+int			handle_exit(t_data *data);
 
 // parse.c
 int			map_width(t_data *d, char **line);
@@ -110,12 +99,26 @@ int			init_var(t_data *d);
 int			draw_gui(t_data *d);
 int			draw_second_projecion(t_data *d);
 void		draw_maps(t_data *d);
+int			ft_matrix_to_vector(t_data *d);
 
 // matrix.c
-int			ft_matrix_rotate(t_data *d);
-int			ft_matrix_to_vector(t_data *d);
+int			ft_matrix_rotate_x(t_data *d);
+int			ft_matrix_rotate_y(t_data *d);
+int			ft_matrix_rotate_z(t_data *d);
 int			ft_matrix_move(t_data *d, t_vector min, t_vector max);
 int			ft_matrix_center(t_data *d);
+
+// general.c
+void		free_cord_map(t_data *d);
+void		free_data(t_data *d);
+void		print_err(const char *err_msg, t_data *d);
+int			check_filename(const char *name, const char *ext);
+
+//helper.c
+long int	findSize(char file_name[]);
+void		print_img_data(t_img *i);
+int			print_info(char *name);
+int			print_map(t_data *d, t_vector **map);
 
 // tools.c
 void		img_pix_put(t_data *d, int x, int y, int color);

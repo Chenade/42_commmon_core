@@ -18,6 +18,13 @@ LFLAGS		= 	-L . -lmlx_Linux -lX11 -lXext -lm
 
 CLIBS		=	-L . -lft
 
+Y			= "\033[33m"
+R			= "\033[31m"
+GREEN		= "\033[92m"
+BLUE		= "\033[94m"
+X			= "\033[0m"
+UP			= "\033[A"
+CUT			= "\033[K"
 ###############################################################################
 #                                                                             #
 #                                  Variable                                   #
@@ -65,28 +72,28 @@ OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 all:			$(NAME)
 
 $(LIBFT):
-				$(MAKE) -C $(LIBFT_DIR) all
+				@$(MAKE) -C $(LIBFT_DIR) all
 				mv $(LIBFT_DIR)/$(LIBFT) .
 				$(MAKE) -C $(LIBFT_DIR) fclean
-				@echo "\033[92mLibft Compile Successfully\n\033[0m"
+				@echo ${GREEN}"Libft Compile Successfully\n"${X}
 
 $(LIBMLX):
 				make -C ${MLX_DIR} all
 				mv $(MLX_DIR)/$(LIBMLX) .
 				mv $(MLX_DIR)/$(LIBMLX_2) .
 				make clean -C ${MLX_DIR}
-				@echo "\033[92mLibmlx Compile Successfully\n\033[0m"
+				@echo ${GREEN}"Libmlx Compile Successfully\n"${X}
 
 
 $(NAME):		$(LIBFT) $(LIBMLX) $(OBJS)
 				${CC} ${OBJS} ${CFLAGS} ${LFLAGS} $(LIBFT) -o $@
-				@echo "\033[92mFDF Compile Successfully\033[0m"
-				@echo "\033[94mCommand: ./fdf {filename}.fdf\033[0m\n"
+				@echo ${GREEN}"FDF Compile Successfully"${X}
+				@echo ${BLUE}"Command: ./fdf {filename}.fdf\n"${X}
 
 project:		clean $(OBJS)
 				${CC} ${OBJS} ${CFLAGS} ${LFLAGS} $(LIBFT) -o $(NAME)
-				@echo "\033[92mFDF Compile Successfully\033[0m"
-				@echo "\033[94mCommand: ./fdf {filename}.fdf\033[0m\n"
+				@echo ${GREEN}"FDF Compile Successfully"${X}
+				@echo ${BLUE}"Command: ./fdf {filename}.fdf\n"${X}
 
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 				@mkdir -p $(dir $@)
@@ -97,9 +104,9 @@ clean:
 
 fclean:			clean
 				$(RM) $(LIBFT) $(LIBMLX) $(LIBMLX_2)
-				@echo "\033[92mLib Clean Successfully\033[0m\n"
+				@echo ${GREEN}"Lib Clean Successfully\n"${X}
 				$(RM) $(NAME)
-				@echo "\033[92mFDF Clean Successfully\033[0m\n"
+				@echo ${GREEN}"FDF Clean Successfully\n"${X}
 
 re:				fclean all
 

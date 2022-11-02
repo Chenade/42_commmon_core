@@ -43,13 +43,18 @@ int draw_second_projecion(t_data *d)
 
 void draw_maps(t_data *d)
 {
+	int	x;
+	int	y;
+
     ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
-    ft_matrix_rotate(d);
+    ft_matrix_rotate_x(d);
     ft_matrix_to_vector(d);
     ft_matrix_center(d);
-    for (int y = 0; y < d->map_h; y++)
+	y = -1;
+    while (++y < d->map_h)
     {
-        for (int x = 0; x < d->map_w; x++)
+        x = -1;
+        while (++x < d->map_w)
         {
             t_vector cur = *(d->map_2d[xy_to_x(d, x, y)]);
             if (x + 1 != d->map_w)
@@ -58,4 +63,26 @@ void draw_maps(t_data *d)
                 ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x, y + 1)]));
         }
     }
+}
+
+int ft_matrix_to_vector(t_data *d)
+{
+    int			x;
+    int			y;
+    t_vector	*_2d;
+    t_vector	*_3d;
+    
+	y = -1;
+    while (++y < d->map_h)
+    {
+        x = -1;
+        while (++x < d->map_w)
+        {
+            _2d = d->map_2d[xy_to_x(d, x, y)];
+            _3d = d->map_3d[xy_to_x(d, x, y)];
+            _2d->x = (_3d->x * d->u->x + _3d->y * d->u->y +_3d->z * d->u->z);
+            _2d->y = (_3d->x * d->v->x + _3d->y * d->v->y +_3d->z * d->v->z);
+        }
+    }
+    return (0);
 }
