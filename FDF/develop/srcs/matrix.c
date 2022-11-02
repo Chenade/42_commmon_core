@@ -9,7 +9,7 @@ int ft_matrix_rotate(t_data *d)
     {
         for (int x = 0; x < d->map_w; x++)
         {
-            t_cord tmp;
+            t_vector tmp;
             tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
             tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
             d->map_3d[xy_to_x(d, x, y)]->x = d->map_3d[xy_to_x(d, x, y)]->x;
@@ -22,7 +22,7 @@ int ft_matrix_rotate(t_data *d)
     {
         for (int x = 0; x < d->map_w; x++)
         {
-            t_cord tmp;
+            t_vector tmp;
             tmp.x = d->map_3d[xy_to_x(d, x, y)]->x;
             tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
             tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
@@ -36,7 +36,7 @@ int ft_matrix_rotate(t_data *d)
     {
         for (int x = 0; x < d->map_w; x++)
         {
-            t_cord tmp;
+            t_vector tmp;
             tmp.x = d->map_3d[xy_to_x(d, x, y)]->x;
             tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
             tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
@@ -50,8 +50,8 @@ int ft_matrix_rotate(t_data *d)
 
 int ft_matrix_to_vector(t_data *d)
 {
-    t_cord  *_2d;
-    t_cord  *_3d;
+    t_vector  *_2d;
+    t_vector  *_3d;
     for (int y = 0; y < d->map_h; y++)
     {
         for (int x = 0; x < d->map_w; x++)
@@ -65,7 +65,7 @@ int ft_matrix_to_vector(t_data *d)
     return (0);
 }
 
-int ft_matrix_move(t_data *d, t_cord min, t_cord max)
+int ft_matrix_move(t_data *d, t_vector min, t_vector max)
 {
     int size;
 
@@ -84,8 +84,8 @@ int ft_matrix_move(t_data *d, t_cord min, t_cord max)
 
 int ft_matrix_center(t_data *d)
 {
-    t_cord  min;
-    t_cord  max;
+    t_vector  min;
+    t_vector  max;
 
     min.x = d->map_2d[0]->x;
     min.y = d->map_2d[0]->y;

@@ -1,10 +1,10 @@
 #include "fdf.h"
 
-static void	ft_lines_draw(t_data *d, t_cord f, t_cord s)//, t_color c)
+static void	ft_lines_draw(t_data *d, t_vector f, t_vector s)//, t_color c)
 {
-	t_cord	delta;
-	t_cord	sign;
-	t_cord	cur;
+	t_vector	delta;
+	t_vector	sign;
+	t_vector	cur;
 	int		error[2];
 
 	delta.x = ft_abs(s.x - f.x);
@@ -51,7 +51,7 @@ void draw_maps(t_data *d)
     {
         for (int x = 0; x < d->map_w; x++)
         {
-            t_cord cur = *(d->map_2d[xy_to_x(d, x, y)]);
+            t_vector cur = *(d->map_2d[xy_to_x(d, x, y)]);
             if (x + 1 != d->map_w)
                 ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x + 1, y)]));
             if (y + 1 != d->map_h)

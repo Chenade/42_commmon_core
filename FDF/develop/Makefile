@@ -48,6 +48,7 @@ SRCS_GEN	=	general.c		\
 
 SRCS		=	$(SRCS_GEN)
 SRCS		+=	main.c			\
+				init.c			\
 				parse.c			\
 				mlx_setup.c		\
 				matrix.c		\

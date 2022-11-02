@@ -37,7 +37,7 @@ int print_info(char *name)
     return size;
 }
 
-int print_map(t_data *d, t_cord **map)
+int print_map(t_data *d, t_vector **map)
 {
     for (int y = 0; y < d->map_h; y++)
     {

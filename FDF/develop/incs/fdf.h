@@ -27,95 +27,100 @@
 
 typedef struct s_color
 {
-    int r;
-    int g;
-    int b;
-    int rgb;
+	int r;
+	int g;
+	int b;
+	int rgb;
 } t_color;
 
-typedef struct s_cord
+typedef struct s_vector
 {
-    int x;
-    int y;
-    int z;
-} t_cord;
+	int x;
+	int y;
+	int z;
+} t_vector;
 
 typedef struct s_img
 {
-    void *mlx_img;
-    char *addr;
-    int bpp;
-    int line_len;
-    int endian;
-    int w;
-    int h;
+	void *mlx_img;
+	char *addr;
+	int bpp;
+	int line_len;
+	int endian;
+	int w;
+	int h;
 } t_img;
 
 typedef struct s_data
 {
-    void *win_ptr;
-    void *mlx_ptr;
-    t_img img;
-    char *buf;
-    int size;
-    t_cord  *u;
-    t_cord  *v;
-    int w;
-    int h;
+	void *win_ptr;
+	void *mlx_ptr;
+	t_img img;
+	char *buf;
+	int size;
+	t_vector  *u;
+	t_vector  *v;
+	int w;
+	int h;
 
-    int map_h;
-    int map_w;
-    char **map;
-    t_cord **map_3d;
-    t_cord **map_2d;
-    int line_length;
-    int height;
-    t_cord  *center;
-    t_cord  *rotation;
+	int map_h;
+	int map_w;
+	char **map;
+	t_vector **map_3d;
+	t_vector **map_2d;
+	int line_length;
+	int height;
+	t_vector  *center;
+	t_vector  *rotation;
 } t_data;
 
 // main.c
-int fdf(char *filename);
+int		fdf(char *filename);
+
+// init.c
+int		init_map(t_data *d);
+int		init_setup(t_data *d);
+int		init_var(t_data *d);
 
 //mlx_setup.c
-int init_mlx(t_data *d, char *name);
-int render_frame(t_data *d);
-int handle_keypress(int keysym, t_data *data);
-int handle_exit(t_data *data);
+int		 init_mlx(t_data *d, char *name);
+int		 render_frame(t_data *d);
+int		 handle_keypress(int keysym, t_data *data);
+int		 handle_exit(t_data *data);
 
 //helper.c
-long int findSize(char file_name[]);
-void print_img_data(t_img *i);
-int print_info(char *name);
-int print_map(t_data *d, t_cord **map);
+long int	findSize(char file_name[]);
+void		print_img_data(t_img *i);
+int			print_info(char *name);
+int			print_map(t_data *d, t_vector **map);
 
 // general.c
-void free_cord_map(t_data *d);
-void free_data(t_data *d);
-void print_err(const char *err_msg, t_data *d);
-int check_filename(const char *name, const char *ext);
+void		free_cord_map(t_data *d);
+void		free_data(t_data *d);
+void		print_err(const char *err_msg, t_data *d);
+int			check_filename(const char *name, const char *ext);
 
 // parse.c
-int map_width(t_data *d, char **line);
-int read_file(t_data *d, char *name);
-int init_map(t_data *d);
-int init_var(t_data *d);
+int			map_width(t_data *d, char **line);
+int			read_file(t_data *d, char *name);
+int			init_map(t_data *d);
+int			init_var(t_data *d);
 
 // draw.c
-int draw_gui(t_data *d);
-int draw_second_projecion(t_data *d);
-void draw_maps(t_data *d);
+int			draw_gui(t_data *d);
+int			draw_second_projecion(t_data *d);
+void		draw_maps(t_data *d);
 
 // matrix.c
-int ft_matrix_rotate(t_data *d);
-int ft_matrix_to_vector(t_data *d);
-int ft_matrix_move(t_data *d, t_cord min, t_cord max);
-int ft_matrix_center(t_data *d);
+int			ft_matrix_rotate(t_data *d);
+int			ft_matrix_to_vector(t_data *d);
+int			ft_matrix_move(t_data *d, t_vector min, t_vector max);
+int			ft_matrix_center(t_data *d);
 
 // tools.c
-void img_pix_put(t_data *d, int x, int y, int color);
-int getpixelcolor(t_img *img, int x, int y);
-int encode_rgb(t_color c);
-int xy_to_x(t_data *d, int x, int y);
+void		img_pix_put(t_data *d, int x, int y, int color);
+int			getpixelcolor(t_img *img, int x, int y);
+int			encode_rgb(t_color c);
+int			xy_to_x(t_data *d, int x, int y);
 
 #endif
