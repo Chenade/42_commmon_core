@@ -3,27 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenasse <cmenasse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 19:19:50 by cmenasse          #+#    #+#             */
-/*   Updated: 2021/02/22 20:05:23 by cmenasse         ###   ########.fr       */
+/*   Created: 2022/05/08 00:05:39 by ykuo              #+#    #+#             */
+/*   Updated: 2022/05/09 12:01:25 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s, char const *set)
+char	*ft_strtrim(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	j;
+	size_t	s;
+	size_t	len;
+	char	*dst;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	j = ft_strlen(s) - 1;
-	while (s[i] && ft_strchr(set, s[i]))
-		i++;
-	while (j + 1 > i && ft_strchr(set, s[j]))
-		j--;
-	return (ft_substr(s, (unsigned int)i, j - i + 1));
+	if (!s1 || !s2)
+		return (0);
+	s = 0;
+	len = ft_strlen(s1);
+	while (s < len && ft_strchr(s2, s1[s]))
+		s++;
+	while (s < len && ft_strchr(s2, s1[len]))
+		len -= 1;
+	if (len == 0)
+		dst = ft_substr(s1, 0, 0);
+	else
+		dst = ft_substr(s1, s, len - s + 1);
+	if (!dst)
+		return (0);
+	return (dst);
 }

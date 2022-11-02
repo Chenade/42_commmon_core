@@ -102,8 +102,15 @@ int init_map(t_data *d);
 int init_var(t_data *d);
 
 // draw.c
+int draw_gui(t_data *d);
+int draw_second_projecion(t_data *d);
 void draw_maps(t_data *d);
+
+// matrix.c
 int ft_matrix_rotate(t_data *d);
+int ft_matrix_to_vector(t_data *d);
+int ft_matrix_move(t_data *d, t_cord min, t_cord max);
+int ft_matrix_center(t_data *d);
 
 // tools.c
 void img_pix_put(t_data *d, int x, int y, int color);

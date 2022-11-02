@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenasse <cmenasse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 19:28:30 by cmenasse          #+#    #+#             */
-/*   Updated: 2021/02/22 19:12:56 by cmenasse         ###   ########.fr       */
+/*   Created: 2022/05/08 14:44:36 by ykuo              #+#    #+#             */
+/*   Updated: 2022/05/08 14:44:48 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
-	t_list	*new_elem;
+	t_list	*ans;
+	t_list	*tmp;
 
-	new_lst = NULL;
+	if (!lst)
+		return (0);
+	ans = ft_lstnew((*f)(lst->content));
+	if (!ans)
+		return (0);
+	lst = lst->next;
 	while (lst)
 	{
-		new_elem = ft_lstnew(f(lst->content));
-		if (!new_elem)
-		{
-			ft_lstclear(&new_lst, del);
-			break ;
-		}
-		ft_lstadd_back(&new_lst, new_elem);
+		tmp = ft_lstnew((*f)(lst->content));
+		if (!tmp)
+			ft_lstclear(&lst, del);
+		ft_lstadd_back (&ans, tmp);
 		lst = lst->next;
 	}
-	return (new_lst);
+	return (ans);
 }

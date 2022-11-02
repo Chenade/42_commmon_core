@@ -5,10 +5,12 @@ void free_cord_map(t_data *d)
     int i;
 
     i = -1;
-    while(d->map[++i])
+    while(d->map && d->map[++i])
     {
-        free(d->map_2d[i]);
-        free(d->map_3d[i]);
+        if (d->map_2d[i])
+            free(d->map_2d[i]);
+        if (d->map_3d[i])
+            free(d->map_3d[i]);
     }
     free(d->map_2d);
     free(d->map_3d);
@@ -25,14 +27,14 @@ void free_data(t_data *d)
     mlx_destroy_display(d->mlx_ptr);
     free(d->mlx_ptr);
     free(d->buf);
-    free_cord_map(d);
-    i = -1;
-    while(d->map[++i])
-        free(d->map[i]);
     free(d->u);
     free(d->v);
     free(d->rotation);
     free(d->center);
+    i = -1;
+    free_cord_map(d);
+    while(d->map && d->map[++i])
+        free(d->map[i]);
     free(d->map);
 }
 

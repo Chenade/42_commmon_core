@@ -50,6 +50,7 @@ SRCS		=	$(SRCS_GEN)
 SRCS		+=	main.c			\
 				parse.c			\
 				mlx_setup.c		\
+				matrix.c		\
 				draw.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

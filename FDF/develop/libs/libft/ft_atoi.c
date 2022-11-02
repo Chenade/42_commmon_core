@@ -3,28 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenasse <cmenasse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 18:17:25 by cmenasse          #+#    #+#             */
-/*   Updated: 2021/02/22 18:53:31 by cmenasse         ###   ########.fr       */
+/*   Created: 2022/05/07 23:54:49 by ykuo              #+#    #+#             */
+/*   Updated: 2022/05/07 23:54:57 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *nptr)
 {
-	long	res;
+	int		i;
+	int		ans;
 	int		sign;
 
-	res = 0;
+	i = 0;
+	ans = 0;
 	sign = 1;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '+' || *str == '-')
-		if (*str++ == '-')
-			sign = -1;
-	while (*str >= '0' && *str <= '9')
-		res = res * 10 + (*str++ - '0');
-	return ((int)(sign * res));
+	while (nptr[i] == 32 || (nptr[i] > 8 && nptr[i] < 14))
+		i += 1;
+	if (nptr[i] == 43 || nptr[i] == 45)
+	{
+		sign = 44 - nptr[i];
+		i += 1;
+	}
+	while (nptr[i] > 47 && nptr[i] < 58)
+	{
+		ans *= 10;
+		ans = ans + nptr[i] - 48;
+		i += 1;
+	}
+	return (ans * sign);
 }

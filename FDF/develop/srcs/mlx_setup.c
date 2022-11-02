@@ -72,7 +72,6 @@ int handle_keypress(int keysym, t_data *data)
             data->height --;
         draw_maps(data);
     }
-    // else if (keysym == XK_Right)
     return (0);
 }
 

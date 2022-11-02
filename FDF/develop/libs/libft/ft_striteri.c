@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenasse <cmenasse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 19:26:52 by cmenasse          #+#    #+#             */
-/*   Updated: 2021/02/22 19:07:59 by cmenasse         ###   ########.fr       */
+/*   Created: 2022/05/07 23:48:01 by ykuo              #+#    #+#             */
+/*   Updated: 2022/05/07 23:48:10 by ykuo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	t_list	*tmp;
+	unsigned int	i;
 
-	while (*lst)
+	i = 0;
+	while (s[i])
 	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
+		f(i, &s[i]);
+		i += 1;
 	}
 }
