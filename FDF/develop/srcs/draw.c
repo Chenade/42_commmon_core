@@ -77,8 +77,6 @@ void	projection_isometric(t_data *d)
 
 void	projection_first_angel(t_data *d)
 {
-	ft_swap(&d->height, &d->height2);
-	d->line_length = (WIDTH / d->map_w) * 0.4;
 	free_cord_map(d);
     init_map(d);
 	init_vector(d->rotation, 0, 0, 0);

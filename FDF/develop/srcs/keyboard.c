@@ -46,6 +46,25 @@ int key_trigger_move(t_data *d, int keysym)
 	return (0);
 }
 
+int key_trigger_projection(t_data *d, int keysym)
+{
+	if (keysym == XK_p)
+	{
+		d->projection *= -1;
+		ft_swap(&d->height, &d->height2);
+		if (d->projection > 0)
+		{
+			d->line_length = (WIDTH / d->map_w) * 0.7;
+			init_vector(d->rotation, 21, 16, -3);
+			init_vector(d->center, 200, 0, 0);
+		}
+		else
+			d->line_length = (WIDTH / d->map_w) * 0.4;
+		return (1);
+	}
+	return (0);
+}
+
 int handle_keypress(int keysym, t_data *d)
 {
     if (keysym == XK_Escape)
@@ -62,13 +81,8 @@ int handle_keypress(int keysym, t_data *d)
 			else if (key_trigger_move(d, keysym))
 				draw_imgs(d);
 		}
-		if (keysym == XK_p)
-		{
-			d->projection *= -1;
-			if (d->projection > 0)
-				init_var(d);
+		if (key_trigger_projection(d, keysym))
 			draw_imgs(d);
-		}
     }
     return (0);
 }

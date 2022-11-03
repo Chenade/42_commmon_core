@@ -2,7 +2,6 @@
 
 int ft_matrix_rotate_x(t_data *d)
 {
-    ft_printf("rotate: (%d, %d, %d)\n", d->rotation->x, d->rotation->y, d->rotation->z);
 	int	x;
 	int	y;
 
