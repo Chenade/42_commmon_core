@@ -45,7 +45,7 @@ int draw_gui(t_data *d)
     return (0);
 }
 
-void	projection_isometric(t_data *d)
+void	draw_maps(t_data *d)
 {
 	int	x;
 	int	y;
@@ -68,24 +68,14 @@ void	projection_isometric(t_data *d)
     }
 }
 
+void	projection_isometric(t_data *d)
+{
+    init_vector(d->rotation, 21, 16, -3);
+	draw_maps(d);
+}
+
 void	projection_first_angel(t_data *d)
 {
-	int	x;
-	int	y;
-
-    ft_matrix_to_vector(d);
-    ft_matrix_center(d);
-	y = -1;
-    while (++y < d->map_h)
-    {
-        x = -1;
-        while (++x < d->map_w)
-        {
-            t_vector cur = *(d->map_2d[xy_to_x(d, x, y)]);
-            if (x + 1 != d->map_w)
-                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x + 1, y)]), xy_to_x(d, x + 1, y));
-            if (y + 1 != d->map_h)
-                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x, y + 1)]), xy_to_x(d, x, y + 1));
-        }
-    }
+	init_vector(d->rotation, 0, 0, 0);
+	draw_maps(d);
 }
