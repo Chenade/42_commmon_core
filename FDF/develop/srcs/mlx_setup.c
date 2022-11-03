@@ -21,6 +21,18 @@ int init_mlx(t_data *d, char *name)
     return (0);
 }
 
+void draw_imgs(t_data *d)
+{
+    ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
+    free_cord_map(d);
+    init_map(d);
+	if (d->projection > 0)
+		projection_isometric(d);
+	else
+		projection_first_angel(d);
+    draw_gui(d);
+}
+
 int render_frame(t_data *d)
 {
     if (d->win_ptr == NULL)

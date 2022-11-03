@@ -5,8 +5,6 @@ int ft_matrix_rotate_x(t_data *d)
 	int	x;
 	int	y;
 
-    free_cord_map(d);
-    init_map(d);
 	y = -1;
     while (++y < d->map_h)
     {

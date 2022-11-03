@@ -1,11 +1,21 @@
 #include "fdf.h"
 
-static void	ft_lines_draw(t_data *d, t_vector f, t_vector s)//, t_color c)
+int ft_linear(t_data *d, t_vector delta, int pos)
+{
+	(void) d;
+	(void) delta;
+	(void) pos;
+	if (ft_atoi(d->map[pos]) == 0)
+    	return (COLOR_WHITE);
+    return (COLOR_RED);
+}
+
+void	ft_lines_draw(t_data *d, t_vector f, t_vector s, int pos)
 {
 	t_vector	delta;
 	t_vector	sign;
 	t_vector	cur;
-	int		error[2];
+	int			error[2];
 
 	delta.x = ft_abs(s.x - f.x);
 	delta.y = ft_abs(s.y - f.y);
@@ -15,7 +25,7 @@ static void	ft_lines_draw(t_data *d, t_vector f, t_vector s)//, t_color c)
 	cur = f;
 	while (cur.x != s.x || cur.y != s.y)
 	{
-		img_pix_put(d, cur.x, cur.y, COLOR_RED);
+		img_pix_put(d, cur.x, cur.y, ft_linear(d, delta, pos));
 		if ((error[1] = error[0] * 2) > -delta.y)
 		{
 			error[0] -= delta.y;
@@ -35,19 +45,12 @@ int draw_gui(t_data *d)
     return (0);
 }
 
-int draw_second_projecion(t_data *d)
-{
-    (void) d;
-    return (0);
-}
-
-void draw_maps(t_data *d)
+void	projection_isometric(t_data *d)
 {
 	int	x;
 	int	y;
 
-    ft_bzero(d->img.addr, d->img.line_len * HEIGHT);
-    ft_matrix_rotate_x(d);
+	ft_matrix_rotate_x(d);
     ft_matrix_to_vector(d);
     ft_matrix_center(d);
 	y = -1;
@@ -58,31 +61,31 @@ void draw_maps(t_data *d)
         {
             t_vector cur = *(d->map_2d[xy_to_x(d, x, y)]);
             if (x + 1 != d->map_w)
-                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x + 1, y)]));
+                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x + 1, y)]), xy_to_x(d, x + 1, y));
             if (y + 1 != d->map_h)
-                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x, y + 1)]));
+                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x, y + 1)]), xy_to_x(d, x, y + 1));
         }
     }
 }
 
-int ft_matrix_to_vector(t_data *d)
+void	projection_first_angel(t_data *d)
 {
-    int			x;
-    int			y;
-    t_vector	*_2d;
-    t_vector	*_3d;
-    
+	int	x;
+	int	y;
+
+    ft_matrix_to_vector(d);
+    ft_matrix_center(d);
 	y = -1;
     while (++y < d->map_h)
     {
         x = -1;
         while (++x < d->map_w)
         {
-            _2d = d->map_2d[xy_to_x(d, x, y)];
-            _3d = d->map_3d[xy_to_x(d, x, y)];
-            _2d->x = (_3d->x * d->u->x + _3d->y * d->u->y +_3d->z * d->u->z);
-            _2d->y = (_3d->x * d->v->x + _3d->y * d->v->y +_3d->z * d->v->z);
+            t_vector cur = *(d->map_2d[xy_to_x(d, x, y)]);
+            if (x + 1 != d->map_w)
+                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x + 1, y)]), xy_to_x(d, x + 1, y));
+            if (y + 1 != d->map_h)
+                ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x, y + 1)]), xy_to_x(d, x, y + 1));
         }
     }
-    return (0);
 }

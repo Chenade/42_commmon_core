@@ -72,6 +72,7 @@ typedef struct s_data
 	int height;
 	t_vector  *center;
 	t_vector  *rotation;
+	int projection;
 } t_data;
 
 // main.c
@@ -85,6 +86,7 @@ int			init_var(t_data *d);
 //mlx_setup.c
 int			init_mlx(t_data *d, char *name);
 int			render_frame(t_data *d);
+void		draw_imgs(t_data *d);
 int			handle_exit(t_data *data);
 int			handle_keypress(int keysym, t_data *data);
 
@@ -95,10 +97,10 @@ int			init_map(t_data *d);
 int			init_var(t_data *d);
 
 // draw.c
+void		ft_lines_draw(t_data *d, t_vector f, t_vector s, int pos);
 int			draw_gui(t_data *d);
-int			draw_second_projecion(t_data *d);
-void		draw_maps(t_data *d);
-int			ft_matrix_to_vector(t_data *d);
+void		projection_isometric(t_data *d);
+void		projection_first_angel(t_data *d);
 
 // matrix.c
 int			ft_matrix_rotate_x(t_data *d);
@@ -112,6 +114,7 @@ void		free_cord_map(t_data *d);
 void		free_data(t_data *d);
 void		print_err(const char *err_msg, t_data *d);
 int			check_filename(const char *name, const char *ext);
+int			ft_matrix_to_vector(t_data *d);
 
 //helper.c
 long int	findSize(char file_name[]);

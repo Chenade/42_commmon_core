@@ -20,7 +20,7 @@ int init_map3d(t_data *d)
         {
             d->map_3d[xy_to_x(d, x, y)]->x = x * d->line_length;
             d->map_3d[xy_to_x(d, x, y)]->y = y * d->line_length;
-            d->map_3d[xy_to_x(d, x, y)]->z = ft_atoi(d->map[xy_to_x(d, x, y)]) * d->height;
+            d->map_3d[xy_to_x(d, x, y)]->z = ft_atoi(d->map[xy_to_x(d, x, y)]) * -d->height;
         }
     }
     return (0);
@@ -60,7 +60,7 @@ int init_var(t_data *d)
     d->v = (t_vector *) ft_malloc(d, sizeof(t_vector));
     init_vector(d->v, 0, 0, 1);
     d->rotation = (t_vector *) ft_malloc(d, sizeof(t_vector));
-    init_vector(d->rotation, 13, 16, 3);
+    init_vector(d->rotation, 21, 16, -3);
     d->center = (t_vector *) ft_malloc(d, sizeof(t_vector));
     init_vector(d->center, 0, 0, 0);
     d->line_length = (WIDTH / d->map_w) * 0.7;
@@ -69,5 +69,6 @@ int init_var(t_data *d)
     while (d->map[++i])
         max = ft_max(max, ft_abs(ft_atoi(d->map[i])));
     d->height = (HEIGHT / 3) / max;
+    d->projection = 1;
     return (0);
 }

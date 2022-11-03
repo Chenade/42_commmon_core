@@ -56,9 +56,14 @@ int handle_keypress(int keysym, t_data *d)
     else
     {
 		if (key_trigger(d, keysym))
-        	draw_maps(d);
+        	draw_imgs(d);
 		else if (key_trigger_move(d, keysym))
-        	draw_maps(d);
+        	draw_imgs(d);
+		else if (keysym == XK_p)
+		{
+			d->projection *= -1;
+			draw_imgs(d);
+		}
     }
     return (0);
 }
