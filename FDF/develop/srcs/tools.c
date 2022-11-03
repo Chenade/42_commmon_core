@@ -24,3 +24,11 @@ int xy_to_x(t_data *d, int x, int y)
 {
     return (y * d->map_w + x);
 }
+
+int init_vector(t_vector *v, int x, int y, int z)
+{
+    v->x = x;
+    v->y = y;
+    v->z = z;
+    return (0);
+}

@@ -55,3 +55,16 @@ int print_map(t_data *d, t_vector **map)
     ft_printf("\n");
     return (0);
 }
+
+void		*ft_malloc(t_data *d, size_t size)
+{
+	void	*ptr;
+
+	if (!(ptr = (void*)malloc(size)))
+    {
+        print_err("Error: Memory allocate failed", d);
+		return (NULL);
+    }
+	ft_bzero(ptr, size);
+	return (ptr);
+}

@@ -8,11 +8,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include "mlx.h"
 #include <string.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <math.h>
+#include "mlx.h"
 #include "libft.h"
 
 #define NB_PATTERN 2
@@ -75,10 +75,9 @@ typedef struct s_data
 } t_data;
 
 // main.c
-int		fdf(char *filename);
+int			fdf(char *filename);
 
 // init.c
-int			init_vector(t_vector *v);
 int			init_map(t_data *d);
 int			init_setup(t_data *d);
 int			init_var(t_data *d);
@@ -86,8 +85,8 @@ int			init_var(t_data *d);
 //mlx_setup.c
 int			init_mlx(t_data *d, char *name);
 int			render_frame(t_data *d);
-int			handle_keypress(int keysym, t_data *data);
 int			handle_exit(t_data *data);
+int			handle_keypress(int keysym, t_data *data);
 
 // parse.c
 int			map_width(t_data *d, char **line);
@@ -119,11 +118,12 @@ long int	findSize(char file_name[]);
 void		print_img_data(t_img *i);
 int			print_info(char *name);
 int			print_map(t_data *d, t_vector **map);
+void		*ft_malloc(t_data *d, size_t size);
 
 // tools.c
 void		img_pix_put(t_data *d, int x, int y, int color);
 int			getpixelcolor(t_img *img, int x, int y);
 int			encode_rgb(t_color c);
 int			xy_to_x(t_data *d, int x, int y);
-
+int			init_vector(t_vector *v, int x, int y, int z);
 #endif

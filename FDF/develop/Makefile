@@ -25,9 +25,10 @@ BLUE		= "\033[94m"
 X			= "\033[0m"
 UP			= "\033[A"
 CUT			= "\033[K"
+
 ###############################################################################
 #                                                                             #
-#                                  Variable                                   #
+#                               Libs Config                                   #
 #                                                                             #
 ###############################################################################
 
@@ -43,6 +44,12 @@ LIBFT_DIR	=	$(LIBS_DIR)/libft
 
 MLX_DIR		=	$(LIBS_DIR)/minilibx-linux
 
+###############################################################################
+#                                                                             #
+#                                  Variable                                   #
+#                                                                             #
+###############################################################################
+
 SRCS_DIR	=	srcs
 
 INCS_DIR	=	incs
@@ -57,6 +64,7 @@ SRCS		=	$(SRCS_GEN)
 SRCS		+=	main.c			\
 				init.c			\
 				parse.c			\
+				keyboard.c		\
 				mlx_setup.c		\
 				matrix.c		\
 				draw.c
@@ -83,7 +91,6 @@ $(LIBMLX):
 				mv $(MLX_DIR)/$(LIBMLX_2) .
 				make clean -C ${MLX_DIR}
 				@echo ${GREEN}"Libmlx Compile Successfully\n"${X}
-
 
 $(NAME):		$(LIBFT) $(LIBMLX) $(OBJS)
 				${CC} ${OBJS} ${CFLAGS} ${LFLAGS} $(LIBFT) -o $@
