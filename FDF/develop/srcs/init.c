@@ -69,6 +69,7 @@ int init_var(t_data *d)
     while (d->map[++i])
         max = ft_max(max, ft_abs(ft_atoi(d->map[i])));
     d->height = (HEIGHT / 3) / max;
+    d->height2 = d->height / 2;
     d->projection = 1;
     return (0);
 }

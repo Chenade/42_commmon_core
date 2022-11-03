@@ -70,6 +70,7 @@ typedef struct s_data
 	t_vector **map_2d;
 	int line_length;
 	int height;
+	int height2;
 	t_vector  *center;
 	t_vector  *rotation;
 	int projection;

@@ -55,13 +55,18 @@ int handle_keypress(int keysym, t_data *d)
     }
     else
     {
-		if (key_trigger(d, keysym))
-        	draw_imgs(d);
-		else if (key_trigger_move(d, keysym))
-        	draw_imgs(d);
-		else if (keysym == XK_p)
+		if (d->projection > 0)
+		{
+			if (key_trigger(d, keysym))
+				draw_imgs(d);
+			else if (key_trigger_move(d, keysym))
+				draw_imgs(d);
+		}
+		if (keysym == XK_p)
 		{
 			d->projection *= -1;
+			if (d->projection > 0)
+				init_var(d);
 			draw_imgs(d);
 		}
     }
