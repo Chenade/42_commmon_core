@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// specific change for fdf on line 36.
+// original : ret[i++] = s2[j];
+
 #include "libft.h"
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -31,7 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j] && s2[j] != '\n')
 		ret[i++] = s2[j++];
 	if (s2[j] == '\n')
-		ret[i++] = s2[j];
+		ret[i++] = 32;
 	ret[i] = 0;
 	free(s1);
 	return (ret);

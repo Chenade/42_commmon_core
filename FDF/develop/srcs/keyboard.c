@@ -53,9 +53,9 @@ int	key_trigger_projection(t_data *d, int keysym)
 		ft_swap(&d->height, &d->height2);
 		if (d->projection > 0)
 		{
-			d->line_length = (WIDTH / d->map_w) * 0.6;
+			d->line_length = (WIDTH / d->map_w) * 0.5;
 			init_vector(d->rotation, 21, 16, -3);
-			init_vector(d->center, 200, 0, 0);
+			init_vector(d->center, 150, 0, 0);
 		}
 		else
 			d->line_length = (WIDTH / d->map_w) * 0.4;

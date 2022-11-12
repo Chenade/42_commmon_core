@@ -16,9 +16,9 @@ int	map_width(t_data *d, char **line)
 	return (0);
 }
 
+// ft_printf("read line %d successfully\n", d->map_h);
 int	process_file(t_data *d, int fd)
 {
-	int		x;
 	char	*l;
 
 	while (42)
@@ -26,10 +26,6 @@ int	process_file(t_data *d, int fd)
 		l = get_next_line (fd);
 		if (!l)
 			break ;
-		x = -1;
-		while (l[++x])
-			if (l[x] == 10)
-				l[x] = 32;
 		if (map_width(d, &l))
 		{
 			free (l);

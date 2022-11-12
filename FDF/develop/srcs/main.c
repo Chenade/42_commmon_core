@@ -6,6 +6,7 @@ int	fdf(char *filename)
 
 	ft_bzero(&d, sizeof(d));
 	init_mlx(&d, filename);
+	ft_printf("mlx init successfully\n");
 	if (read_file(&d, filename))
 		return (1);
 	ft_printf("map height: %d, map width: %d\n", d.map_h, d.map_w);

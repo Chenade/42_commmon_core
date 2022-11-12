@@ -65,10 +65,10 @@ int	init_var(t_data *d)
 	d->rotation = (t_vector *) ft_malloc(d, sizeof(t_vector));
 	init_vector(d->rotation, 21, 16, -3);
 	d->center = (t_vector *) ft_malloc(d, sizeof(t_vector));
-	init_vector(d->center, 200, 0, 0);
-	d->line_length = (WIDTH / d->map_w) * 0.6;
+	init_vector(d->center, 150, 0, 0);
+	d->line_length = (WIDTH / d->map_w) * 0.5;
 	i = -1;
-	max = 0;
+	max = 1;
 	while (d->map[++i])
 		max = ft_max(max, ft_abs(ft_atoi(d->map[i])));
 	d->height = (HEIGHT / 3) / max;
