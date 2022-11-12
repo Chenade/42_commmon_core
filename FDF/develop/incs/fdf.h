@@ -4,11 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
-#include <string.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <math.h>
@@ -24,6 +20,7 @@
 #define COLOR_BLACK 0x0000000
 #define COLOR_RED 0x00FF0000
 #define COLOR_WHITE 0x00FFFFFF
+#define COLOR_TEXT 0xEAEAEA
 
 typedef struct s_color
 {

@@ -8,7 +8,7 @@ long int	find_size(char file_name[])
 	fp = fopen(file_name, "r");
 	if (fp == NULL)
 	{
-		printf("File Not Found!\n");
+		ft_printf("File Not Found!\n");
 		return (-1);
 	}
 	fseek(fp, 0L, SEEK_END);

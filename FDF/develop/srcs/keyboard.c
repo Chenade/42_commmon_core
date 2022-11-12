@@ -1,27 +1,26 @@
 #include "fdf.h"
-#include "keyboard.h"
 
 int	key_trigger(t_data *d, int keysym)
 {
-	if (keysym == NUM_PAD_7)
+	if (keysym == XK_q)
 		d->rotation->x ++;
-	else if (keysym == NUM_PAD_4)
+	else if (keysym == XK_a)
 		d->rotation->x --;
-	else if (keysym == NUM_PAD_8)
+	else if (keysym == XK_w)
 		d->rotation->y ++;
-	else if (keysym == NUM_PAD_5)
+	else if (keysym == XK_s)
 		d->rotation->y --;
-	else if (keysym == NUM_PAD_9)
+	else if (keysym == XK_e)
 		d->rotation->z ++;
-	else if (keysym == NUM_PAD_6)
+	else if (keysym == XK_d)
 		d->rotation->z --;
-	else if (keysym == NUM_PAD_2)
+	else if (keysym == XK_r)
 		d->height ++;
-	else if (keysym == NUM_PAD_0)
+	else if (keysym == XK_f)
 		d->height --;
-	if (keysym == NUM_PAD_7 || keysym == NUM_PAD_4 || keysym == NUM_PAD_8
-		|| keysym == NUM_PAD_5 || keysym == NUM_PAD_9 || keysym == NUM_PAD_6
-		|| keysym == NUM_PAD_2 || keysym == NUM_PAD_0)
+	if (keysym == XK_q || keysym == XK_a || keysym == XK_w
+		|| keysym == XK_s || keysym == XK_e || keysym == XK_d
+		|| keysym == XK_r || keysym == XK_f)
 		return (1);
 	return (0);
 }
@@ -36,12 +35,12 @@ int	key_trigger_move(t_data *d, int keysym)
 		d->center->y += 10;
 	else if (keysym == XK_Down)
 		d->center->y -= 10;
-	else if (keysym == NUM_PAD_1)
+	else if (keysym == XK_j)
 		d->line_length --;
-	else if (keysym == NUM_PAD_3)
+	else if (keysym == XK_k)
 		d->line_length ++;
 	if (keysym == XK_Right || keysym == XK_Left || keysym == XK_Up
-		|| keysym == XK_Down || keysym == NUM_PAD_1 || keysym == NUM_PAD_3)
+		|| keysym == XK_Down || keysym == XK_j || keysym == XK_k)
 		return (1);
 	return (0);
 }
@@ -54,7 +53,7 @@ int	key_trigger_projection(t_data *d, int keysym)
 		ft_swap(&d->height, &d->height2);
 		if (d->projection > 0)
 		{
-			d->line_length = (WIDTH / d->map_w) * 0.7;
+			d->line_length = (WIDTH / d->map_w) * 0.6;
 			init_vector(d->rotation, 21, 16, -3);
 			init_vector(d->center, 200, 0, 0);
 		}

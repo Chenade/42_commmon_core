@@ -27,7 +27,6 @@ void	draw_imgs(t_data *d)
 		projection_isometric(d);
 	else
 		projection_first_angel(d);
-	draw_gui(d);
 }
 
 int	render_frame(t_data *d)
@@ -35,6 +34,7 @@ int	render_frame(t_data *d)
 	if (d->win_ptr == NULL)
 		return (1);
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img.mlx_img, 0, 0);
+	draw_gui(d);
 	return (0);
 }
 

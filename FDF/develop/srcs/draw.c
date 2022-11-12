@@ -56,7 +56,24 @@ void	ft_lines_draw(t_data *d, t_vector f, t_vector s, int pos)
 
 int	draw_gui(t_data *d)
 {
-	(void) d;
+	int		y;
+	void	*mlx;
+	void	*win;
+
+	y = 200;
+	mlx = d->mlx_ptr;
+	win = d->win_ptr;
+	mlx_string_put(mlx, win, 65, y += 20, COLOR_TEXT, "How to Use");
+	mlx_string_put(mlx, win, 15, y += 35, COLOR_TEXT, "Zoom: | J | / | K |");
+	mlx_string_put(mlx, win, 15, y += 30, COLOR_TEXT, "Move: Arrows");
+	mlx_string_put(mlx, win, 15, y += 30, COLOR_TEXT, "Height: | R | / | F |");
+	mlx_string_put(mlx, win, 15, y += 30, COLOR_TEXT, "Rotate: Press & Move");
+	mlx_string_put(mlx, win, 15, y += 30, COLOR_TEXT, "Rotate:");
+	mlx_string_put(mlx, win, 57, y += 25, COLOR_TEXT, "X-Axis - | Q | / | A |");
+	mlx_string_put(mlx, win, 57, y += 25, COLOR_TEXT, "Y-Axis - | W | / | S |");
+	mlx_string_put(mlx, win, 57, y += 25, COLOR_TEXT, "Z-Axis - | E | / | D |");
+	mlx_string_put(mlx, win, 15, y += 30, COLOR_TEXT, "Projection Change");
+	mlx_string_put(mlx, win, 57, y += 25, COLOR_TEXT, "P Key");
 	return (0);
 }
 
