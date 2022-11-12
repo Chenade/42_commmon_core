@@ -64,7 +64,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 int		ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
-void    ft_swap(int *a, int *b);
+void	ft_swap(int *a, int *b);
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);

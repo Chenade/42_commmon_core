@@ -1,6 +1,6 @@
-int ft_min(int a, int b)
+int	ft_min(int a, int b)
 {
-    if (a > b)
-        return (b);
-    return (a);
+	if (a > b)
+		return (b);
+	return (a);
 }
