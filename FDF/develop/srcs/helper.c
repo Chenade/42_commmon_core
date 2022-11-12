@@ -1,70 +1,68 @@
 #include "fdf.h"
 
-long int findSize(char file_name[])
+long int	find_size(char file_name[])
 {
-    // opening the file in read mode
-    FILE *fp = fopen(file_name, "r");
+	FILE		*fp;
+	long int	res;
 
-    // checking if the file exist or not
-    if (fp == NULL)
-    {
-        printf("File Not Found!\n");
-        return -1;
-    }
-    fseek(fp, 0L, SEEK_END);
-    // calculating the size of the file
-    long int res = ftell(fp);
-
-    // closing the file
-    fclose(fp);
-
-    return res;
+	fp = fopen(file_name, "r");
+	if (fp == NULL)
+	{
+		printf("File Not Found!\n");
+		return (-1);
+	}
+	fseek(fp, 0L, SEEK_END);
+	res = ftell(fp);
+	fclose(fp);
+	return (res);
 }
 
-void print_img_data(t_img *i)
+void	print_img_data(t_img *i)
 {
-    printf("bit per pixel %d\n", i->bpp);
-    printf("endian %d\n", i->endian);
-    printf("line_len %d\n", i->line_len);
+	ft_printf("bit per pixel %d\n", i->bpp);
+	ft_printf("endian %d\n", i->endian);
+	ft_printf("line_len %d\n", i->line_len);
 }
 
-int print_info(char *name)
+int	print_info(char *name)
 {
-    long size = findSize(name);
+	long	size;
 
-    printf("size of file %ld bytes\n", size);
-
-    return size;
+	size = find_size(name);
+	ft_printf("size of file %ld bytes\n", size);
+	return (size);
 }
 
-int print_map(t_data *d, t_vector **map)
+int	print_map(t_data *d, t_vector **map)
 {
-    int x;
-    int y;
+	int	x;
+	int	y;
 
-    y = -1;
-    while (++y < d->map_h)
-    {
-        x = -1;
-        while (++x < d->map_w)
-        {
-            ft_printf("(%d, %d, %d)  ", map[xy_to_x(d, x, y)]->x, map[xy_to_x(d, x, y)]->y, map[xy_to_x(d, x, y)]->z);
-        }
-        ft_printf("\n");
-    }
-    ft_printf("\n");
-    return (0);
+	y = -1;
+	while (++y < d->map_h)
+	{
+		x = -1;
+		while (++x < d->map_w)
+		{
+			ft_printf("(%d, %d, %d)  ", map[xy_to_x(d, x, y)]->x,
+				map[xy_to_x(d, x, y)]->y, map[xy_to_x(d, x, y)]->z);
+		}
+		ft_printf("\n");
+	}
+	ft_printf("\n");
+	return (0);
 }
 
-void		*ft_malloc(t_data *d, size_t size)
+void	*ft_malloc(t_data *d, size_t size)
 {
 	void	*ptr;
 
-	if (!(ptr = (void*)malloc(size)))
-    {
-        print_err("Error: Memory allocate failed", d);
+	ptr = (void *) malloc (size);
+	if (!(ptr))
+	{
+		print_err("Error: Memory allocate failed", d);
 		return (NULL);
-    }
+	}
 	ft_bzero(ptr, size);
 	return (ptr);
 }

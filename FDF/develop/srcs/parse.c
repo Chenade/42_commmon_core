@@ -1,57 +1,57 @@
 #include "fdf.h"
 
-int map_width(t_data *d, char **line)
+int	map_width(t_data *d, char **line)
 {
-    int     i;
-    char    **res;
+	int		i;
+	char	**res;
 
-    res = ft_split(*line, 32);
-    i = -1;
-    while (res[++i])
-        free(res[i]);
-    free (res);
-    if (d->map_h != 0 && d->map_w != i)
-        return (1);
-    d->map_w = i;
-    return (0);
+	res = ft_split(*line, 32);
+	i = -1;
+	while (res[++i])
+		free(res[i]);
+	free (res);
+	if (d->map_h != 0 && d->map_w != i)
+		return (1);
+	d->map_w = i;
+	return (0);
 }
 
-int process_file(t_data *d, int fd)
+int	process_file(t_data *d, int fd)
 {
-    int x;
-    char    *l;
+	int		x;
+	char	*l;
 
-    while (42)
-    {
-        l = get_next_line (fd);
-        if (!l)
-            break ;
-        x = -1;
-        while(l[++x])
-            if (l[x] == 10)
-                l[x] = 32;
-        if (map_width(d, &l))
-        {
-            free (l);
-            print_err("Error: Invalid Map.", d);
-        }
-        d->buf = ft_strjoin(d->buf, l);
-        d->map_h += 1;
-        free (l);
-    }
-    return (0);
+	while (42)
+	{
+		l = get_next_line (fd);
+		if (!l)
+			break ;
+		x = -1;
+		while (l[++x])
+			if (l[x] == 10)
+				l[x] = 32;
+		if (map_width(d, &l))
+		{
+			free (l);
+			print_err("Error: Invalid Map.", d);
+		}
+		d->buf = ft_strjoin(d->buf, l);
+		d->map_h += 1;
+		free (l);
+	}
+	return (0);
 }
 
-int read_file(t_data *d, char *name)
+int	read_file(t_data *d, char *name)
 {
-    int fd;
+	int	fd;
 
-    fd = open(name, O_RDONLY);
-    process_file (d, fd);
-    close(fd);
-    if (d->map_h == 0)
-        print_err("Error: Empty Map.", d);
-    d->map = ft_split(d->buf, 32);
-    init_var(d);
-    return (0);
+	fd = open(name, O_RDONLY);
+	process_file (d, fd);
+	close(fd);
+	if (d->map_h == 0)
+		print_err("Error: Empty Map.", d);
+	d->map = ft_split(d->buf, 32);
+	init_var(d);
+	return (0);
 }

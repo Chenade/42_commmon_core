@@ -1,7 +1,7 @@
 #include "fdf.h"
 #include "keyboard.h"
 
-int key_trigger(t_data *d, int keysym)
+int	key_trigger(t_data *d, int keysym)
 {
 	if (keysym == NUM_PAD_7)
 		d->rotation->x ++;
@@ -19,14 +19,14 @@ int key_trigger(t_data *d, int keysym)
 		d->height ++;
 	else if (keysym == NUM_PAD_0)
 		d->height --;
-	if (keysym == NUM_PAD_7 || keysym == NUM_PAD_4 || keysym == NUM_PAD_8 ||
-		keysym == NUM_PAD_5 || keysym == NUM_PAD_9 || keysym == NUM_PAD_6 ||
-		keysym == NUM_PAD_2 || keysym == NUM_PAD_0)
+	if (keysym == NUM_PAD_7 || keysym == NUM_PAD_4 || keysym == NUM_PAD_8
+		|| keysym == NUM_PAD_5 || keysym == NUM_PAD_9 || keysym == NUM_PAD_6
+		|| keysym == NUM_PAD_2 || keysym == NUM_PAD_0)
 		return (1);
 	return (0);
 }
 
-int key_trigger_move(t_data *d, int keysym)
+int	key_trigger_move(t_data *d, int keysym)
 {
 	if (keysym == XK_Right)
 		d->center->x += 10;
@@ -40,13 +40,13 @@ int key_trigger_move(t_data *d, int keysym)
 		d->line_length --;
 	else if (keysym == NUM_PAD_3)
 		d->line_length ++;
-	if (keysym == XK_Right || keysym == XK_Left || keysym == XK_Up ||
-		keysym == XK_Down || keysym == NUM_PAD_1 || keysym == NUM_PAD_3)
+	if (keysym == XK_Right || keysym == XK_Left || keysym == XK_Up
+		|| keysym == XK_Down || keysym == NUM_PAD_1 || keysym == NUM_PAD_3)
 		return (1);
 	return (0);
 }
 
-int key_trigger_projection(t_data *d, int keysym)
+int	key_trigger_projection(t_data *d, int keysym)
 {
 	if (keysym == XK_p)
 	{
@@ -65,15 +65,15 @@ int key_trigger_projection(t_data *d, int keysym)
 	return (0);
 }
 
-int handle_keypress(int keysym, t_data *d)
+int	handle_keypress(int keysym, t_data *d)
 {
-    if (keysym == XK_Escape)
-    {
-        mlx_destroy_window(d->mlx_ptr, d->win_ptr);
-        d->win_ptr = NULL;
-    }
-    else
-    {
+	if (keysym == XK_Escape)
+	{
+		mlx_destroy_window(d->mlx_ptr, d->win_ptr);
+		d->win_ptr = NULL;
+	}
+	else
+	{
 		if (d->projection > 0)
 		{
 			if (key_trigger(d, keysym))
@@ -83,6 +83,6 @@ int handle_keypress(int keysym, t_data *d)
 		}
 		if (key_trigger_projection(d, keysym))
 			draw_imgs(d);
-    }
-    return (0);
+	}
+	return (0);
 }

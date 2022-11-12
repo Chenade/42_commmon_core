@@ -63,6 +63,7 @@ SRCS_GEN	=	general.c		\
 SRCS		=	$(SRCS_GEN)
 SRCS		+=	main.c			\
 				init.c			\
+				projection.c	\
 				parse.c			\
 				keyboard.c		\
 				mlx_setup.c		\

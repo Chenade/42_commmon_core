@@ -100,6 +100,7 @@ int			init_var(t_data *d);
 // draw.c
 void		ft_lines_draw(t_data *d, t_vector f, t_vector s, int pos);
 int			draw_gui(t_data *d);
+void		draw_maps(t_data *d);
 void		projection_isometric(t_data *d);
 void		projection_first_angel(t_data *d);
 
