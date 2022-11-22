@@ -12,87 +12,52 @@
 
 #include "fdf.h"
 
-int	ft_matrix_rotate_x(t_data *d)
+int	ft_matrix_rotate(t_data *d, int i)
 {
-	int			x;
-	int			y;
 	t_vector	tmp;
 
-	if (d->rotation->x != 0)
-	{
-		y = -1;
-		while (++y < d->map_h)
-		{
-			x = -1;
-			while (++x < d->map_w)
-			{
-				tmp.x = d->map_3d[xy_to_x(d, x, y)]->x;
-				tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
-				tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
-				d->map_3d[xy_to_x(d, x, y)]->x = d->map_3d[xy_to_x(d, x, y)]->x;
-				d->map_3d[xy_to_x(d, x, y)]->y
-					= tmp.y * cos(d->rotation->x) + tmp.z * sin(d->rotation->x);
-				d->map_3d[xy_to_x(d, x, y)]->z = tmp.y
-					* sin(d->rotation->x) * -1 + tmp.z * cos(d->rotation->x);
-			}
-		}
-	}
-	ft_matrix_rotate_y(d);
+	init_vector(&tmp, d->map_3d[i]->x, d->map_3d[i]->y, d->map_3d[i]->z);
+	d->map_3d[i]->x = d->map_3d[i]->x;
+	d->map_3d[i]->y = tmp.y * cos(d->rot->x) + tmp.z * sin(d->rot->x);
+	d->map_3d[i]->z = tmp.y * sin(d->rot->x) * -1 + tmp.z * cos(d->rot->x);
+	init_vector(&tmp, d->map_3d[i]->x, d->map_3d[i]->y, d->map_3d[i]->z);
+	d->map_3d[i]->x = tmp.x * cos(d->rot->y) + tmp.z * sin(d->rot->y);
+	d->map_3d[i]->y = tmp.y;
+	d->map_3d[i]->z = tmp.x * sin(d->rot->y) * -1 + tmp.z * cos(d->rot->y);
+	init_vector(&tmp, d->map_3d[i]->x, d->map_3d[i]->y, d->map_3d[i]->z);
+	d->map_3d[i]->x = tmp.x * cos(d->rot->z) - tmp.y * sin(d->rot->z);
+	d->map_3d[i]->y = tmp.x * cos(d->rot->z) + tmp.y * sin(d->rot->z);
+	d->map_3d[i]->z = tmp.z;
 	return (0);
 }
 
-int	ft_matrix_rotate_y(t_data *d)
+int	ft_matrix_to_vector(t_data *d, int i)
 {
-	int			x;
-	int			y;
-	t_vector	tmp;
+	t_vector	*_2d;
+	t_vector	*_3d;
 
-	if (d->rotation->y != 0)
-	{
-		y = -1;
-		while (++y < d->map_h)
-		{
-			x = -1;
-			while (++x < d->map_w)
-			{
-				tmp.x = d->map_3d[xy_to_x(d, x, y)]->x;
-				tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
-				tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
-				d->map_3d[xy_to_x(d, x, y)]->x
-					= tmp.x * cos(d->rotation->y) + tmp.z * sin(d->rotation->y);
-				d->map_3d[xy_to_x(d, x, y)]->y = tmp.y;
-				d->map_3d[xy_to_x(d, x, y)]->z = tmp.x
-					* sin(d->rotation->y) * -1 + tmp.z * cos(d->rotation->y);
-			}
-		}
-	}
-	ft_matrix_rotate_z(d);
+	_2d = d->map_2d[i];
+	_3d = d->map_3d[i];
+	_2d->x = (_3d->x * d->u->x + _3d->y * d->u->y + _3d->z * d->u->z);
+	_2d->y = (_3d->x * d->v->x + _3d->y * d->v->y + _3d->z * d->v->z);
 	return (0);
 }
 
-int	ft_matrix_rotate_z(t_data *d)
+int	ft_matrix_iter(t_data *d)
 {
 	int			x;
 	int			y;
-	t_vector	tmp;
+	int			i;
 
-	if (d->rotation->z != 0)
+	y = -1;
+	while (++y < d->map_h)
 	{
-		y = -1;
-		while (++y < d->map_h)
+		x = -1;
+		while (++x < d->map_w)
 		{
-			x = -1;
-			while (++x < d->map_w)
-			{
-				tmp.x = d->map_3d[xy_to_x(d, x, y)]->x;
-				tmp.y = d->map_3d[xy_to_x(d, x, y)]->y;
-				tmp.z = d->map_3d[xy_to_x(d, x, y)]->z;
-				d->map_3d[xy_to_x(d, x, y)]->x
-					= tmp.x * cos(d->rotation->z) - tmp.y * sin(d->rotation->z);
-				d->map_3d[xy_to_x(d, x, y)]->y = tmp.x
-					* cos(d->rotation->z) + tmp.y * sin(d->rotation->z);
-				d->map_3d[xy_to_x(d, x, y)]->z = tmp.z;
-			}
+			i = xy_to_x(d, x, y);
+			ft_matrix_rotate(d, i);
+			ft_matrix_to_vector(d, i);
 		}
 	}
 	return (0);

@@ -74,8 +74,8 @@ int	init_var(t_data *d)
 	init_vector(d->u, 1, 0, 0);
 	d->v = (t_vector *) ft_malloc(d, sizeof(t_vector));
 	init_vector(d->v, 0, 0, 1);
-	d->rotation = (t_vector *) ft_malloc(d, sizeof(t_vector));
-	init_vector(d->rotation, 21, 16, -3);
+	d->rot = (t_vector *) ft_malloc(d, sizeof(t_vector));
+	init_vector(d->rot, 21, 16, -3);
 	d->center = (t_vector *) ft_malloc(d, sizeof(t_vector));
 	init_vector(d->center, 150, 0, 0);
 	d->line_length = (WIDTH / d->map_w) * 0.5;

@@ -81,7 +81,7 @@ typedef struct s_data
 	int			height;
 	int			height2;
 	t_vector	*center;
-	t_vector	*rotation;
+	t_vector	*rot;
 	int			projection;
 }	t_data;
 
@@ -114,9 +114,9 @@ void		projection_isometric(t_data *d);
 void		projection_first_angel(t_data *d);
 
 // matrix.c
-int			ft_matrix_rotate_x(t_data *d);
-int			ft_matrix_rotate_y(t_data *d);
-int			ft_matrix_rotate_z(t_data *d);
+int			ft_matrix_rotate(t_data *d, int i);
+int			ft_matrix_to_vector(t_data *d, int i);
+int			ft_matrix_iter(t_data *d);
 int			ft_matrix_move(t_data *d, t_vector min, t_vector max);
 int			ft_matrix_center(t_data *d);
 
@@ -125,7 +125,6 @@ void		free_cord_map(t_data *d);
 void		free_data(t_data *d);
 void		print_err(const char *err_msg, t_data *d);
 int			check_filename(const char *name, const char *ext);
-int			ft_matrix_to_vector(t_data *d);
 
 //helper.c
 long int	findSize(char file_name[]);

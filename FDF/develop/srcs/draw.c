@@ -95,8 +95,7 @@ void	draw_maps(t_data *d)
 	int			y;
 	t_vector	cur;
 
-	ft_matrix_rotate_x(d);
-	ft_matrix_to_vector(d);
+	ft_matrix_iter(d);
 	ft_matrix_center(d);
 	y = -1;
 	while (++y < d->map_h)

@@ -15,17 +15,17 @@
 int	key_trigger(t_data *d, int keysym)
 {
 	if (keysym == XK_q)
-		d->rotation->x ++;
+		d->rot->x ++;
 	else if (keysym == XK_a)
-		d->rotation->x --;
+		d->rot->x --;
 	else if (keysym == XK_w)
-		d->rotation->y ++;
+		d->rot->y ++;
 	else if (keysym == XK_s)
-		d->rotation->y --;
+		d->rot->y --;
 	else if (keysym == XK_e)
-		d->rotation->z ++;
+		d->rot->z ++;
 	else if (keysym == XK_d)
-		d->rotation->z --;
+		d->rot->z --;
 	else if (keysym == XK_r)
 		d->height ++;
 	else if (keysym == XK_f)
@@ -66,7 +66,7 @@ int	key_trigger_projection(t_data *d, int keysym)
 		if (d->projection > 0)
 		{
 			d->line_length = (WIDTH / d->map_w) * 0.5;
-			init_vector(d->rotation, 21, 16, -3);
+			init_vector(d->rot, 21, 16, -3);
 			init_vector(d->center, 150, 0, 0);
 		}
 		else
