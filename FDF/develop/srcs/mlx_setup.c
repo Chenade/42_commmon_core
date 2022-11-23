@@ -12,14 +12,15 @@
 
 #include "fdf.h"
 
-int	init_mlx(t_data *d, char *name)
+int	init_mlx(t_data *d)
 {
-	d->size = print_info(name);
 	d->buf = (char *)ft_malloc(d, d->size);
 	d->w = WIDTH;
 	d->h = HEIGHT;
 	{
 		d->mlx_ptr = mlx_init();
+		if (!d->mlx_ptr)
+			print_err("Failed init window.", d);
 		d->win_ptr = mlx_new_window(d->mlx_ptr, d->w, d->h, "fdf");
 		if (!d->win_ptr)
 			print_err("Failed to launch window.", d);

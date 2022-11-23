@@ -17,7 +17,7 @@ int	fdf(char *filename)
 	t_data	d;
 
 	ft_bzero(&d, sizeof(d));
-	init_mlx(&d, filename);
+	init_mlx(&d);
 	ft_printf("mlx init successfully\n");
 	if (read_file(&d, filename))
 		return (1);

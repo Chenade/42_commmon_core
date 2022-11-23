@@ -92,7 +92,7 @@ int			init_setup(t_data *d);
 int			init_var(t_data *d);
 
 //mlx_setup.c
-int			init_mlx(t_data *d, char *name);
+int			init_mlx(t_data *d);
 int			render_frame(t_data *d);
 void		draw_imgs(t_data *d);
 int			handle_exit(t_data *data);
