@@ -40,6 +40,7 @@ int	ft_matrix_to_vector(t_data *d, int i)
 	_3d = d->map_3d[i];
 	_2d->x = (_3d->x * d->u->x + _3d->y * d->u->y + _3d->z * d->u->z);
 	_2d->y = (_3d->x * d->v->x + _3d->y * d->v->y + _3d->z * d->v->z);
+	_2d->c = (_3d->c);
 	return (0);
 }
 

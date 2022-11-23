@@ -19,7 +19,7 @@ int	ft_linear(t_data *d, t_vector delta, int pos)
 	(void) pos;
 	if (ft_atoi(d->map[pos]) == 0)
 		return (COLOR_WHITE);
-	return (COLOR_RED);
+	return (8396832);
 }
 
 t_vector	ft_draw_sign(t_vector f, t_vector s)
@@ -37,7 +37,7 @@ t_vector	ft_draw_sign(t_vector f, t_vector s)
 	return (sign);
 }
 
-void	ft_lines_draw(t_data *d, t_vector f, t_vector s, int pos)
+void	ft_lines_draw(t_data *d, t_vector f, t_vector s)
 {
 	t_vector	delta;
 	t_vector	sign;
@@ -51,7 +51,7 @@ void	ft_lines_draw(t_data *d, t_vector f, t_vector s, int pos)
 	cur = f;
 	while (cur.x != s.x || cur.y != s.y)
 	{
-		img_pix_put(d, cur.x, cur.y, ft_linear(d, delta, pos));
+		img_pix_put(d, cur.x, cur.y, cur.c);
 		error[1] = error[0] * 2;
 		if (error[1] > -delta.y)
 		{
@@ -105,11 +105,9 @@ void	draw_maps(t_data *d)
 		{
 			cur = *(d->map_2d[xy_to_x(d, x, y)]);
 			if (x + 1 != d->map_w)
-				ft_lines_draw(d, cur,
-					*(d->map_2d[xy_to_x(d, x + 1, y)]), xy_to_x(d, x + 1, y));
+				ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x + 1, y)]));
 			if (y + 1 != d->map_h)
-				ft_lines_draw(d, cur,
-					*(d->map_2d[xy_to_x(d, x, y + 1)]), xy_to_x(d, x, y + 1));
+				ft_lines_draw(d, cur, *(d->map_2d[xy_to_x(d, x, y + 1)]));
 		}
 	}
 }

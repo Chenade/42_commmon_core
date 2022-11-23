@@ -12,29 +12,64 @@
 
 #include "fdf.h"
 
+int	hextoint(char *str, char *base)
+{
+	int	count[4];
+	int	ans;
+
+	count[0] = 0;
+	ans = 0;
+	while (str[count[0]])
+	{
+		count[1] = 0;
+		while (base[count[1]])
+		{
+			if (str[count[0]] == base[count[1]])
+			{
+				ans = ans * 16 + count[1];
+				break ;
+			}
+			count[1] += 1;
+		}
+		if (base [count[1]] == '\0')
+			break ;
+		count[0] += 1;
+	}
+	return (ans);
+}
+
+int	map_setup(t_data *d, int x, int y)
+{
+	char	**tmp;
+
+	tmp = ft_split(d->map[xy_to_x(d, x, y)], ',');
+	init_vector(d->map_3d[xy_to_x(d, x, y)], x * d->line_length,
+		y * d->line_length, ft_atoi(tmp[0]) * -d->height);
+	free (tmp[0]);
+	if (tmp[1])
+	{
+		d->map_3d[xy_to_x(d, x, y)]->c = hextoint(tmp[1] + 2, BASE);
+		free (tmp[1]);
+	}
+	else
+		d->map_3d[xy_to_x(d, x, y)]->c = COLOR_WHITE;
+	free (tmp);
+	return (0);
+}
+
 int	init_map3d(t_data *d)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	d->map_3d
-		= (t_vector **) malloc((d->map_w * d->map_h) * sizeof(t_vector *));
-	if (!d->map_3d)
-		print_err("Error: Memory allocate failed", d);
-	ft_bzero(d->map_3d, sizeof(t_vector *));
-	while (++y < (d->map_h * d->map_w))
-		d->map_3d[y] = (t_vector *) ft_malloc(d, sizeof(t_vector));
-	y = -1;
 	while (++y < d->map_h)
 	{
 		x = -1;
 		while (++x < d->map_w)
 		{
-			d->map_3d[xy_to_x(d, x, y)]->x = x * d->line_length;
-			d->map_3d[xy_to_x(d, x, y)]->y = y * d->line_length;
-			d->map_3d[xy_to_x(d, x, y)]->z
-				= ft_atoi(d->map[xy_to_x(d, x, y)]) * -d->height;
+			init_vector(d->map_2d[xy_to_x(d, x, y)], 0, 0, 0);
+			map_setup(d, x, y);
 		}
 	}
 	return (0);
@@ -42,7 +77,6 @@ int	init_map3d(t_data *d)
 
 int	init_map(t_data *d)
 {
-	int	x;
 	int	y;
 
 	y = -1;
@@ -54,12 +88,13 @@ int	init_map(t_data *d)
 	while (++y < (d->map_h * d->map_w))
 		d->map_2d[y] = (t_vector *) ft_malloc(d, sizeof(t_vector));
 	y = -1;
-	while (++y < d->map_h)
-	{
-		x = -1;
-		while (++x < d->map_w)
-			init_vector(d->map_2d[xy_to_x(d, x, y)], 0, 0, 0);
-	}
+	d->map_3d
+		= (t_vector **) malloc((d->map_w * d->map_h) * sizeof(t_vector *));
+	if (!d->map_3d)
+		print_err("Error: Memory allocate failed", d);
+	ft_bzero(d->map_3d, sizeof(t_vector *));
+	while (++y < (d->map_h * d->map_w))
+		d->map_3d[y] = (t_vector *) ft_malloc(d, sizeof(t_vector));
 	init_map3d(d);
 	return (0);
 }

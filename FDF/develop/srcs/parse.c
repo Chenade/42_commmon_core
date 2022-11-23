@@ -15,16 +15,22 @@
 int	map_width(t_data *d, char **line)
 {
 	int		i;
+	int		o;
 	char	**res;
 
 	res = ft_split(*line, 32);
 	i = -1;
+	o = 0;
 	while (res[++i])
+	{
+		if (res[i][0] == 10)
+			o = -1;
 		free(res[i]);
+	}
 	free (res);
-	if (d->map_h != 0 && d->map_w != i)
+	if (d->map_h != 0 && d->map_w != i + o)
 		return (1);
-	d->map_w = i;
+	d->map_w = i + o;
 	return (0);
 }
 

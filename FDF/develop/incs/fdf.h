@@ -23,14 +23,11 @@
 # include "mlx.h"
 # include "libft.h"
 
-# define NB_PATTERN 2
-# define PATTERN_SIZE 4
-
 # define WIDTH 1600
 # define HEIGHT 1200
 
-# define COLOR_BLACK 0x0000000
-# define COLOR_RED 0x00FF0000
+# define BASE "0123456789abcdef"
+
 # define COLOR_WHITE 0x00FFFFFF
 # define COLOR_TEXT 0xEAEAEA
 
@@ -47,6 +44,7 @@ typedef struct s_vector
 	int	x;
 	int	y;
 	int	z;
+	int	c;
 }	t_vector;
 
 typedef struct s_img
@@ -107,7 +105,7 @@ int			init_map(t_data *d);
 int			init_var(t_data *d);
 
 // draw.c
-void		ft_lines_draw(t_data *d, t_vector f, t_vector s, int pos);
+void		ft_lines_draw(t_data *d, t_vector f, t_vector s);
 int			draw_gui(t_data *d);
 void		draw_maps(t_data *d);
 void		projection_isometric(t_data *d);
