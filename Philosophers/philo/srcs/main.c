@@ -1,40 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <ykuo@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/23 20:26:58 by ykuo              #+#    #+#             */
+/*   Updated: 2022/11/23 20:27:02 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-// int	fdf(char *filename)
-// {
-// 	t_data	d;
-
-// 	ft_bzero(&d, sizeof(d));
-// 	init_mlx(&d, filename);
-// 	ft_printf("mlx init successfully\n");
-// 	if (read_file(&d, filename))
-// 		return (1);
-// 	ft_printf("map height: %d, map width: %d\n", d.map_h, d.map_w);
-// 	draw_imgs(&d);
-// 	mlx_loop_hook(d.mlx_ptr, render_frame, &d);
-// 	mlx_hook(d.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &d);
-// 	mlx_hook(d.win_ptr, ClientMessage, StructureNotifyMask, &handle_exit, &d);
-// 	mlx_loop(d.mlx_ptr);
-// 	free_data(&d);
-// 	return (0);
-// }
+int	philo_start(t_data *d)
+{
+	(void) d;
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
-	// int	fd;
-	// int	status;
+	t_data	d;
 
-	// fd = open(argv[1], O_RDONLY);
-	// status = 1;
-	if (argc != 2)
-		printf("Error: Usage: ./fdf {filename}.fdf\n");
-	// else if (fd < 0 || read(fd, 0, 0))
-	// 	ft_printf("Error: Cannot open file.\n");
-	// else
-	// 	status = fdf(argv[1]);
-	// close (fd);
-	printf("Error: Cannot open file.\n");
+	if (argc != 5 && argc != 6)
+		print_usage();
+	ft_bzero(&d, sizeof(d));
+	philo_setup(&d, argv);
+	philo_start(&d);
 	return (0);
 }

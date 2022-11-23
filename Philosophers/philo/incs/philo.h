@@ -3,63 +3,28 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
-# include <math.h>
 
-# define COLOR_BLACK 0x0000000
-# define COLOR_RED 0x00FF0000
-# define COLOR_WHITE 0x00FFFFFF
-# define COLOR_TEXT 0xEAEAEA
-
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-	int	rgb;
-}	t_color;
-
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_vector;
-
-typedef struct s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		w;
-	int		h;
-}	t_img;
+# define P_Y "\033[33m"
+# define P_RED "\033[31m"
+# define P_GREEN "\033[92m"
+# define P_BLUE "\033[94m"
+# define P_X "\033[0m"
 
 typedef struct s_data
 {
-	void		*win_ptr;
-	void		*mlx_ptr;
-	t_img		img;
-	char		*buf;
-	int			size;
-	t_vector	*u;
-	t_vector	*v;
-	int			w;
-	int			h;
-
-	int			map_h;
-	int			map_w;
-	char		**map;
-	t_vector	**map_3d;
-	t_vector	**map_2d;
-	int			line_length;
-	int			height;
-	int			height2;
-	t_vector	*center;
-	t_vector	*rotation;
-	int			projection;
+	int	count;
+	int	nbr_die;
+	int	nbr_eat;
+	int	nbr_sleep;
+	int	nbr_meal;
 }	t_data;
+
+int		ft_printf(const char *s, ...);
+int 	is_digits(char *s);
+int		ft_atoi(const char *nptr);
+void	ft_bzero(void *s, size_t n);
+
+void	print_usage(void);
+int		philo_setup(t_data *d, char **argv);
 
 #endif

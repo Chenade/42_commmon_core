@@ -20,7 +20,7 @@ LFLAGS		+= 	-L . -lmlx_Linux -lX11 -lXext -lm
 CLIBS		=	-L . -lft
 
 Y			= "\033[33m"
-R			= "\033[31m"
+RED			= "\033[31m"
 GREEN		= "\033[92m"
 BLUE		= "\033[94m"
 X			= "\033[0m"
@@ -39,13 +39,13 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-# SRCS_GEN	=	general.c		\
-# 				tools.c			\
+SRCS_GEN	=	lib/ft_printf.c		\
+				lib/tools.c			\
+				parse.c
 # 				helper.c		\
 
-# SRCS		=	$(SRCS_GEN)
-SRCS		=	main.c
-
+SRCS		=	$(SRCS_GEN)
+SRCS		+=	main.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
