@@ -39,8 +39,7 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-SRCS_GEN	=	lib/ft_printf.c		\
-				lib/tools.c			\
+SRCS_GEN	=	lib/tools.c			\
 				parse.c
 # 				helper.c		\
 

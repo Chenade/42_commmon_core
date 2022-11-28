@@ -3,6 +3,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 # define P_Y "\033[33m"
 # define P_RED "\033[31m"
@@ -19,7 +20,6 @@ typedef struct s_data
 	int	nbr_meal;
 }	t_data;
 
-int		ft_printf(const char *s, ...);
 int 	is_digits(char *s);
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);

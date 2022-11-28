@@ -14,13 +14,13 @@
 
 void	print_usage(void)
 {
-	ft_printf(P_RED);
-	ft_printf("Error: Usage:");
-	ft_printf(P_BLUE);
-	ft_printf(" ./philo {number_of_philosophers} {time_to_die}");
-	ft_printf(" {time_to_eat} {time_to_sleep}");
-	ft_printf("[number_of_times_each_philosopher_must_eat]\n");
-	ft_printf(P_X);
+	printf(P_RED);
+	printf("Error: Usage:");
+	printf(P_BLUE);
+	printf(" ./philo {number_of_philosophers} {time_to_die}");
+	printf(" {time_to_eat} {time_to_sleep}");
+	printf("[number_of_times_each_philosopher_must_eat]\n");
+	printf(P_X);
 	exit(EXIT_FAILURE);
 }
 
