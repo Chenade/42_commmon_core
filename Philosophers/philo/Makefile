@@ -39,12 +39,14 @@ INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-SRCS_GEN	=	lib/tools.c			\
+SRCS_GEN	=	lib/utils.c		\
+				lib/tools.c			\
 				parse.c
 # 				helper.c		\
 
 SRCS		=	$(SRCS_GEN)
-SRCS		+=	main.c
+SRCS		+=	main.c			\
+				philo.c
 
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 

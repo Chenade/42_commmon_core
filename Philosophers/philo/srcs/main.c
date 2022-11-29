@@ -12,20 +12,16 @@
 
 #include "philo.h"
 
-int	philo_start(t_data *d)
-{
-	(void) d;
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	d;
+	int		status;
 
 	if (argc != 5 && argc != 6)
 		print_usage();
 	ft_bzero(&d, sizeof(d));
-	philo_setup(&d, argv);
-	philo_start(&d);
+	status = philo_setup(&d, argv);
+	if (!status)
+		free_data(&d);
 	return (0);
 }

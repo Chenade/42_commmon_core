@@ -24,27 +24,60 @@ void	print_usage(void)
 	exit(EXIT_FAILURE);
 }
 
+int	philo_init(t_data *d)
+{
+	int	i;
+
+	d->timestamp = timestamp();
+	i = -1;
+	while (++i < d->count)
+	{
+		d->philo[i].id = i + 1;
+		d->philo[i].last_eat = 0;
+		d->philo[i].fork_r = NULL;
+		d->philo[i].info = d;
+		d->philo[i].m_count = 0;
+		pthread_mutex_init(&(d->philo[i].fork_l), NULL);
+		if (i == d->count - 1)
+			d->philo[i].fork_r = &d->philo[0].fork_l;
+		else
+			d->philo[i].fork_r = &d->philo[i + 1].fork_l;
+		if (pthread_create(&d->philo[i].thread, NULL, \
+				&philo_life, &(d->philo[i])) != 0)
+			return (-1);
+	}
+	i = -1;
+	while (++i < d->count)
+		if (pthread_join(d->philo[i].thread, NULL) != 0)
+			return (-1);
+	return (0);
+}
+
 int	philo_setup(t_data *d, char **argv)
 {
 	int	i;
 
 	i = 0;
 	while (argv[++i])
-	{
 		if (!is_digits(argv[i]))
 			print_usage();
-		if (i == 1)
-			d->count = ft_atoi(argv[i]);
-		else if (i == 2)
-			d->nbr_die = ft_atoi(argv[i]);
-		else if (i == 3)
-			d->nbr_eat = ft_atoi(argv[i]);
-		else if (i == 4)
-			d->nbr_sleep = ft_atoi(argv[i]);
-		else if (i == 5)
-			d->nbr_meal = ft_atoi(argv[i]);
-	}
-	if (i == 5)
-		d->nbr_meal = -1;
+	d->philo_eat = 0;
+	d->count = ft_atoi(argv[1]);
+	d->t_die = ft_atoi(argv[2]);
+	d->t_eat = ft_atoi(argv[3]);
+	d->t_sleep = ft_atoi(argv[4]);
+	if (argv[5])
+		d->nbr_meal = ft_atoi(argv[5]);
+	if (argv[5] && d->nbr_meal == 0)
+		return (1);
+	pthread_mutex_init(&d->print, NULL);
+	pthread_mutex_init(&d->m_stop, NULL);
+	pthread_mutex_init(&d->m_eat, NULL);
+	pthread_mutex_init(&d->dead, NULL);
+	d->stop = 0;
+	d->philo = malloc(sizeof(t_philo) * d->count);
+	if (d->philo == NULL)
+		ft_printerr(d, "Memory allocated error!");
+	philo_init(d);
 	return (0);
 }
