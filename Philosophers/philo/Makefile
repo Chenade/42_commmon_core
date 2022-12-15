@@ -8,10 +8,10 @@ NAME		=	philo
 
 RM			=	rm -rf
 
-CC			=	cc
+CC			=	gcc
 
 CFLAGS		=	-Wall -Werror -Wextra
-CFLAGS		+=	-g3 -MMD
+CFLAGS		+=	-g3 -MMD -pthread
 CFLAGS		+=	-I $(INCS_DIR)
 
 LFLAGS		=	-I $(LIBFT_DIR) -I ${MLX_DIR}
@@ -58,7 +58,10 @@ OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS)
+norminette:
+				norminette $(SRCS_DIR) $(INCS_DIR)
+
+$(NAME):		norminette $(OBJS)
 				${CC} ${OBJS} ${CFLAGS} $(LIBFT) -o $@
 				@echo ${GREEN}"Philo Compile Successfully"${X}
 				@echo ${BLUE}"Command: ./philo {number_of_philosophers} {time_to_die} {time_to_eat} {time_to_sleep} [number_of_times_each_philosopher_must_eat] \n"${X}

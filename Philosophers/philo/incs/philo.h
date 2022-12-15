@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/15 20:21:30 by ykuo              #+#    #+#             */
+/*   Updated: 2022/12/15 20:22:31 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -45,20 +57,20 @@ typedef struct s_data
 	pthread_mutex_t	dead;
 }	t_data;
 
-int 	is_digits(char *s);
-int		ft_atoi(const char *nptr);
-void	ft_bzero(void *s, size_t n);
+int			is_digits(char *s);
+int			ft_atoi(const char *nptr);
+void		ft_bzero(void *s, size_t n);
 
 // utils.c
 long long	timestamp(void);
-void	ft_usleep(int ms);
-void	free_data(t_data *d);
-void	ft_printerr(t_data *d, char *s);
+void		ft_usleep(int ms);
+void		free_data(t_data *d);
+void		ft_printerr(t_data *d, char *s);
 
-void	print_usage(void);
-int		philo_setup(t_data *d, char **argv);
+void		print_usage(void);
+int			philo_setup(t_data *d, char **argv);
 
-int		is_dead(t_philo *philo, int nb);
-void	print(t_philo *philo, char *str);
-void	*philo_life(void *phi);
+int			is_dead(t_philo *philo, int nb);
+void		print(t_philo *philo, char *str);
+void		*philo_life(void *phi);
 #endif

@@ -1,5 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ykuo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/15 20:20:22 by ykuo              #+#    #+#             */
+/*   Updated: 2022/12/15 20:21:21 by ykuo             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "philo.h"
 
 long long	timestamp(void)
 {
@@ -52,6 +63,7 @@ void	print(t_philo *philo, char *str)
 	time = timestamp() - philo->info->timestamp;
 	if (!philo->info->stop && time >= 0 \
 			&& time <= INT_MAX && !is_dead(philo, 0))
-		printf("%lld %d %s, (%d)\n", timestamp() - philo->info->timestamp, philo->id, str, philo->m_count);
+		printf("%lld %d %s, (%d)\n", timestamp() - philo->info->timestamp,
+			philo->id, str, philo->m_count);
 	pthread_mutex_unlock(&(philo->info->print));
 }
