@@ -10,6 +10,8 @@ RM			=	rm -rf
 
 CC			=	gcc
 
+CLEAR		=	clear
+
 CFLAGS		=	-Wall -Werror -Wextra
 CFLAGS		+=	-g3 -MMD -pthread
 CFLAGS		+=	-I $(INCS_DIR)
@@ -33,14 +35,14 @@ CUT			= "\033[K"
 #                                                                             #
 ###############################################################################
 
-SRCS_DIR	=	srcs
+SRCS_DIR	=	./
 
 INCS_DIR	=	incs
 
 OBJS_DIR	=	objs
 
-SRCS_GEN	=	lib/utils.c		\
-				lib/tools.c			\
+SRCS_GEN	=	utils.c		\
+				tools.c			\
 				parse.c
 # 				helper.c		\
 
@@ -56,15 +58,31 @@ OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 #                                                                             #
 ###############################################################################
 
-all:			$(NAME)
+all:			clear norminette $(NAME) 
+				@echo ${BLUE}"\nCommand: ./philo {number_of_philosophers} {time_to_die} {time_to_eat} {time_to_sleep} [number_of_times_each_philosopher_must_eat] \n"${X}
 
-norminette:
-				norminette $(SRCS_DIR) $(INCS_DIR)
+clear:
+				clear
+				@echo "/****************************************************************************/"
+				@echo "/*                                                                          */"
+				@echo "/*                                                       :::      ::::::::  */"
+				@echo "/*  philosophers  <Common Core>                        :+:      :+:    :+:  */"
+				@echo "/*                                                   +:+ +:+         +:+    */"
+				@echo "/*  By: ykuo <marvin@42.fr>                        +#+  +:+       +#+       */"
+				@echo "/*                                               +#+#+#+#+#+   +#+          */"
+				@echo "/*                                                    #+#    #+#            */"
+				@echo "/*                                                   ###   ########.fr      */"
+				@echo "/*                                                                          */"
+				@echo "/****************************************************************************/"
 
-$(NAME):		norminette $(OBJS)
-				${CC} ${OBJS} ${CFLAGS} $(LIBFT) -o $@
-				@echo ${GREEN}"Philo Compile Successfully"${X}
-				@echo ${BLUE}"Command: ./philo {number_of_philosophers} {time_to_die} {time_to_eat} {time_to_sleep} [number_of_times_each_philosopher_must_eat] \n"${X}
+norminette:		
+				@echo ${Y}"\n=====philo norminette check!====="${X}
+				norminette $(SRCS_DIR)
+				@echo ${GREEN}"=====philo norminette check Successfully!=====\n"${X}
+
+$(NAME):		$(OBJS) 
+				${CC} ${OBJS} ${CFLAGS} -o $@
+				@echo ${GREEN}"=====Philo Compile Successfully====="${X}
 
 $(OBJS_DIR)/%.o:$(SRCS_DIR)/%.c
 				@mkdir -p $(dir $@)
@@ -75,7 +93,7 @@ clean:
 
 fclean:			clean
 				$(RM) $(NAME)
-				@echo ${GREEN}"Philo Clean Successfully\n"${X}
+				@echo ${GREEN}"====Philo Clean Successfully====\n"${X}
 
 re:				fclean all
 

@@ -63,7 +63,7 @@ void	print(t_philo *philo, char *str)
 	time = timestamp() - philo->info->timestamp;
 	if (!philo->info->stop && time >= 0 \
 			&& time <= INT_MAX && !is_dead(philo, 0))
-		printf("%lld %d %s, (%d)\n", timestamp() - philo->info->timestamp,
-			philo->id, str, philo->m_count);
+		printf("% 7lld % 2d %s\n", timestamp() - philo->info->timestamp,
+			philo->id, str);
 	pthread_mutex_unlock(&(philo->info->print));
 }
