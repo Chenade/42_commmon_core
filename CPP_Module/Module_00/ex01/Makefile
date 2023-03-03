@@ -1,5 +1,5 @@
 
-NAME		=	Phonebook
+NAME		=	phonebook
 
 RM			=	rm -rf
 
@@ -10,7 +10,7 @@ CFLAGS		+=	-std=c++98
 CFLAGS		+=	-g3 -MMD
 
 SRCS		=	Contact.cpp \
-				PhoneBook.cpp \
+				phoneBook.cpp \
 				main.cpp
 
 OBJS_DIR	=	objs
