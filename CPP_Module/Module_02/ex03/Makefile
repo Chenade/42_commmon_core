@@ -11,6 +11,7 @@ CFLAGS		+=	-g3 -MMD
 
 SRCS		=	Fixed.cpp \
 				Point.cpp \
+				bsp.cpp \
 				main.cpp
 
 OBJS_DIR	=	objs

@@ -17,7 +17,7 @@ class Fixed
 		Fixed& operator=(const Fixed& rhs);
 
 		//Comparison operators
-		bool operator>(const Fixed& rhs)
+		bool operator>(const Fixed& rhs);
 		bool operator<(const Fixed& rhs);
 		bool operator>=(const Fixed& rhs);
 		bool operator<=(const Fixed& rhs);

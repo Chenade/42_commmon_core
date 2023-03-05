@@ -19,6 +19,7 @@ class Point
 
 		// std operator
 		Point& operator=(const Point& rhs);
+		bool operator==(const Point& rhs) const ;
 
 		// Function
 		Fixed const getX(void) const;
