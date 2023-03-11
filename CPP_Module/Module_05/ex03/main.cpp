@@ -15,11 +15,12 @@ int main( void )
         Form*   formbyIntern;
 
         formbyIntern = intern.makeForm("robotomy request", "Bender");
-        bureaucrat.signForm(*formbyIntern);
-        bureaucrat.executeForm(*formbyIntern);
+        if (formbyIntern) bureaucrat.signForm(*formbyIntern);
+        if (formbyIntern) bureaucrat.executeForm(*formbyIntern);
         delete formbyIntern;
         std::cout << "\n----------------  Intern (failed) -----------------" << std::endl;
         formbyIntern = intern.makeForm("robotomsy request", "Bender2");
+        if (formbyIntern) bureaucrat.signForm(*formbyIntern);
         delete formbyIntern;
     }
 
