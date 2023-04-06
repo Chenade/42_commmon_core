@@ -1,0 +1,37 @@
+: 1680746539:0;ll
+: 1680746540:0;l
+: 1680746543:0;clear
+: 1680746545:0;make
+: 1680746571:0;vim srcs/requirements/mariadb
+: 1680746575:0;vim srcs/requirements/mariadb/Dockerfile
+: 1680746589:0;vim srcs/requirements/mariadb/tools/dbscript.sh
+: 1680746608:0;vim srcs/requirements/mariadb/conf/50-server.cnf
+: 1680746613:0;clear
+: 1680746614:0;make
+: 1680746684:0;cd
+: 1680746730:0;ls
+: 1680746739:0;docker image ls
+: 1680746750:0;docker container
+: 1680746752:0;docker container l
+: 1680746754:0;docker container ls
+: 1680746756:0;clear
+: 1680746761:0;make re
+: 1680746778:0;docker image rm $(docker image ls -qa)
+: 1680746779:0;ls
+: 1680746781:0;cd srcs
+: 1680746798:0;vim Makefile
+: 1680746807:0;make
+: 1680746828:0;vim srcs/docker-compose.yml
+: 1680746860:0;cd
+: 1680746890:0;make
+: 1680746930:0;vim srcs/requirements/nginx/conf/nginx.conf
+: 1680746965:0;sudo vim /etc/host
+: 1680746983:0;sudo vim /etc/hosts
+: 1680747037:0;ls
+: 1680747042:0;sl
+: 1680747043:0;ls
+: 1680747059:0;clear
+: 1680747061:0;cd ..
+: 1680747233:0;ls
+: 1680747235:0;cd srcs
+: 1680747254:0;ga .
