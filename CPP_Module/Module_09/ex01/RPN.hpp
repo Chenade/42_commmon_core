@@ -1,5 +1,5 @@
-#ifndef EX01_RPN_HPP_
-#define EX01_RPN_HPP_
+#ifndef RPN_HPP
+#define RPN_HPP
 
 #include <string> // std::string
 #include <stack> // stack<>
