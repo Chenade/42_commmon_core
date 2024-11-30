@@ -7,3 +7,6 @@
 [submodule "Minishell"]
 	path = Minishell
 	url = https://github.com/Chenade/minishell_shared.git
+[submodule "MiniRT"]
+	path = MiniRT
+	url = https://github.com/Chenade/minirt_shared.git
