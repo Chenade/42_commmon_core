@@ -4,3 +4,6 @@
 [submodule "Transcendence"]
 	path = Transcendence
 	url = https://github.com/bCigueS/ft_transcendence.git
+[submodule "Minishell"]
+	path = Minishell
+	url = https://github.com/Chenade/minishell_shared.git
