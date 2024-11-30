@@ -1,0 +1,3 @@
+[submodule "Webserv"]
+	path = Webserv
+	url = https://github.com/pareidolies/42-webserv.git
